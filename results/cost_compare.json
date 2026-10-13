@@ -1,0 +1,1304 @@
+{
+  "billing_rule": "prereg: guide cost = input_tokens + output_tokens; each fork that uses a snapshot guidance pays the cached usage once (shared generation, per-fork bill). CLI fixed overhead (~14k) is inside input_tokens.",
+  "rerun_needed": false,
+  "missing_pre_tasks": [],
+  "missing_a1": [],
+  "pure_strong_model_from_scratch": {
+    "label_zh": "纯强模型从零解题",
+    "label_en": "pure strong model from scratch (capability-gap precheck guide-alone)",
+    "source": "guide_cache kind=takeover key=[\"pre\", tid]",
+    "unit": "per task (n=15 kept tasks)",
+    "role": "cost upper bound: Codex/guide solves alone, no small model",
+    "aggregate": {
+      "n": 15,
+      "input_tokens": {
+        "sum": 216307,
+        "mean": 14420.466666666667,
+        "median": 14171,
+        "min": 14157,
+        "max": 15118
+      },
+      "output_tokens": {
+        "sum": 955,
+        "mean": 63.666666666666664,
+        "median": 59,
+        "min": 49,
+        "max": 103
+      },
+      "total": {
+        "sum": 217262,
+        "mean": 14484.133333333333,
+        "median": 14234,
+        "min": 14208,
+        "max": 15185
+      },
+      "cached_input_tokens": {
+        "sum": 168576,
+        "mean": 11238.4,
+        "median": 13696,
+        "min": 1408,
+        "max": 14720
+      },
+      "reasoning_output_tokens": {
+        "sum": 278,
+        "mean": 18.533333333333335,
+        "median": 13,
+        "min": 10,
+        "max": 49
+      },
+      "latency": {
+        "sum": 102.75184941291809,
+        "mean": 6.85012329419454,
+        "median": 6.572738409042358,
+        "min": 5.229717016220093,
+        "max": 11.437528371810913
+      },
+      "success_rate": 1.0,
+      "n_success": 15
+    },
+    "per_task": [
+      {
+        "tid": "T09",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T09"
+        ],
+        "input_tokens": 15110,
+        "output_tokens": 61,
+        "total": 15171,
+        "cached_input_tokens": 11648,
+        "reasoning_output_tokens": 23,
+        "latency": 7.776868104934692,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T10",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T10"
+        ],
+        "input_tokens": 15118,
+        "output_tokens": 67,
+        "total": 15185,
+        "cached_input_tokens": 14720,
+        "reasoning_output_tokens": 16,
+        "latency": 7.969097375869751,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T11",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T11"
+        ],
+        "input_tokens": 15101,
+        "output_tokens": 55,
+        "total": 15156,
+        "cached_input_tokens": 11648,
+        "reasoning_output_tokens": 13,
+        "latency": 7.3375327587127686,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T12",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T12"
+        ],
+        "input_tokens": 15112,
+        "output_tokens": 65,
+        "total": 15177,
+        "cached_input_tokens": 1408,
+        "reasoning_output_tokens": 18,
+        "latency": 8.003383159637451,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T14",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T14"
+        ],
+        "input_tokens": 14171,
+        "output_tokens": 59,
+        "total": 14230,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 5.229717016220093,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T17",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T17"
+        ],
+        "input_tokens": 14157,
+        "output_tokens": 51,
+        "total": 14208,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 10,
+        "latency": 5.250418663024902,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T20",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T20"
+        ],
+        "input_tokens": 14162,
+        "output_tokens": 72,
+        "total": 14234,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 31,
+        "latency": 6.918671131134033,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T26",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T26"
+        ],
+        "input_tokens": 14164,
+        "output_tokens": 49,
+        "total": 14213,
+        "cached_input_tokens": 1408,
+        "reasoning_output_tokens": 10,
+        "latency": 6.605726003646851,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T28",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T28"
+        ],
+        "input_tokens": 14190,
+        "output_tokens": 91,
+        "total": 14281,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 22,
+        "latency": 6.491303205490112,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T31",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T31"
+        ],
+        "input_tokens": 14166,
+        "output_tokens": 103,
+        "total": 14269,
+        "cached_input_tokens": 4480,
+        "reasoning_output_tokens": 49,
+        "latency": 6.572738409042358,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T32",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T32"
+        ],
+        "input_tokens": 14177,
+        "output_tokens": 49,
+        "total": 14226,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 6.560124635696411,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T33",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T33"
+        ],
+        "input_tokens": 14187,
+        "output_tokens": 50,
+        "total": 14237,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 10,
+        "latency": 11.437528371810913,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T37",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T37"
+        ],
+        "input_tokens": 14162,
+        "output_tokens": 71,
+        "total": 14233,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 27,
+        "latency": 5.510681390762329,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T38",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T38"
+        ],
+        "input_tokens": 14160,
+        "output_tokens": 57,
+        "total": 14217,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 10,
+        "latency": 5.4920876026153564,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      },
+      {
+        "tid": "T40",
+        "kind": "takeover",
+        "key": [
+          "pre",
+          "T40"
+        ],
+        "input_tokens": 14170,
+        "output_tokens": 55,
+        "total": 14225,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 5.595971584320068,
+        "error": null,
+        "model": "gpt-5.5",
+        "success": true
+      }
+    ]
+  },
+  "A1_takeover": {
+    "label_zh": "大模型接管",
+    "label_en": "big-model takeover (mid-upgrade after small-model attempt 1 failed)",
+    "source": "pilot forks arm=A1 matched to guide_records.takeover / guide_cache",
+    "unit": "per snapshot fork (n=45)",
+    "role": "mid-course upgrade arm",
+    "aggregate": {
+      "n": 45,
+      "input_tokens": {
+        "sum": 638623,
+        "mean": 14191.622222222222,
+        "median": 14170,
+        "min": 14007,
+        "max": 15118
+      },
+      "output_tokens": {
+        "sum": 3140,
+        "mean": 69.77777777777777,
+        "median": 61,
+        "min": 39,
+        "max": 121
+      },
+      "total": {
+        "sum": 641763,
+        "mean": 14261.4,
+        "median": 14231,
+        "min": 14059,
+        "max": 15177
+      },
+      "cached_input_tokens": {
+        "sum": 600960,
+        "mean": 13354.666666666666,
+        "median": 13696,
+        "min": 1408,
+        "max": 14720
+      },
+      "reasoning_output_tokens": {
+        "sum": 928,
+        "mean": 20.622222222222224,
+        "median": 13,
+        "min": 0,
+        "max": 57
+      },
+      "latency": {
+        "sum": 613.0462262630463,
+        "mean": 13.62324947251214,
+        "median": 6.014824628829956,
+        "min": 4.811627626419067,
+        "max": 336.84590196609497
+      },
+      "success_rate": 0.9555555555555556,
+      "n_success": 43
+    },
+    "per_fork": [
+      {
+        "tid": "T09",
+        "seed": 1000,
+        "input_tokens": 14163,
+        "output_tokens": 110,
+        "total": 14273,
+        "fork_cost": 14273,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 56,
+        "latency": 6.158220052719116,
+        "success": false,
+        "exec_s": 1.950258731842041,
+        "wall": 8.108478784561157
+      },
+      {
+        "tid": "T09",
+        "seed": 1002,
+        "input_tokens": 14153,
+        "output_tokens": 48,
+        "total": 14201,
+        "fork_cost": 14201,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 10,
+        "latency": 5.649085760116577,
+        "success": true,
+        "exec_s": 1.432276725769043,
+        "wall": 7.08136248588562
+      },
+      {
+        "tid": "T09",
+        "seed": 1003,
+        "input_tokens": 14152,
+        "output_tokens": 51,
+        "total": 14203,
+        "fork_cost": 14203,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 7.886165618896484,
+        "success": true,
+        "exec_s": 1.6336379051208496,
+        "wall": 9.519803524017334
+      },
+      {
+        "tid": "T10",
+        "seed": 1000,
+        "input_tokens": 14160,
+        "output_tokens": 63,
+        "total": 14223,
+        "fork_cost": 14223,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 5.197345972061157,
+        "success": true,
+        "exec_s": 8.054383754730225,
+        "wall": 13.251729726791382
+      },
+      {
+        "tid": "T10",
+        "seed": 1001,
+        "input_tokens": 14213,
+        "output_tokens": 121,
+        "total": 14334,
+        "fork_cost": 14334,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 57,
+        "latency": 6.272805452346802,
+        "success": true,
+        "exec_s": 13.878946304321289,
+        "wall": 20.15175175666809
+      },
+      {
+        "tid": "T10",
+        "seed": 1002,
+        "input_tokens": 14166,
+        "output_tokens": 80,
+        "total": 14246,
+        "fork_cost": 14246,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 25,
+        "latency": 5.510185718536377,
+        "success": true,
+        "exec_s": 2.3815698623657227,
+        "wall": 7.8917555809021
+      },
+      {
+        "tid": "T11",
+        "seed": 1002,
+        "input_tokens": 14148,
+        "output_tokens": 53,
+        "total": 14201,
+        "fork_cost": 14201,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 10,
+        "latency": 6.313012361526489,
+        "success": true,
+        "exec_s": 1.3177049160003662,
+        "wall": 7.6307172775268555
+      },
+      {
+        "tid": "T11",
+        "seed": 1003,
+        "input_tokens": 14145,
+        "output_tokens": 55,
+        "total": 14200,
+        "fork_cost": 14200,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 4.90897536277771,
+        "success": true,
+        "exec_s": 1.3580241203308105,
+        "wall": 6.2669994831085205
+      },
+      {
+        "tid": "T11",
+        "seed": 1005,
+        "input_tokens": 14151,
+        "output_tokens": 57,
+        "total": 14208,
+        "fork_cost": 14208,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 4.811627626419067,
+        "success": true,
+        "exec_s": 1.3118157386779785,
+        "wall": 6.123443365097046
+      },
+      {
+        "tid": "T12",
+        "seed": 1000,
+        "input_tokens": 14155,
+        "output_tokens": 68,
+        "total": 14223,
+        "fork_cost": 14223,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 21,
+        "latency": 6.1486616134643555,
+        "success": true,
+        "exec_s": 2.0446548461914062,
+        "wall": 8.193316459655762
+      },
+      {
+        "tid": "T12",
+        "seed": 1001,
+        "input_tokens": 14168,
+        "output_tokens": 60,
+        "total": 14228,
+        "fork_cost": 14228,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 5.55239200592041,
+        "success": true,
+        "exec_s": 7.475555181503296,
+        "wall": 13.027947187423706
+      },
+      {
+        "tid": "T12",
+        "seed": 1002,
+        "input_tokens": 14156,
+        "output_tokens": 60,
+        "total": 14216,
+        "fork_cost": 14216,
+        "cost_match": true,
+        "cached_input_tokens": 1408,
+        "reasoning_output_tokens": 13,
+        "latency": 5.655878067016602,
+        "success": true,
+        "exec_s": 1.9040932655334473,
+        "wall": 7.559971332550049
+      },
+      {
+        "tid": "T14",
+        "seed": 1001,
+        "input_tokens": 14170,
+        "output_tokens": 58,
+        "total": 14228,
+        "fork_cost": 14228,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 7.416590690612793,
+        "success": true,
+        "exec_s": 9.764256238937378,
+        "wall": 17.18084692955017
+      },
+      {
+        "tid": "T14",
+        "seed": 1004,
+        "input_tokens": 14170,
+        "output_tokens": 56,
+        "total": 14226,
+        "fork_cost": 14226,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 10,
+        "latency": 4.884473562240601,
+        "success": true,
+        "exec_s": 6.8008623123168945,
+        "wall": 11.685335874557495
+      },
+      {
+        "tid": "T14",
+        "seed": 1005,
+        "input_tokens": 14173,
+        "output_tokens": 56,
+        "total": 14229,
+        "fork_cost": 14229,
+        "cost_match": true,
+        "cached_input_tokens": 11648,
+        "reasoning_output_tokens": 10,
+        "latency": 6.389716625213623,
+        "success": true,
+        "exec_s": 1.8375627994537354,
+        "wall": 8.227279424667358
+      },
+      {
+        "tid": "T17",
+        "seed": 1000,
+        "input_tokens": 14169,
+        "output_tokens": 83,
+        "total": 14252,
+        "fork_cost": 14252,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 20,
+        "latency": 7.063007593154907,
+        "success": true,
+        "exec_s": 1.6746811866760254,
+        "wall": 8.737688779830933
+      },
+      {
+        "tid": "T17",
+        "seed": 1004,
+        "input_tokens": 14171,
+        "output_tokens": 60,
+        "total": 14231,
+        "fork_cost": 14231,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 18,
+        "latency": 5.699556350708008,
+        "success": true,
+        "exec_s": 5.843755006790161,
+        "wall": 11.543311357498169
+      },
+      {
+        "tid": "T17",
+        "seed": 1006,
+        "input_tokens": 14179,
+        "output_tokens": 76,
+        "total": 14255,
+        "fork_cost": 14255,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 5.835958957672119,
+        "success": true,
+        "exec_s": 6.538533687591553,
+        "wall": 12.374492645263672
+      },
+      {
+        "tid": "T20",
+        "seed": 1000,
+        "input_tokens": 14160,
+        "output_tokens": 54,
+        "total": 14214,
+        "fork_cost": 14214,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 5.4022064208984375,
+        "success": true,
+        "exec_s": 2.0944225788116455,
+        "wall": 7.496628999710083
+      },
+      {
+        "tid": "T20",
+        "seed": 1006,
+        "input_tokens": 14162,
+        "output_tokens": 39,
+        "total": 14201,
+        "fork_cost": 14201,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 0,
+        "latency": 5.221694469451904,
+        "success": true,
+        "exec_s": 5.126630544662476,
+        "wall": 10.34832501411438
+      },
+      {
+        "tid": "T20",
+        "seed": 1007,
+        "input_tokens": 15118,
+        "output_tokens": 59,
+        "total": 15177,
+        "fork_cost": 15177,
+        "cost_match": true,
+        "cached_input_tokens": 14720,
+        "reasoning_output_tokens": 18,
+        "latency": 5.36798357963562,
+        "success": true,
+        "exec_s": 1.8718905448913574,
+        "wall": 7.2398741245269775
+      },
+      {
+        "tid": "T26",
+        "seed": 1003,
+        "input_tokens": 14163,
+        "output_tokens": 48,
+        "total": 14211,
+        "fork_cost": 14211,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 10,
+        "latency": 336.84590196609497,
+        "success": true,
+        "exec_s": 1.6965720653533936,
+        "wall": 338.54247403144836
+      },
+      {
+        "tid": "T26",
+        "seed": 1004,
+        "input_tokens": 14007,
+        "output_tokens": 52,
+        "total": 14059,
+        "fork_cost": 14059,
+        "cost_match": true,
+        "cached_input_tokens": 11648,
+        "reasoning_output_tokens": 13,
+        "latency": 5.353029251098633,
+        "success": true,
+        "exec_s": 1.6558067798614502,
+        "wall": 7.008836030960083
+      },
+      {
+        "tid": "T26",
+        "seed": 1005,
+        "input_tokens": 14172,
+        "output_tokens": 51,
+        "total": 14223,
+        "fork_cost": 14223,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 4.88040828704834,
+        "success": true,
+        "exec_s": 7.701145172119141,
+        "wall": 12.58155345916748
+      },
+      {
+        "tid": "T28",
+        "seed": 1002,
+        "input_tokens": 14193,
+        "output_tokens": 90,
+        "total": 14283,
+        "fork_cost": 14283,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 21,
+        "latency": 13.838992595672607,
+        "success": true,
+        "exec_s": 4.757049798965454,
+        "wall": 18.59604239463806
+      },
+      {
+        "tid": "T28",
+        "seed": 1003,
+        "input_tokens": 14194,
+        "output_tokens": 92,
+        "total": 14286,
+        "fork_cost": 14286,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 18,
+        "latency": 6.750736474990845,
+        "success": true,
+        "exec_s": 2.9749202728271484,
+        "wall": 9.725656747817993
+      },
+      {
+        "tid": "T28",
+        "seed": 1004,
+        "input_tokens": 14198,
+        "output_tokens": 83,
+        "total": 14281,
+        "fork_cost": 14281,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 6.996284008026123,
+        "success": true,
+        "exec_s": 3.1626622676849365,
+        "wall": 10.15894627571106
+      },
+      {
+        "tid": "T31",
+        "seed": 1000,
+        "input_tokens": 14195,
+        "output_tokens": 119,
+        "total": 14314,
+        "fork_cost": 14314,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 40,
+        "latency": 7.173131465911865,
+        "success": false,
+        "exec_s": 7.46546745300293,
+        "wall": 14.638598918914795
+      },
+      {
+        "tid": "T31",
+        "seed": 1018,
+        "input_tokens": 14175,
+        "output_tokens": 117,
+        "total": 14292,
+        "fork_cost": 14292,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 50,
+        "latency": 6.331016540527344,
+        "success": true,
+        "exec_s": 7.397900104522705,
+        "wall": 13.728916645050049
+      },
+      {
+        "tid": "T31",
+        "seed": 1023,
+        "input_tokens": 14169,
+        "output_tokens": 87,
+        "total": 14256,
+        "fork_cost": 14256,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 33,
+        "latency": 5.850132703781128,
+        "success": true,
+        "exec_s": 6.190578460693359,
+        "wall": 12.040711164474487
+      },
+      {
+        "tid": "T32",
+        "seed": 1000,
+        "input_tokens": 14181,
+        "output_tokens": 49,
+        "total": 14230,
+        "fork_cost": 14230,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 6.606416702270508,
+        "success": true,
+        "exec_s": 6.215356111526489,
+        "wall": 12.821772813796997
+      },
+      {
+        "tid": "T32",
+        "seed": 1001,
+        "input_tokens": 14253,
+        "output_tokens": 76,
+        "total": 14329,
+        "fork_cost": 14329,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 36,
+        "latency": 6.358047723770142,
+        "success": true,
+        "exec_s": 8.250808477401733,
+        "wall": 14.608856201171875
+      },
+      {
+        "tid": "T32",
+        "seed": 1003,
+        "input_tokens": 14235,
+        "output_tokens": 74,
+        "total": 14309,
+        "fork_cost": 14309,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 37,
+        "latency": 6.6819539070129395,
+        "success": true,
+        "exec_s": 10.346164464950562,
+        "wall": 17.0281183719635
+      },
+      {
+        "tid": "T33",
+        "seed": 1000,
+        "input_tokens": 14193,
+        "output_tokens": 53,
+        "total": 14246,
+        "fork_cost": 14246,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 6.014824628829956,
+        "success": true,
+        "exec_s": 1.6582303047180176,
+        "wall": 7.673054933547974
+      },
+      {
+        "tid": "T33",
+        "seed": 1001,
+        "input_tokens": 14191,
+        "output_tokens": 53,
+        "total": 14244,
+        "fork_cost": 14244,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 5.2931458950042725,
+        "success": true,
+        "exec_s": 1.6564884185791016,
+        "wall": 6.949634313583374
+      },
+      {
+        "tid": "T33",
+        "seed": 1002,
+        "input_tokens": 14187,
+        "output_tokens": 53,
+        "total": 14240,
+        "fork_cost": 14240,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 5.636912822723389,
+        "success": true,
+        "exec_s": 7.210147142410278,
+        "wall": 12.847059965133667
+      },
+      {
+        "tid": "T37",
+        "seed": 1000,
+        "input_tokens": 14160,
+        "output_tokens": 74,
+        "total": 14234,
+        "fork_cost": 14234,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 30,
+        "latency": 4.919007778167725,
+        "success": true,
+        "exec_s": 1.6830086708068848,
+        "wall": 6.602016448974609
+      },
+      {
+        "tid": "T37",
+        "seed": 1002,
+        "input_tokens": 14174,
+        "output_tokens": 111,
+        "total": 14285,
+        "fork_cost": 14285,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 49,
+        "latency": 5.775314092636108,
+        "success": true,
+        "exec_s": 2.3520970344543457,
+        "wall": 8.127411127090454
+      },
+      {
+        "tid": "T37",
+        "seed": 1003,
+        "input_tokens": 14160,
+        "output_tokens": 70,
+        "total": 14230,
+        "fork_cost": 14230,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 26,
+        "latency": 5.390195846557617,
+        "success": true,
+        "exec_s": 1.9308297634124756,
+        "wall": 7.321025609970093
+      },
+      {
+        "tid": "T38",
+        "seed": 1001,
+        "input_tokens": 14155,
+        "output_tokens": 66,
+        "total": 14221,
+        "fork_cost": 14221,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 19,
+        "latency": 7.284723997116089,
+        "success": true,
+        "exec_s": 1.9012937545776367,
+        "wall": 9.186017751693726
+      },
+      {
+        "tid": "T38",
+        "seed": 1002,
+        "input_tokens": 14156,
+        "output_tokens": 59,
+        "total": 14215,
+        "fork_cost": 14215,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 6.562763929367065,
+        "success": true,
+        "exec_s": 2.0723252296447754,
+        "wall": 8.63508915901184
+      },
+      {
+        "tid": "T38",
+        "seed": 1003,
+        "input_tokens": 14158,
+        "output_tokens": 61,
+        "total": 14219,
+        "fork_cost": 14219,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 10,
+        "latency": 7.102874279022217,
+        "success": true,
+        "exec_s": 6.354888439178467,
+        "wall": 13.457762718200684
+      },
+      {
+        "tid": "T40",
+        "seed": 1001,
+        "input_tokens": 14187,
+        "output_tokens": 96,
+        "total": 14283,
+        "fork_cost": 14283,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 38,
+        "latency": 6.263646125793457,
+        "success": true,
+        "exec_s": 2.2257583141326904,
+        "wall": 8.489404439926147
+      },
+      {
+        "tid": "T40",
+        "seed": 1002,
+        "input_tokens": 14183,
+        "output_tokens": 74,
+        "total": 14257,
+        "fork_cost": 14257,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 22,
+        "latency": 10.312521696090698,
+        "success": true,
+        "exec_s": 2.1341116428375244,
+        "wall": 12.446633338928223
+      },
+      {
+        "tid": "T40",
+        "seed": 1004,
+        "input_tokens": 14182,
+        "output_tokens": 65,
+        "total": 14247,
+        "fork_cost": 14247,
+        "cost_match": true,
+        "cached_input_tokens": 13696,
+        "reasoning_output_tokens": 13,
+        "latency": 5.478699684143066,
+        "success": true,
+        "exec_s": 7.797516107559204,
+        "wall": 13.27621579170227
+      }
+    ]
+  },
+  "arms_side_by_side_prereg_billing": {
+    "A0": {
+      "n": 45,
+      "success_rate": 0.4,
+      "n_success": 18,
+      "input_tokens": {
+        "sum": 0,
+        "mean": 0,
+        "median": 0
+      },
+      "output_tokens": {
+        "sum": 0,
+        "mean": 0,
+        "median": 0
+      },
+      "total": {
+        "sum": 0,
+        "mean": 0,
+        "median": 0
+      },
+      "label_zh": "不指导",
+      "unit": "per snapshot fork"
+    },
+    "A1": {
+      "n": 45,
+      "input_tokens": {
+        "sum": 638623,
+        "mean": 14191.622222222222,
+        "median": 14170,
+        "min": 14007,
+        "max": 15118
+      },
+      "output_tokens": {
+        "sum": 3140,
+        "mean": 69.77777777777777,
+        "median": 61,
+        "min": 39,
+        "max": 121
+      },
+      "total": {
+        "sum": 641763,
+        "mean": 14261.4,
+        "median": 14231,
+        "min": 14059,
+        "max": 15177
+      },
+      "cached_input_tokens": {
+        "sum": 600960,
+        "mean": 13354.666666666666,
+        "median": 13696,
+        "min": 1408,
+        "max": 14720
+      },
+      "reasoning_output_tokens": {
+        "sum": 928,
+        "mean": 20.622222222222224,
+        "median": 13,
+        "min": 0,
+        "max": 57
+      },
+      "latency": {
+        "sum": 613.0462262630463,
+        "mean": 13.62324947251214,
+        "median": 6.014824628829956,
+        "min": 4.811627626419067,
+        "max": 336.84590196609497
+      },
+      "success_rate": 0.9555555555555556,
+      "n_success": 43,
+      "label_zh": "大模型接管",
+      "unit": "per snapshot fork"
+    },
+    "A2": {
+      "n": 135,
+      "input_tokens": {
+        "sum": 1936800,
+        "mean": 14346.666666666666,
+        "median": 14203,
+        "min": 14171,
+        "max": 15149
+      },
+      "output_tokens": {
+        "sum": 8538,
+        "mean": 63.24444444444445,
+        "median": 62,
+        "min": 40,
+        "max": 116
+      },
+      "total": {
+        "sum": 1945338,
+        "mean": 14409.91111111111,
+        "median": 14263,
+        "min": 14218,
+        "max": 15217
+      },
+      "cached_input_tokens": {
+        "sum": 1781376,
+        "mean": 13195.377777777778,
+        "median": 13696,
+        "min": 1408,
+        "max": 14720
+      },
+      "reasoning_output_tokens": {
+        "sum": 1827,
+        "mean": 13.533333333333333,
+        "median": 10,
+        "min": 0,
+        "max": 67
+      },
+      "latency": null,
+      "success_rate": 0.6,
+      "n_success": 81,
+      "label_zh": "短提示 (Shepherding)",
+      "unit": "per snapshot fork (all delays pooled, n=135)"
+    },
+    "A3": {
+      "n": 135,
+      "input_tokens": {
+        "sum": 1917087,
+        "mean": 14200.644444444444,
+        "median": 14204,
+        "min": 13983,
+        "max": 14286
+      },
+      "output_tokens": {
+        "sum": 17982,
+        "mean": 133.2,
+        "median": 128,
+        "min": 96,
+        "max": 208
+      },
+      "total": {
+        "sum": 1935069,
+        "mean": 14333.844444444445,
+        "median": 14332,
+        "min": 14102,
+        "max": 14475
+      },
+      "cached_input_tokens": {
+        "sum": 1732224,
+        "mean": 12831.288888888888,
+        "median": 13696,
+        "min": 1408,
+        "max": 13696
+      },
+      "reasoning_output_tokens": {
+        "sum": 1740,
+        "mean": 12.88888888888889,
+        "median": 10,
+        "min": 0,
+        "max": 117
+      },
+      "latency": null,
+      "success_rate": 0.7333333333333333,
+      "n_success": 99,
+      "label_zh": "长结构化指导",
+      "unit": "per snapshot fork (all delays pooled, n=135)"
+    },
+    "precheck_guide_alone": {
+      "n": 15,
+      "input_tokens": {
+        "sum": 216307,
+        "mean": 14420.466666666667,
+        "median": 14171,
+        "min": 14157,
+        "max": 15118
+      },
+      "output_tokens": {
+        "sum": 955,
+        "mean": 63.666666666666664,
+        "median": 59,
+        "min": 49,
+        "max": 103
+      },
+      "total": {
+        "sum": 217262,
+        "mean": 14484.133333333333,
+        "median": 14234,
+        "min": 14208,
+        "max": 15185
+      },
+      "cached_input_tokens": {
+        "sum": 168576,
+        "mean": 11238.4,
+        "median": 13696,
+        "min": 1408,
+        "max": 14720
+      },
+      "reasoning_output_tokens": {
+        "sum": 278,
+        "mean": 18.533333333333335,
+        "median": 13,
+        "min": 10,
+        "max": 49
+      },
+      "latency": {
+        "sum": 102.75184941291809,
+        "mean": 6.85012329419454,
+        "median": 6.572738409042358,
+        "min": 5.229717016220093,
+        "max": 11.437528371810913
+      },
+      "success_rate": 1.0,
+      "n_success": 15,
+      "label_zh": "纯强模型从零解题",
+      "unit": "per task (n=15)"
+    }
+  },
+  "ratios_vs_pure_strong": {
+    "A0_over_pre": 0.0,
+    "A1_over_pre": 0.9846222533162725,
+    "A2_over_pre": 0.9948756186846602,
+    "A3_over_pre": 0.9896238949593885,
+    "note": "ratio = mean billed guide tokens per snapshot-fork / mean guide-alone tokens per task (precheck). Units differ (fork vs task) but both are one Codex CLI call with ~14k fixed input overhead, so ratios near 1.0."
+  },
+  "unique_cached_calls_once": {
+    "short": {
+      "n_unique_calls": 45,
+      "sum_total": 648446,
+      "mean_total": 14409.91111111111,
+      "median_total": 14263,
+      "sum_input": 645600,
+      "sum_output": 2846
+    },
+    "long": {
+      "n_unique_calls": 45,
+      "sum_total": 645023,
+      "mean_total": 14333.844444444445,
+      "median_total": 14332,
+      "sum_input": 639029,
+      "sum_output": 5994
+    },
+    "takeover": {
+      "n_unique_calls": 45,
+      "sum_total": 641763,
+      "mean_total": 14261.4,
+      "median_total": 14231,
+      "sum_input": 638623,
+      "sum_output": 3140
+    },
+    "precheck_guide_alone": {
+      "n_unique_calls": 15,
+      "sum_total": 217262,
+      "mean_total": 14484.133333333333,
+      "median_total": 14234,
+      "sum_input": 216307,
+      "sum_output": 955
+    }
+  },
+  "cli_fixed_overhead_note": {
+    "observation": "Codex CLI input_tokens are dominated by a fixed overhead of ~14k tokens per call (visible across precheck, A1, A2, A3). Relative token savings vs pure strong model are therefore near zero under this measurement tool; that is a measurement limitation, not evidence the method fails.",
+    "pre_input_mean": 14420.466666666667,
+    "a1_input_mean": 14191.622222222222,
+    "a2_input_mean": 14346.666666666666,
+    "a3_input_mean": 14200.644444444444
+  }
+}
