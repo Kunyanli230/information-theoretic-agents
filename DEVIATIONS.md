@@ -30,3 +30,10 @@
   - **Selected (λ,β)=(0.0, 0.05)** on no-m4 holdout. λ=0 ⇒ frozen argmax ≈ fixed m3 (22/24). Documented as prediction-5 risk (RD encoder may not beat gate+fixed-long). Not silently spun.
   - **Delay-conditional argmax** did not move to shorter messages as d↑ (opposite of qualitative ∂r*/∂ρ<0 on this discrete family/N=24). Absolute long-arm decline retained as directional; primary Thm-2 = confirmatory logistic. stale=16 kept as mechanism contribution.
   - **Confirmatory not started:** no `run_confirmatory` runner; `voi/gate.py` TabularGainPredictor still stub; needs gate fit + Heath OK. Capability gap PASS → confirmatory path (not exploratory downgrade) when started.
+- Confirmatory implementation + run start (2026-10-14 ~01:20 CST; Heath tonight hard instruction via group; local, no push/PR):
+  - Real `TabularGainPredictor` fit on path-A N=24 cal forks (`voi/fit_gate.py` → `results/gate/`). Labels = Δ^{π0} at d=0 for schemes short=m2 / long=m3 / rd=e*-argmax / takeover; cost = guide est_output_tokens. Nested holdout (same T20,T26) selected **λ=0.001, μ=0.0**. Cell backoff: n<3 → pooled.
+  - **VD_enc** arm added **before** confirmatory outcomes: candidates `{none,short,long,rd}` (no takeover). Reason: holdout λ makes full **VD** (with takeover) select takeover on cal replay (cheaper ΔC at tied Δ≈0.5) — that would confound Q3 encoder ablation with upgrade-routing. Prereg prediction-5 / Q3 primary contrast = **G_fixL vs VD_enc**. Full **VD** still run and reported (takeover rate soft-flag applies).
+  - Family frozen: short=m2, long=m3, m4 dropped. Encoder artifacts unchanged (`59243b0` / `results/encoder/`).
+  - Runner: `voi/run_confirmatory.py` — 7 tasks × 3 snaps; arms C0,C1,C2,C3,G_fix,G_fixL,VD_enc,VD; delays {0,1,2} on message/gated-request arms; fresh grok-4.6 diagnoses (path A); underpowered label in meta.
+  - Capability gap PASS retained — confirmatory **not** exploratory-downgrade.
+  - Thm2: no claim that discrete argmax shortens with delay; C2/C3 delay rates reported; primary = logistic (analysis may follow).

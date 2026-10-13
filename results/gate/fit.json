@@ -1,0 +1,289 @@
+{
+  "meta": {
+    "source": "results/calibration/cal.json",
+    "encoder": "results/encoder/e_star.json",
+    "prereg": "v3-path-A",
+    "short_mid": "m2",
+    "long_mid": "m3",
+    "default_rd_mid": "m3",
+    "fit_tasks": [
+      "T09",
+      "T10",
+      "T11",
+      "T12",
+      "T14",
+      "T17"
+    ],
+    "holdout_tasks": [
+      "T20",
+      "T26"
+    ],
+    "label": "Delta_pi0_d0",
+    "cost_recipe": "guide_est_output_tokens",
+    "fitted_at": "2026-10-14T01:15:37+0800",
+    "underpowered_note": "tabular on N=24; confirmatory 7 tasks underpowered"
+  },
+  "lam": 0.001,
+  "mu": 0.0,
+  "holdout_best": {
+    "n": 6,
+    "success": 1.0,
+    "cost": 31.666666666666668,
+    "pick_counts": {
+      "takeover": 6
+    },
+    "request_rate": 1.0
+  },
+  "holdout_grid_top10": [
+    {
+      "lam": 0.001,
+      "mu": 0.0,
+      "n": 6,
+      "success": 1.0,
+      "cost": 31.666666666666668,
+      "pick_counts": {
+        "takeover": 6
+      },
+      "request_rate": 1.0
+    },
+    {
+      "lam": 0.001,
+      "mu": 0.01,
+      "n": 6,
+      "success": 1.0,
+      "cost": 31.666666666666668,
+      "pick_counts": {
+        "takeover": 6
+      },
+      "request_rate": 1.0
+    },
+    {
+      "lam": 0.001,
+      "mu": 0.05,
+      "n": 6,
+      "success": 1.0,
+      "cost": 31.666666666666668,
+      "pick_counts": {
+        "takeover": 6
+      },
+      "request_rate": 1.0
+    },
+    {
+      "lam": 0.001,
+      "mu": 0.1,
+      "n": 6,
+      "success": 1.0,
+      "cost": 31.666666666666668,
+      "pick_counts": {
+        "takeover": 6
+      },
+      "request_rate": 1.0
+    },
+    {
+      "lam": 0.001,
+      "mu": 0.2,
+      "n": 6,
+      "success": 1.0,
+      "cost": 31.666666666666668,
+      "pick_counts": {
+        "takeover": 6
+      },
+      "request_rate": 1.0
+    },
+    {
+      "lam": 0.002,
+      "mu": 0.0,
+      "n": 6,
+      "success": 1.0,
+      "cost": 31.666666666666668,
+      "pick_counts": {
+        "takeover": 6
+      },
+      "request_rate": 1.0
+    },
+    {
+      "lam": 0.002,
+      "mu": 0.01,
+      "n": 6,
+      "success": 1.0,
+      "cost": 31.666666666666668,
+      "pick_counts": {
+        "takeover": 6
+      },
+      "request_rate": 1.0
+    },
+    {
+      "lam": 0.002,
+      "mu": 0.05,
+      "n": 6,
+      "success": 1.0,
+      "cost": 31.666666666666668,
+      "pick_counts": {
+        "takeover": 6
+      },
+      "request_rate": 1.0
+    },
+    {
+      "lam": 0.002,
+      "mu": 0.1,
+      "n": 6,
+      "success": 1.0,
+      "cost": 31.666666666666668,
+      "pick_counts": {
+        "takeover": 6
+      },
+      "request_rate": 1.0
+    },
+    {
+      "lam": 0.002,
+      "mu": 0.2,
+      "n": 6,
+      "success": 1.0,
+      "cost": 31.666666666666668,
+      "pick_counts": {
+        "takeover": 6
+      },
+      "request_rate": 1.0
+    }
+  ],
+  "cal_policy_eval": {
+    "G_fix": {
+      "n": 24,
+      "success": 0.5833333333333334,
+      "cost": 125.25,
+      "pick_counts": {
+        "short": 24
+      },
+      "request_rate": 1.0
+    },
+    "G_fixL": {
+      "n": 24,
+      "success": 0.8333333333333334,
+      "cost": 125.25,
+      "pick_counts": {
+        "long": 24
+      },
+      "request_rate": 1.0
+    },
+    "VD_enc": {
+      "n": 24,
+      "success": 0.9166666666666666,
+      "cost": 125.25,
+      "pick_counts": {
+        "rd": 24
+      },
+      "request_rate": 1.0
+    },
+    "VD": {
+      "n": 24,
+      "success": 0.9166666666666666,
+      "cost": 31.25,
+      "pick_counts": {
+        "takeover": 24
+      },
+      "request_rate": 1.0
+    },
+    "control": {
+      "n": 24,
+      "success": 0.4166666666666667,
+      "cost": 0.0
+    }
+  },
+  "scheme_rates_d0": {
+    "short": {
+      "success": 0.5833333333333334,
+      "cost": 125.25,
+      "n": 24
+    },
+    "long": {
+      "success": 0.8333333333333334,
+      "cost": 125.25,
+      "n": 24
+    },
+    "rd": {
+      "success": 0.9166666666666666,
+      "cost": 125.25,
+      "n": 24
+    },
+    "takeover": {
+      "success": 0.9166666666666666,
+      "cost": 31.25,
+      "n": 24
+    }
+  },
+  "predictor": {
+    "table": {
+      "pooled": {
+        "short": [
+          0.16666666666666666,
+          125.25,
+          1.0
+        ],
+        "long": [
+          0.4166666666666667,
+          125.25,
+          1.0
+        ],
+        "rd": [
+          0.5,
+          125.25,
+          1.0
+        ],
+        "takeover": [
+          0.5,
+          31.25,
+          1.0
+        ]
+      },
+      "attempt=1|error_class=assert": {
+        "short": [
+          0.16666666666666666,
+          125.25,
+          1.0
+        ],
+        "long": [
+          0.4166666666666667,
+          125.25,
+          1.0
+        ],
+        "rd": [
+          0.5,
+          125.25,
+          1.0
+        ],
+        "takeover": [
+          0.5,
+          31.25,
+          1.0
+        ]
+      }
+    },
+    "cell_n": {
+      "pooled": 24,
+      "attempt=1|error_class=assert": 24
+    },
+    "min_cell": 3
+  },
+  "pooled_row": {
+    "short": [
+      0.16666666666666666,
+      125.25,
+      1.0
+    ],
+    "long": [
+      0.4166666666666667,
+      125.25,
+      1.0
+    ],
+    "rd": [
+      0.5,
+      125.25,
+      1.0
+    ],
+    "takeover": [
+      0.5,
+      31.25,
+      1.0
+    ]
+  }
+}
