@@ -139,3 +139,131 @@ forking ('T11', 1002) (7/24)...
     m4 d=2: success=True status=not_needed
     takeover d=None: success=True status=takeover
 forking ('T11', 1003) (8/24)...
+  forks=14 success=7
+    control d=0: success=False status=none
+    m1 d=0: success=False status=accepted
+    m1 d=1: success=False status=accepted
+    m1 d=2: success=False status=accepted
+    m2 d=0: success=False status=accepted
+    m2 d=1: success=False status=accepted
+    m2 d=2: success=False status=accepted
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=True status=accepted
+    m3 d=2: success=True status=accepted
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=True status=accepted
+    m4 d=2: success=True status=accepted
+    takeover d=None: success=True status=takeover
+forking ('T11', 1005) (9/24)...
+  forks=14 success=14
+    control d=0: success=True status=none
+    m1 d=0: success=True status=accepted
+    m1 d=1: success=True status=accepted
+    m1 d=2: success=True status=not_needed
+    m2 d=0: success=True status=accepted
+    m2 d=1: success=True status=accepted
+    m2 d=2: success=True status=not_needed
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=True status=accepted
+    m3 d=2: success=True status=not_needed
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=True status=accepted
+    m4 d=2: success=True status=not_needed
+    takeover d=None: success=True status=takeover
+forking ('T12', 1000) (10/24)...
+  forks=14 success=4
+    control d=0: success=False status=none
+    m1 d=0: success=True status=accepted
+    m1 d=1: success=False status=stale
+    m1 d=2: success=False status=stale
+    m2 d=0: success=True status=accepted
+    m2 d=1: success=False status=stale
+    m2 d=2: success=False status=stale
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=False status=stale
+    m3 d=2: success=False status=stale
+    m4 d=0: success=False status=accepted
+    m4 d=1: success=False status=stale
+    m4 d=2: success=False status=stale
+    takeover d=None: success=True status=takeover
+forking ('T12', 1001) (11/24)...
+  forks=14 success=4
+    control d=0: success=False status=none
+    m1 d=0: success=False status=accepted
+    m1 d=1: success=False status=not_needed
+    m1 d=2: success=False status=not_needed
+    m2 d=0: success=True status=accepted
+    m2 d=1: success=False status=not_needed
+    m2 d=2: success=False status=not_needed
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=False status=not_needed
+    m3 d=2: success=False status=not_needed
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=False status=not_needed
+    m4 d=2: success=False status=not_needed
+    takeover d=None: success=True status=takeover
+forking ('T12', 1002) (12/24)...
+  forks=14 success=13
+    control d=0: success=True status=none
+    m1 d=0: success=False status=accepted
+    m1 d=1: success=True status=not_needed
+    m1 d=2: success=True status=not_needed
+    m2 d=0: success=True status=accepted
+    m2 d=1: success=True status=not_needed
+    m2 d=2: success=True status=not_needed
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=True status=not_needed
+    m3 d=2: success=True status=not_needed
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=True status=not_needed
+    m4 d=2: success=True status=not_needed
+    takeover d=None: success=True status=takeover
+forking ('T14', 1001) (13/24)...
+  forks=14 success=4
+    control d=0: success=False status=none
+    m1 d=0: success=True status=accepted
+    m1 d=1: success=False status=stale
+    m1 d=2: success=False status=stale
+    m2 d=0: success=False status=accepted
+    m2 d=1: success=False status=stale
+    m2 d=2: success=False status=stale
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=False status=stale
+    m3 d=2: success=False status=stale
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=False status=stale
+    m4 d=2: success=False status=stale
+    takeover d=None: success=True status=takeover
+forking ('T14', 1004) (14/24)...
+  forks=14 success=12
+    control d=0: success=False status=none
+    m1 d=0: success=True status=accepted
+    m1 d=1: success=True status=accepted
+    m1 d=2: success=False status=accepted
+    m2 d=0: success=True status=accepted
+    m2 d=1: success=True status=accepted
+    m2 d=2: success=True status=accepted
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=True status=accepted
+    m3 d=2: success=True status=accepted
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=True status=accepted
+    m4 d=2: success=True status=accepted
+    takeover d=None: success=True status=takeover
+forking ('T14', 1005) (15/24)...
+  forks=14 success=11
+    control d=0: success=False status=none
+    m1 d=0: success=False status=accepted
+    m1 d=1: success=False status=accepted
+    m1 d=2: success=True status=accepted
+    m2 d=0: success=True status=accepted
+    m2 d=1: success=True status=accepted
+    m2 d=2: success=True status=accepted
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=True status=accepted
+    m3 d=2: success=True status=accepted
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=True status=accepted
+    m4 d=2: success=True status=accepted
+    takeover d=None: success=True status=takeover
+forking ('T17', 1000) (16/24)...
