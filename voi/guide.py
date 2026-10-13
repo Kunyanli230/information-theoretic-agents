@@ -4,6 +4,7 @@ CACHE = os.path.join(os.path.dirname(__file__), "..", "results", "guide_cache");
 SPEC = {
  "short": 'Return ONLY a JSON object {"hint": <advice of at most 40 words>, "applicable_if": <an exact substring copied verbatim from the code that your advice is about>}.',
  "long": 'Return ONLY a JSON object {"location": ..., "cause": ..., "change": ..., "verification": ..., "applicable_if": <an exact substring copied verbatim from the code that your advice is about>}. Do not write the full corrected code.',
+ "diagnosis": 'Return ONLY a JSON object {"location": <where the bug is>, "cause": <why it fails>, "change": <what to change / steps>, "verification": <how to check the fix>, "applicable_if": <an exact substring copied verbatim from the code that your advice is about>}. Do not write the full corrected code. Fill every field.',
  "takeover": 'Return ONLY a JSON object {"code": <the complete corrected Python code>}.',
 }
 def _ask(prompt):
@@ -46,4 +47,5 @@ def cost(rec):
 def render(rec):
     o = rec.get("obj") or {}
     if rec["kind"] == "short": return o.get("hint")
-    if rec["kind"] == "long": return "\n".join(f"{k}: {o.get(k)}" for k in ("location", "cause", "change", "verification"))
+    if rec["kind"] in ("long", "diagnosis"):
+        return "\n".join(f"{k}: {o.get(k)}" for k in ("location", "cause", "change", "verification"))
