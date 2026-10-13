@@ -1,6 +1,6 @@
 # VoI-Delegate — Phase-1 mechanism experiment: PREREGISTRATION (v3)
 
-Status: written 2026-10-13 (Asia/Shanghai) **BEFORE** any v3 harness changes or new runs. Supersedes v2 fixed-timing four-arm protocol for the next confirmatory cycle. Source: `/workspace/proposals/delegation/voi-delegate-theory-astra.md` §§3–5 (Theorems 1–2, execution calibration, pseudocode ll.751–793) plus Heath via dr eggbot (2026-10-13): true VoI request timing, Theorem-1 encoder, Theorem-2 length–delay test, logistic primary, CLI cost as measurement limitation.
+Status: written 2026-10-13 (Asia/Shanghai) **BEFORE** any v3 harness changes or new runs. Amended same day (still pre-implementation) for (i) message-side \(c_h(z,m)\) vs shared diagnosis baseline and (ii) mandatory VD takeover-rate reporting — see `DEVIATIONS.md`. Supersedes v2 fixed-timing four-arm protocol for the next confirmatory cycle. Source: `/workspace/proposals/delegation/voi-delegate-theory-astra.md` §§3–5 (Theorems 1–2, execution calibration, pseudocode ll.751–793) plus Heath via dr eggbot (2026-10-13): true VoI request timing, Theorem-1 encoder, Theorem-2 length–delay test, logistic primary, CLI cost as measurement limitation.
 
 Pilot v2 (commits through `59d9979`) remains directional evidence only; it is not decisive for any gate. This document does **not** claim VoI-gate *training beyond a tabular/light predictor fit on fork data*, and does **not** claim low-overhead cost savings under Codex CLI until a separate amendment changes the guide path.
 
@@ -90,7 +90,7 @@ v_h^\star(z)=\max_{m\in\mathcal M_h}v_h(z,m),\quad
 d_h(z,m)=v_h^\star(z)-v_h(z,m).
 \]
 
-Cost \(\widehat c_h(z,m)\): **output tokens** of the diagnosis call attributed to that fork (primary), with input/total reported secondarily. Diagnosis is computed **once per prefix**; all \(m\in\mathcal M\) are field subsets of the same \(z\) (no per-template guide re-call).
+**Cost \(\widehat c_h(z,m)\) (post-review amendment, before v3 code):** because diagnosis \(z\) is computed **once per prefix** and each \(m\) is a field subset of the same \(z\), the diagnosis call's output tokens are a **shared baseline** \(c^{\mathrm{diag}}\) (logged once; input/total reported secondarily) and **must not** alone serve as the \(m\)-differentiating cost inside the Theorem-1 encoder — otherwise \(\lambda c\) is nearly constant across \(m\) and cannot select length. Primary \(\widehat c_h(z,m)\) for encoding is the **post-encode message cost**: field count in the chosen template, and/or rendered character length / estimated tokens of the delivered string (frozen recipe before confirmatory: prefer estimated tokens of rendered \(m\), with field-count as a parallel/ablation cost). Fork-level billing still reports diagnosis in/out/cached/reasoning plus this message cost. Diagnosis once; no per-template guide re-call.
 
 ### Concrete calibration plan (N, K, S, T)
 
@@ -127,6 +127,8 @@ Order-of-magnitude executor continuations: \(O(NKST)\approx 24\times 13\times 1\
 | \(m_4\) | locate + cause + change + verification |
 
 All carry `applicable_if` / version. Length classes for Q2: **short** \(=\{m_1\}\) (or \(m_1\cup m_2\) if holdout prefers), **long** \(=\{m_3\}\) (or \(m_3\cup m_4\)).
+
+**Encoder cost term:** \(c_h(z,m)\) in eqs. 7–9 is the **message cost** defined in §4 (rendered/estimated tokens or field count), **not** the one-shot diagnosis output alone. Diagnosis output remains a shared additive baseline outside the \(m\)-argmin when comparing templates from one \(z\).
 
 Offline objective (eqs. 7–9):
 
@@ -170,6 +172,7 @@ Delays \(d\in\{0,1,2\}\) on **C2, C3** (full factorial, paired) for Q2. Gate arm
 - Wall-clock (measured + simulated asynchrony as in v2).
 - Message disposition: accepted / stale / not-needed; whether next edit touched indicated location.
 - Stale-discard rate on \(d\ge 1\).
+- **Takeover selection rate** on gated arms (G_fix, G_fixL, VD): fraction of decision boundaries (and of episodes) where \(q^\star=q_{\mathrm{takeover}}\) is chosen and paid. Always report; see decision rule below.
 
 **Primary analyses (confirmatory tasks):**
 
@@ -196,7 +199,8 @@ Secondary: fit eqs. (11)–(15) on cal; validate \(r^\star\) on confirmatory —
 4. **Cost / saving vs C1 or pure-strong:** report output-token ratios and total-token ratios with footnote that totals are CLI-overhead-dominated (~0.98–0.99× in pilot cost_compare). **Do not** apply the v2 “\(s<10\%\) ⇒ stop scheme” rule to **total** tokens under CLI. Re-enable a formal 20%/10% total-cost gate only after a Heath-approved amendment to a low-fixed-overhead guide path (direct API or persistent cached session).
 5. Non-inferiority vs takeover on **success** remains informative but underpowered; report CI vs −5 pp margin without claiming confirmation.
 6. Stale rate: always report; \(<5\%\) ⇒ engineering-detail label for contribution text, mechanism still required.
-7. No arm / threshold edits after seeing confirmatory outcomes; deviations → `DEVIATIONS.md`.
+7. **VD / gated takeover rate:** always report \(P(q^\star=q_{\mathrm{takeover}})\). If takeover is the modal paid choice on confirmatory (or rate is high enough that gains vs C0 are driven by mid-upgrade rather than guidance), **do not** claim guidance-protocol success in the write-up — novelty collapses to upgrade routing; report as such. Pre-specified soft flag for discussion: takeover rate \(>50\%\) of paid requests on VD ⇒ method claim defaults to upgrade-routing unless a sensitivity excluding takeover still shows guidance gains (must be preregistered before unblinding confirmatory).
+8. No arm / threshold edits after seeing confirmatory outcomes; deviations → `DEVIATIONS.md`.
 
 ## 10. Blockers & risks to report (before / during implementation)
 
