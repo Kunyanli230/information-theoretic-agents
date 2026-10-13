@@ -1,8 +1,8 @@
 # VoI-Delegate — Phase-1 mechanism experiment: PREREGISTRATION (v3)
 
-Status: written 2026-10-13 (Asia/Shanghai) **BEFORE** any v3 harness changes or new runs. Amended same day (still pre-implementation) for (i) message-side \(c_h(z,m)\) vs shared diagnosis baseline and (ii) mandatory VD takeover-rate reporting — see `DEVIATIONS.md`. Supersedes v2 fixed-timing four-arm protocol for the next confirmatory cycle. Source: `/workspace/proposals/delegation/voi-delegate-theory-astra.md` §§3–5 (Theorems 1–2, execution calibration, pseudocode ll.751–793) plus Heath via dr eggbot (2026-10-13): true VoI request timing, Theorem-1 encoder, Theorem-2 length–delay test, logistic primary, CLI cost as measurement limitation.
+Status: written 2026-10-13 (Asia/Shanghai) **BEFORE** any v3 harness changes or new runs. Amended same day for (i) message-side \(c_h(z,m)\) vs shared diagnosis baseline and (ii) mandatory VD takeover-rate reporting — see `DEVIATIONS.md`. **Further amended 2026-10-13 ~23:46 CST (Heath via dr eggbot):** guide path switched from Codex CLI to **Cursor CLI (`agent`) model `grok-4.6`** (path A unchanged: fresh diagnosis → N=24). Supersedes v2 fixed-timing four-arm protocol for the next confirmatory cycle. Source: `/workspace/proposals/delegation/voi-delegate-theory-astra.md` §§3–5 (Theorems 1–2, execution calibration, pseudocode ll.751–793) plus Heath via dr eggbot (2026-10-13): true VoI request timing, Theorem-1 encoder, Theorem-2 length–delay test, logistic primary.
 
-Pilot v2 (commits through `59d9979`) remains directional evidence only; it is not decisive for any gate. This document does **not** claim VoI-gate *training beyond a tabular/light predictor fit on fork data*, and does **not** claim low-overhead cost savings under Codex CLI until a separate amendment changes the guide path.
+Pilot v2 and the v3 signal probe (both under Codex CLI `gpt-5.5`) remain **directional evidence only** under a **different guide distribution**; they are **not** decisive for any gate and **must not** be pooled with Grok-4.6 calibration / confirmatory outcomes as if they shared one guide. This document does **not** claim VoI-gate *training beyond a tabular/light predictor fit on fork data*.
 
 ## Contribution coverage (hard checklist)
 
@@ -25,20 +25,35 @@ Each bullet is a claim that **may appear in the paper only if the corresponding 
 
 ## 1. Hardware & models
 
-Carries forward v2 amendments (Heath-approved Codex CLI guide; Qwen2.5-Coder-0.5B executor).
+Executor unchanged from v2. **Guide path amended 2026-10-13 ~23:46–23:49 CST (Heath via dr eggbot, clarified):** Codex CLI **removed** from this machine; guide is **Cursor CLI only**. Previous pin Codex CLI **0.161.0** / model `gpt-5.5` is **obsolete**. **No remaining guide-path dependency on Codex CLI or any `gpt-*` model.**
 
 - Box: 8 CPU cores, 16 GB RAM, no GPU.
 - **Executor (small, frozen):** `Qwen/Qwen2.5-Coder-0.5B-Instruct` (HF snapshot `ea3f2471cf1b1f0db85067f1ef93848e38e88c25`), transformers CPU fp32, sampling T=0.7, top_p=0.95, max_new_tokens=256, torch seed fixed per attempt (byte-identical for equal seed).
-- **Guide (big):** Codex CLI 0.161.0 (`/home/box/.local/bin/codex`), `codex exec --skip-git-repo-check -s read-only -m gpt-5.5 -c model_reasoning_effort=low --json`, empty temp dir, ChatGPT-account login (no new login). Model pinned `gpt-5.5`. Text-only; never edits files. **Same invocation constraints as v2.**
-- **Cost reporting (CLI measurement limit):** every guide call logs `input_tokens`, `output_tokens`, `cached_input_tokens`, `reasoning_output_tokens` from `turn.completed` separately. **Primary cost claims for this phase use output-side tokens** (and separately report totals). Input is dominated by ~14k CLI fixed prompt overhead per call (pilot: ~14.2k mean); **total-token “savings vs pure-strong / takeover” are not interpretable as method savings under this meter** — see §9 and Blockers. Cached guide responses keyed by (snapshot, diagnosis-kind); billed once per fork that consumes them under the per-fork accounting rule (unique-cache-once sums only as secondary contrast, as in `results/cost_compare.*`).
-- A0 big-model tokens = 0 means **big-model billing only**; small-model CPU/tokens are always reported and must not be described as a free baseline.
+- **Guide (big) — pinned invocation (reproducible):**
+  - **Binary:** `/home/box/.local/bin/agent` → `/home/box/.local/share/cursor-agent/versions/2026.10.01-e373342/cursor-agent` (Cursor Agent CLI **2026.10.01-e373342**, installed via `curl https://cursor.com/install -fsS | bash`).
+  - **Headless command (canonical):**
+    ```
+    agent -p --mode=ask --model grok-4.6 --output-format text --workspace <empty-temp-dir> "<prompt>"
+    ```
+    Flags: `-p` / `--print` (non-interactive); `--mode=ask` (**read-only Q&A — must not edit files**); `--model grok-4.6` (exact model id); `--output-format text`; empty temp `--workspace` so the guide cannot touch the harness tree. Auth via `CURSOR_API_KEY` env (or `agent login` in 1:1 — not in group chat). **Do not** use Cloud Agent / `CloudAgent` tool for guide fills.
+  - **Effort / sampling:** model string may take bracket overrides (CLI docs: `'name[effort=...,fast=...]'`). Default pin for this phase: plain `grok-4.6` with CLI defaults (no extra temperature/top_p). If a later amendment sets effort, log the full `--model` string literally.
+  - **Output contract:** return **ONLY** one JSON object with schema `location`, `cause`, `change`, `verification`, `applicable_if` (exact code substring). Harness parses the first `{...}` object; retry once on parse failure.
+  - **Path A:** fresh Grok-4.6 `diagnosis` per calibration prefix → N=24. **Forbidden:** seeding `diagnosis_*` from pilot/probe Codex `long_*` (or any `seeded_from`) for path-A cal/confirmatory.
+- **Cost reporting (Cursor CLI meter):**
+  - Codex `turn.completed` fields and the **~14k CLI fixed-input footnote are obsolete**; Codex is uninstalled — do not use them for Grok-era claims.
+  - Every guide call logs usage if the CLI JSON/text report exposes token fields; else log `output_chars` and `est_output_tokens = ceil(output_chars/4)` of returned text; mark input as `null` / N/A.
+  - **Primary meters:** (1) guide-call count, (2) post-encode message cost \(c_h(z,m)\) (§4), (3) available token/char fields. Shared diagnosis cost logged once per prefix.
+  - **Total-token 20%/10% gate:** **not** auto-restored. Re-enable only via a **separate** Heath-approved amendment after Cursor/`grok-4.6` metering is characterized. Efficacy remains primary (§9).
+  - Cache keyed by `(kind, snapshot key, code hash)`.
+- A0 / C0 big-model tokens = 0 means **big-model billing only**; small-model CPU/tokens always reported.
+- **Capability-gap precheck:** guide model change **requires** a fresh guide-alone recheck under Cursor CLI / `grok-4.6`. Codex guide-alone **100% must not** be reused. Small-alone may be reused (executor unchanged). Until recheck lands, do not cite old Codex 100% as Grok capability.
 
 ## 2. Tasks / filter (amendment: reuse pilot pool)
 
 - Task bank: 40 synthetic single-function Python bug-fix tasks (`voi/tasks.py`), unchanged.
 - **Reuse** the v2 difficulty-filtered kept set (executor-alone success in [0.2, 0.8] on 5 seeds), without re-filter:
   `T09,T10,T11,T12,T14,T17,T20,T26,T28,T31,T32,T33,T37,T38,T40` (15 tasks).
-- **Capability-gap precheck:** reuse pilot result (guide-alone 100% vs small-alone 56%, gap 44 pp ≥ 15 pp). Do not re-spend guide calls unless models/versions change.
+- **Capability-gap precheck:** pilot Codex result (guide-alone 100% vs small-alone 56%, gap 44 pp) is **historical / directional only**. Guide model change to `grok-4.6` **requires a fresh guide-alone recheck** (same pass rule ≥ 15 pp gap vs frozen small-alone). Do **not** carry Codex 100% into Grok-era claims. Small-alone rates may be reused (executor unchanged).
 - **Justification:** avoids re-burning CLI budget; pool is already gap-qualified. **Risk:** 15 tasks cannot supply the v2-style \(n\approx 269\) paired forks for a powered non-inferiority gate — confirmatory analyses on this pool are **labelled underpowered** unless the task bank is expanded by a later amendment (Blockers).
 - Task split for v3 (fixed before calibration outcomes are used for encoder/gate fitting):
   - **Calibration tasks (8):** `T09,T10,T11,T12,T14,T17,T20,T26` — forks used to estimate \(\widehat d,\widehat c\), fit encoder \(e^\star\), fit tabular/light \(\widehat\Delta\) predictor, choose \(\lambda,\mu,\beta\) and message-family members on a nested held-out slice of these 8.
@@ -144,7 +159,7 @@ e^{(k+1)}(m\mid z,h)\propto q^{(k)}(m\mid h)\exp\{-(d_h(z,m)+\lambda c_h(z,m))/\
 q^{(k+1)}(m\mid h)=\sum_z p(z\mid h)e^{(k+1)}(m\mid z,h).
 \]
 
-Finite tables: Blahut–Arimoto or a small convex solver. Group by coarse \(h\); cross-group fallback = pooled table. **Deploy:** one Codex diagnosis \(z\) (JSON fields for the full family) → apply \(e^\star\) (or argmax deterministic decode of \(e^\star\)) to select fields/length → attach `applicable_if`.
+Finite tables: Blahut–Arimoto or a small convex solver. Group by coarse \(h\); cross-group fallback = pooled table. **Deploy:** one Grok-4.6 (Cursor CLI `agent`) diagnosis \(z\) (JSON fields for the full family) → apply \(e^\star\) (or argmax deterministic decode of \(e^\star\)) to select fields/length → attach `applicable_if`.
 
 Honesty: \(p(z\mid h)\) estimated empirically from cal diagnoses; estimation error bounds of eq. (10) cover \(\widehat d,\widehat c\) only under stated assumptions — source-distribution error is **out of scope** of that guarantee and is noted as a limitation.
 
@@ -191,12 +206,12 @@ Secondary: fit eqs. (11)–(15) on cal; validate \(r^\star\) on confirmatory —
 
 ## 9. Decision rules (updated for CLI cost limitation)
 
-**Efficacy is primary** for go / no-go in this phase. Cost under Codex CLI is a **measurement limitation**, not a method failure by itself.
+**Efficacy is primary** for go / no-go in this phase. Under the Grok-4.6 / Cursor meter, report actual available token/char fields (§1); the old Codex CLI ~14k-input limitation **no longer applies**. The formal total-token 20%/10% gate stays **suspended** until a separate amendment re-enables it after metering is characterized — absence of that gate is procedural, not a claim that totals are unmeasurable.
 
 1. **Q2 (must report):** long−short × delay interaction from logistic; if CI excludes 0 in the predicted direction, Theorem-2 qualitative prediction supported on this harness; parametric (15) accepted only if holdout fit passes pre-specified tolerance (to be fixed at cal time on nested holdout RMSE / sign of \(\partial r^\star/\partial\rho\)).
 2. **Q3:** if VD does not improve over G_fix/G_fixL on success (point estimate) with non-worse output-token cost, **do not claim** RD encoder as empirical main contribution; keep Theorem 1 as theory + negative/ablation result.
 3. **Q0:** if gated arms do not beat fixed-timing C2/C3 on the success–output-token Pareto (descriptive underpowered CIs), report null on timing; do not silently revert to fixed timing in the method claim.
-4. **Cost / saving vs C1 or pure-strong:** report output-token ratios and total-token ratios with footnote that totals are CLI-overhead-dominated (~0.98–0.99× in pilot cost_compare). **Do not** apply the v2 “\(s<10\%\) ⇒ stop scheme” rule to **total** tokens under CLI. Re-enable a formal 20%/10% total-cost gate only after a Heath-approved amendment to a low-fixed-overhead guide path (direct API or persistent cached session).
+4. **Cost / saving vs C1 or pure-strong:** report guide-call counts, message costs, and available Grok/Cursor in/out (or `output_chars` / est. tokens when in/out missing). **Do not** reuse pilot `cost_compare` CLI-overhead footnotes for Grok-era ratios. **Do not** apply the v2 “\(s<10\%\) ⇒ stop scheme” rule to totals until a **separate** Heath-approved amendment restores the 20%/10% total-cost gate under characterized Grok metering. Pure-strong vs takeover columns may be rebuilt after the fresh capability-gap recheck.
 5. Non-inferiority vs takeover on **success** remains informative but underpowered; report CI vs −5 pp margin without claiming confirmation.
 6. Stale rate: always report; \(<5\%\) ⇒ engineering-detail label for contribution text, mechanism still required.
 7. **VD / gated takeover rate:** always report \(P(q^\star=q_{\mathrm{takeover}})\). If takeover is the modal paid choice on confirmatory (or rate is high enough that gains vs C0 are driven by mid-upgrade rather than guidance), **do not** claim guidance-protocol success in the write-up — novelty collapses to upgrade routing; report as such. Pre-specified soft flag for discussion: takeover rate \(>50\%\) of paid requests on VD ⇒ method claim defaults to upgrade-routing unless a sensitivity excluding takeover still shows guidance gains (must be preregistered before unblinding confirmatory).
@@ -208,26 +223,27 @@ Do **not** silently shrink the algorithm. If any item bites, Coder reports to th
 
 1. **Distortion estimation cost \(O(NKST)\).** Full cal ~900 attempt-steps + ~24 diagnosis calls may exceed box/CLI budget or wall time. Mitigation already in protocol: signal probe first; then full cal. If probe is null, report and stop expansion — do not delete message family from the design doc.
 2. **15-task pool / 7 confirmatory tasks underpowered** for non-inferiority and for stable encoder-vs-ablation separation. Need Heath decision to expand tasks or accept underpowered confirmatory + cal-only mechanism evidence.
-3. **CLI ~14k input overhead** makes total-token savings unmeasurable; output-side only. Cost gate suspended pending pathway amendment.
+3. **Guide meter (Grok/Cursor):** log available in/out or char estimates; if token fields stay missing, cost claims stay call-count + message-cost primary. Formal 20%/10% total-token gate remains suspended until a separate amendment. (Obsolete: Codex CLI ~14k input overhead — does not apply to this guide path.)
 4. **Encoder vs ablation:** if G_fix/G_fixL matches VD, information-theoretic communication stays theoretical — must be surfaced, not spun.
 5. **Gate training honesty:** v3 fits a **tabular or light** predictor on cal forks (\(\widehat\Delta^{\pi_0}\)); not RL/SFT of models; not full Bellman \(Q^\star\). Do not claim otherwise.
 6. **Attempt-2+ prefixes** may be needed for a non-trivial gate; if only attempt-1 prefixes are affordable, the gate is little more than a rebranded fixed-timing policy — report as Blocker if that collapse happens.
-7. **Diagnosis once vs family:** if Codex refuses structured multi-field JSON reliably, field ablation for \(m_1\ldots m_4\) breaks; report before inventing online multi-calls (forbidden).
+7. **Diagnosis once vs family:** if Grok-4.6 / Cursor CLI `agent` refuses structured multi-field JSON reliably, field ablation for \(m_1\ldots m_4\) breaks; report before inventing online multi-calls (forbidden).
+8. **No mixing guide eras:** pilot + probe outcomes under Codex `gpt-5.5` are directional only; Grok-4.6 calibration/confirmatory must be analyzed and reported as a **separate guide distribution**. Do not pool success rates, costs, or encoder fits across the two eras as one sample.
 
 ## 11. Runtime estimate (v3)
 
 - Signal probe: ~40 executor forks + 8 guide calls ≈ 0.5–1.5 h.
-- Full cal: ~24×13 forks + 24 guide calls ≈ 4–10 h wall (CPU-bound executor; guide serial/parallel limited by CLI).
+- Full cal: ~24×13 forks + 24 guide calls ≈ 4–10 h wall (CPU-bound executor; guide serial via Cursor CLI `agent`).
 - Confirmatory (7 tasks × 3 snapshots × arms × delays): depends on final arm set; order 3–8 h if full factorial on C2/C3 plus gated arms once.
 - Encoder solve: negligible (\(O(J n_z n_m)\) table).
 
 ## 12. Diff vs pilot v2
 
 - Request timing: **fixed after attempt-1** → **VoI gate** on execution-calibrated \(\widehat\Delta\) (pre-pay scheme scoring).
-- Messages: fixed short/long strings from Codex → **finite family + offline Theorem-1 encoder**; one diagnosis \(z\), lightweight field select.
+- Messages: fixed short/long strings from prior Codex pilot → **finite family + offline Theorem-1 encoder** (Grok-4.6 fresh \(z\) for path A); one diagnosis \(z\), lightweight field select.
 - Arms: A0–A3 → C0–C3 continuity **plus** G_fix, G_fixL ablation **plus** full VD.
 - Primary Q2 analysis: bootstrap-only (pilot deviation) → **logistic with task FE restored**; bootstrap robustness.
-- Cost: v2 total-token 20%/10% gate → **suspended under CLI**; report output tokens; total with overhead footnote; pure-strong vs takeover columns kept as in cost_compare.
+- Cost: v2 total-token 20%/10% gate → **still suspended** pending separate amendment under Grok meter; report available Cursor/Grok tokens or char estimates (CLI ~14k footnote obsolete); rebuild pure-strong/takeover after capability-gap recheck.
 - Tasks: same 15 kept; explicit **8/7 cal/confirm split**; confirmatory labelled underpowered.
 - New: Contribution coverage checklist; Blockers section; ≤1 in-flight; stale mechanism retained as mandatory.
 - Still out of scope: SFT/RL of either model; claiming classic EVSI non-negativity for signed \(\Delta\); TwinRouterBench static labels as intervention proof.
