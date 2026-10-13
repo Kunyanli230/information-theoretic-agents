@@ -9,8 +9,8 @@ FAMILY = {
     "m3": ("location", "cause", "change"),
     "m4": ("location", "cause", "change", "verification"),
 }
-SHORT_IDS = ("m1",)  # default short class; holdout may expand to m1∪m2
-LONG_IDS = ("m3", "m4")
+SHORT_IDS = ("m2",)  # frozen after N=24 cal: m1≈control; paper-side short arm = m2
+LONG_IDS = ("m3",)  # m4 dropped from default encode family (tied success, higher c); see results/encoder/
 
 
 def render_from_z(z, mid):
