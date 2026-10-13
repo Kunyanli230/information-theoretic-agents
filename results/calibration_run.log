@@ -1,0 +1,45 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:   0%|          | 1/290 [00:01<05:59,  1.24s/it]Loading weights:  51%|█████     | 147/290 [00:01<00:00, 149.92it/s]Loading weights:  78%|███████▊  | 227/290 [00:01<00:00, 177.75it/s]Loading weights:  97%|█████████▋| 281/290 [00:01<00:00, 186.77it/s]Loading weights: 100%|██████████| 290/290 [00:01<00:00, 148.67it/s]
+building N=24 snapshots (3 attempt-1-fail / cal task)...
+snapshots 24 [('T09', 1000), ('T09', 1002), ('T09', 1003), ('T10', 1001), ('T10', 1002), ('T10', 1003), ('T11', 1002), ('T11', 1003), ('T11', 1005), ('T12', 1000), ('T12', 1001), ('T12', 1002), ('T14', 1001), ('T14', 1004), ('T14', 1005), ('T17', 1000), ('T17', 1004), ('T17', 1006), ('T20', 1003), ('T20', 1006), ('T20', 1007), ('T26', 1003), ('T26', 1004), ('T26', 1006)]
+fresh diagnosis for 24/24 prefixes...
+diag T09:1000 OK L=20.98263120651245
+diag T09:1002 OK L=17.973273038864136
+diag T09:1003 OK L=16.440450429916382
+diag T10:1001 OK L=57.59344482421875
+diag T10:1002 OK L=16.74941897392273
+diag T10:1003 OK L=21.714263916015625
+diag T11:1002 OK L=16.128806114196777
+diag T11:1003 OK L=17.45811653137207
+diag T11:1005 OK L=17.083775758743286
+diag T12:1000 OK L=19.048518657684326
+diag T12:1001 OK L=14.78491497039795
+diag T12:1002 OK L=20.360225439071655
+diag T14:1001 OK L=12.91725206375122
+diag T14:1004 OK L=14.712516069412231
+diag T14:1005 OK L=13.071966171264648
+diag T17:1000 OK L=16.055219173431396
+diag T17:1004 OK L=19.524240732192993
+diag T17:1006 OK L=15.436154842376709
+diag T20:1003 OK L=22.842143535614014
+diag T20:1006 OK L=14.756680488586426
+diag T20:1007 OK L=20.648159742355347
+diag T26:1003 OK L=15.087823390960693
+diag T26:1004 OK L=22.3321692943573
+diag T26:1006 OK L=19.828141689300537
+forking ('T09', 1000) (1/24)...
+  forks=14 success=5
+    control d=0: success=False status=none
+    m1 d=0: success=False status=accepted
+    m1 d=1: success=True status=accepted
+    m1 d=2: success=False status=not_needed
+    m2 d=0: success=False status=accepted
+    m2 d=1: success=False status=accepted
+    m2 d=2: success=False status=not_needed
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=True status=accepted
+    m3 d=2: success=False status=not_needed
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=True status=accepted
+    m4 d=2: success=False status=not_needed
+    takeover d=None: success=False status=takeover
+forking ('T09', 1002) (2/24)...

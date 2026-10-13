@@ -1,0 +1,968 @@
+{
+ "meta": {
+  "prereg": "v3-path-A",
+  "N": 24,
+  "n_per_task": 3,
+  "delays": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "control",
+   "m1",
+   "m2",
+   "m3",
+   "m4",
+   "takeover"
+  ],
+  "cal_tasks": [
+   "T09",
+   "T10",
+   "T11",
+   "T12",
+   "T14",
+   "T17",
+   "T20",
+   "T26"
+  ],
+  "guide_model": "grok-4.6",
+  "guide_backend": "cursor-cli-agent",
+  "agent_version": "2026.10.01-e373342",
+  "capability_gap": {
+   "guide_alone": 1.0,
+   "small_alone": 0.56,
+   "gap_pp": 44.0,
+   "passed": true,
+   "source": "results/capability_gap_grok46.json"
+  },
+  "started": "2026-10-14T00:00:18+0800"
+ },
+ "snapshots": [
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "code": "def last_n(xs, n):\n    if n > len(xs):\n        return []\n    return xs[-n:]\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpxt5mkdkx.py\", line 6, in <module>\n    assert last_n([1, 2, 3], 0) == []\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 1.7930092811584473,
+   "attempt": 1
+  },
+  {
+   "tid": "T09",
+   "seed": 1002,
+   "code": "def last_n(xs, n):\n    return xs[-n:]\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpzi8idg8o.py\", line 4, in <module>\n    assert last_n([1, 2, 3], 0) == []\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 1.121748447418213,
+   "attempt": 1
+  },
+  {
+   "tid": "T09",
+   "seed": 1003,
+   "code": "def last_n(xs, n):\n    return xs[-n:]\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp20plud3h.py\", line 4, in <module>\n    assert last_n([1, 2, 3], 0) == []\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 1.582341194152832,
+   "attempt": 1
+  },
+  {
+   "tid": "T10",
+   "seed": 1001,
+   "code": "def fib(n):\n    a, b = 0, 1\n    if n <= 0:\n        return None  # Handle negative input by returning None\n    elif n == 1:\n        return 0\n    elif n == 2:\n        return 1\n    else:\n        for _ in range(3, n + 1):\n            a, b = b, a + b\n        return a\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp9sb2wgaz.py\", line 14, in <module>\n    assert fib(5) == 5\n           ^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 14.951375246047974,
+   "attempt": 1
+  },
+  {
+   "tid": "T10",
+   "seed": 1002,
+   "code": "def fib(n):\n    a, b = 0, 1\n    while n > 0:\n        a, b = b, a * b\n        n -= 1\n    return a\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp2samh7eq.py\", line 8, in <module>\n    assert fib(5) == 5\n           ^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 3.089855432510376,
+   "attempt": 1
+  },
+  {
+   "tid": "T10",
+   "seed": 1003,
+   "code": "def fib(n):\n    a, b = 0, 1\n    for _ in range(n):\n        a, b = b, a * b\n    return a\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpds9dgtzv.py\", line 7, in <module>\n    assert fib(5) == 5\n           ^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 2.2887179851531982,
+   "attempt": 1
+  },
+  {
+   "tid": "T11",
+   "seed": 1002,
+   "code": "def append_item(x, xs=[]):\n    xs.append(x)\n    return xs\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpfrwwfxtx.py\", line 6, in <module>\n    assert append_item(2) == [2]\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 1.628230094909668,
+   "attempt": 1
+  },
+  {
+   "tid": "T11",
+   "seed": 1003,
+   "code": "def append_item(x, xs=[]):\n    xs.append(x)\n    return xs\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpge7o0ait.py\", line 6, in <module>\n    assert append_item(2) == [2]\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 5.781408309936523,
+   "attempt": 1
+  },
+  {
+   "tid": "T11",
+   "seed": 1005,
+   "code": "def append_item(x, xs=[]):\n    xs.extend([x])\n    return xs\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpl9k20bwn.py\", line 6, in <module>\n    assert append_item(2) == [2]\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 1.7677521705627441,
+   "attempt": 1
+  },
+  {
+   "tid": "T12",
+   "seed": 1000,
+   "code": "def is_palindrome(s):\n    t = ''.join(c for c in s if c.isalnum())\n    return t == t[::-1]\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpx3y8pvot.py\", line 5, in <module>\n    assert is_palindrome('Aba')\n           ~~~~~~~~~~~~~^^^^^^^\nAssertionError\n",
+   "a1_s": 1.8736915588378906,
+   "attempt": 1
+  },
+  {
+   "tid": "T12",
+   "seed": 1001,
+   "code": "def is_palindrome(s):\n    t = ''.join(c for c in s if c.isalnum())\n    # Check if the string is alphanumeric and the reversed string is equal\n    return t == t[::-1]\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp2fbscywr.py\", line 6, in <module>\n    assert is_palindrome('Aba')\n           ~~~~~~~~~~~~~^^^^^^^\nAssertionError\n",
+   "a1_s": 7.69265079498291,
+   "attempt": 1
+  },
+  {
+   "tid": "T12",
+   "seed": 1002,
+   "code": "def is_palindrome(s):\n    t = ''.join(c for c in s if c.isalnum())\n    return t == t[::-1]\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpfj26a2dx.py\", line 5, in <module>\n    assert is_palindrome('Aba')\n           ~~~~~~~~~~~~~^^^^^^^\nAssertionError\n",
+   "a1_s": 2.234896183013916,
+   "attempt": 1
+  },
+  {
+   "tid": "T14",
+   "seed": 1001,
+   "code": "def first_index(xs, v):\n    for i, x in enumerate(xs):\n        if x == v:\n            return i\n    return 0\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmph9bizmxo.py\", line 7, in <module>\n    assert first_index([1, 2], 9) == -1\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 11.622287273406982,
+   "attempt": 1
+  },
+  {
+   "tid": "T14",
+   "seed": 1004,
+   "code": "def first_index(xs, v):\n    for i, x in enumerate(xs):\n        if x == v:\n            return i\n    return 0\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpknmworhn.py\", line 7, in <module>\n    assert first_index([1, 2], 9) == -1\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 6.857367515563965,
+   "attempt": 1
+  },
+  {
+   "tid": "T14",
+   "seed": 1005,
+   "code": "def first_index(xs, v):\n    for i, x in enumerate(xs):\n        if x == v:\n            return i\n    return 0\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp6h8ev_fg.py\", line 7, in <module>\n    assert first_index([1, 2], 9) == -1\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 2.1064982414245605,
+   "attempt": 1
+  },
+  {
+   "tid": "T17",
+   "seed": 1000,
+   "code": "import unittest\n\nclass TestPower(unittest.TestCase):\n    def test_power(self):\n        self.assertEqual(power(2, 3), 8)\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp5ei9ve3y.py\", line 7, in <module>\n    assert power(2, 3) == 8\n           ^^^^^\nNameError: name 'power' is not defined\n",
+   "a1_s": 1.8604488372802734,
+   "attempt": 1
+  },
+  {
+   "tid": "T17",
+   "seed": 1004,
+   "code": "def power(b, e):\n    r = 1\n    for _ in range(e):  # Corrected the loop to run e times\n        r *= e\n    return r\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpi7g4v0a4.py\", line 7, in <module>\n    assert power(2, 3) == 8\n           ^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 6.438741207122803,
+   "attempt": 1
+  },
+  {
+   "tid": "T17",
+   "seed": 1006,
+   "code": "def power(b, e):\n    if e < 0:\n        raise ValueError(\"Exponent must be non-negative.\")\n    r = 1\n    for _ in range(e):\n        r *= e\n    return r\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmprhndrufi.py\", line 9, in <module>\n    assert power(2, 3) == 8\n           ^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 6.463501691818237,
+   "attempt": 1
+  },
+  {
+   "tid": "T20",
+   "seed": 1003,
+   "code": "import re\ndef capitalize_words(s):\n    # Use regular expression to replace multiple spaces with a single space and capitalize each word\n    return ' '.join(re.sub(r' {2,}', ' ', s).split())\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpe9i28exp.py\", line 6, in <module>\n    assert capitalize_words('hi there') == 'Hi There'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 2.606130838394165,
+   "attempt": 1
+  },
+  {
+   "tid": "T20",
+   "seed": 1006,
+   "code": "def capitalize_words(s):\n    return ' '.join(w[:1].upper() + w[2:] for w in s.split(' '))\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp_pzlibxz.py\", line 4, in <module>\n    assert capitalize_words('hi there') == 'Hi There'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 5.4585206508636475,
+   "attempt": 1
+  },
+  {
+   "tid": "T20",
+   "seed": 1007,
+   "code": "def capitalize_words(s):\n    return ' '.join(w[:1].upper() + w[2:] for w in s.split(' '))\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp71cavwi9.py\", line 4, in <module>\n    assert capitalize_words('hi there') == 'Hi There'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 1.872584342956543,
+   "attempt": 1
+  },
+  {
+   "tid": "T26",
+   "seed": 1003,
+   "code": "def strip_prefix(s, p):\n    if s.startswith(p):\n        return s[len(p) + 1:]\n    return s\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmplm90xl3x.py\", line 6, in <module>\n    assert strip_prefix('foobar', 'foo') == 'bar'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 1.8022685050964355,
+   "attempt": 1
+  },
+  {
+   "tid": "T26",
+   "seed": 1004,
+   "code": "def strip_prefix(s, p):\n    if s.startswith(p):\n        return s[len(p) + 1:]\n    return s\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp8blxu01j.py\", line 6, in <module>\n    assert strip_prefix('foobar', 'foo') == 'bar'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 1.8313040733337402,
+   "attempt": 1
+  },
+  {
+   "tid": "T26",
+   "seed": 1006,
+   "code": "def strip_prefix(s, p):\n    if s.startswith(p):\n        return s[len(p) + 1:]\n    else:\n        return s\n",
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpa9d6gw8l.py\", line 7, in <module>\n    assert strip_prefix('foobar', 'foo') == 'bar'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "a1_s": 8.49294924736023,
+   "attempt": 1
+  }
+ ],
+ "diagnoses": {
+  "T09:1000": {
+   "obj": {
+    "location": "return xs[-n:] when n is 0",
+    "cause": "In Python -0 is 0, so xs[-0:] is xs[0:] and returns the whole list instead of the last 0 items.",
+    "change": "Treat n == 0 as an empty result before slicing (for example return [] when n is 0), or slice from len(xs)-n so a zero count yields an empty list.",
+    "verification": "Re-run assert last_n([1, 2, 3], 0) == []; also check last_n([1, 2, 3], 2) == [2, 3] and last_n([1, 2, 3], 4) == [].",
+    "applicable_if": "return xs[-n:]"
+   },
+   "usage": {
+    "output_chars": 479,
+    "est_output_tokens": 120,
+    "input_tokens": null
+   },
+   "latency": 20.98263120651245,
+   "error": null,
+   "text": "{\"location\": \"return xs[-n:] when n is 0\", \"cause\": \"In Python -0 is 0, so xs[-0:] is xs[0:] and returns the whole list instead of the last 0 items.\", \"change\": \"Treat n == 0 as an empty result before slicing (for example return [] when n is 0), or slice from len(xs)-n so a zero count yields an empty list.\", \"verification\": \"Re-run assert last_n([1, 2, 3], 0) == []; also check last_n([1, 2, 3], 2) == [2, 3] and last_n([1, 2, 3], 4) == [].\", \"applicable_if\": \"return xs[-n:]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T09:1002": {
+   "obj": {
+    "location": "the slice expression xs[-n:] in last_n",
+    "cause": "In Python -0 equals 0, so xs[-0:] is the same as xs[0:] and returns the whole list instead of [].",
+    "change": "Handle n == 0 as a special case (return []), or otherwise avoid using a negative zero as a slice start.",
+    "verification": "Re-run assert last_n([1, 2, 3], 0) == [] and confirm it passes; also check n > 0 still returns the last n items.",
+    "applicable_if": "return xs[-n:]"
+   },
+   "usage": {
+    "output_chars": 448,
+    "est_output_tokens": 112,
+    "input_tokens": null
+   },
+   "latency": 17.973273038864136,
+   "error": null,
+   "text": "{\"location\": \"the slice expression xs[-n:] in last_n\", \"cause\": \"In Python -0 equals 0, so xs[-0:] is the same as xs[0:] and returns the whole list instead of [].\", \"change\": \"Handle n == 0 as a special case (return []), or otherwise avoid using a negative zero as a slice start.\", \"verification\": \"Re-run assert last_n([1, 2, 3], 0) == [] and confirm it passes; also check n > 0 still returns the last n items.\", \"applicable_if\": \"return xs[-n:]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T09:1003": {
+   "obj": {
+    "location": "the slice expression xs[-n:] in last_n",
+    "cause": "In Python -0 equals 0, so xs[-0:] is xs[0:] and returns the whole list instead of an empty suffix.",
+    "change": "Treat n == 0 as a special case that returns [] (or otherwise avoid using -n as the slice start when n is 0).",
+    "verification": "Re-run assert last_n([1, 2, 3], 0) == [] and also check a positive n, e.g. last_n([1, 2, 3], 2) == [2, 3].",
+    "applicable_if": "return xs[-n:]"
+   },
+   "usage": {
+    "output_chars": 444,
+    "est_output_tokens": 111,
+    "input_tokens": null
+   },
+   "latency": 16.440450429916382,
+   "error": null,
+   "text": "{\"location\": \"the slice expression xs[-n:] in last_n\",\"cause\": \"In Python -0 equals 0, so xs[-0:] is xs[0:] and returns the whole list instead of an empty suffix.\",\"change\": \"Treat n == 0 as a special case that returns [] (or otherwise avoid using -n as the slice start when n is 0).\",\"verification\": \"Re-run assert last_n([1, 2, 3], 0) == [] and also check a positive n, e.g. last_n([1, 2, 3], 2) == [2, 3].\",\"applicable_if\": \"return xs[-n:]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T10:1001": {
+   "obj": {
+    "location": "the else branch that runs for n=5: the loop `for _ in range(3, n + 1)` together with `return a`",
+    "cause": "n=5 skips the n==1/n==2 cases and iterates only three times from (0, 1), then returns a. Those updates leave a=2 and b=3, so fib(5) is 2 (two steps behind F(5)=5), and the assertion fails.",
+    "change": "Keep a, b = 0, 1. Iterate until the nth term is the returned value: loop n-1 times (e.g. range(1, n) or range(2, n+1)) and return b, or loop n times and return a. Do not return a after only range(3, n+1).",
+    "verification": "Re-run assert fib(5) == 5. Also check fib(3)==2, fib(4)==3, and fib(6)==8 so the loop is not still off-by-one.",
+    "applicable_if": "for _ in range(3, n + 1):"
+   },
+   "usage": {
+    "output_chars": 702,
+    "est_output_tokens": 176,
+    "input_tokens": null
+   },
+   "latency": 57.59344482421875,
+   "error": null,
+   "text": "{\"location\": \"the else branch that runs for n=5: the loop `for _ in range(3, n + 1)` together with `return a`\",\"cause\": \"n=5 skips the n==1/n==2 cases and iterates only three times from (0, 1), then returns a. Those updates leave a=2 and b=3, so fib(5) is 2 (two steps behind F(5)=5), and the assertion fails.\",\"change\": \"Keep a, b = 0, 1. Iterate until the nth term is the returned value: loop n-1 times (e.g. range(1, n) or range(2, n+1)) and return b, or loop n times and return a. Do not return a after only range(3, n+1).\",\"verification\": \"Re-run assert fib(5) == 5. Also check fib(3)==2, fib(4)==3, and fib(6)==8 so the loop is not still off-by-one.\",\"applicable_if\": \"for _ in range(3, n + 1):\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T10:1002": {
+   "obj": {
+    "location": "the loop update `a, b = b, a * b`",
+    "cause": "Fibonacci requires the next term to be the sum of the previous two, but the code multiplies them, so after the first step `b` becomes 0 and `fib(5)` returns 0 instead of 5",
+    "change": "replace the `*` with `+` so the pair advances as `a, b = b, a + b`",
+    "verification": "re-run `assert fib(5) == 5` and spot-check nearby values such as `fib(0)==0`, `fib(1)==1`, `fib(6)==8`",
+    "applicable_if": "a, b = b, a * b"
+   },
+   "usage": {
+    "output_chars": 471,
+    "est_output_tokens": 118,
+    "input_tokens": null
+   },
+   "latency": 16.74941897392273,
+   "error": null,
+   "text": "{\"location\": \"the loop update `a, b = b, a * b`\", \"cause\": \"Fibonacci requires the next term to be the sum of the previous two, but the code multiplies them, so after the first step `b` becomes 0 and `fib(5)` returns 0 instead of 5\", \"change\": \"replace the `*` with `+` so the pair advances as `a, b = b, a + b`\", \"verification\": \"re-run `assert fib(5) == 5` and spot-check nearby values such as `fib(0)==0`, `fib(1)==1`, `fib(6)==8`\", \"applicable_if\": \"a, b = b, a * b\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T10:1003": {
+   "obj": {
+    "location": "the loop update `a, b = b, a * b`",
+    "cause": "Fibonacci recurrence requires addition of the previous two terms, but the update multiplies them (`a * b`). After a few steps `a` collapses to 0, so `fib(5)` returns 0 instead of 5.",
+    "change": "Replace the product with a sum: use `a, b = b, a + b` so each iteration advances to the next Fibonacci number.",
+    "verification": "Re-run `assert fib(5) == 5`. Also check nearby values such as `fib(0)==0`, `fib(1)==1`, `fib(6)==8`.",
+    "applicable_if": "a, b = b, a * b"
+   },
+   "usage": {
+    "output_chars": 523,
+    "est_output_tokens": 131,
+    "input_tokens": null
+   },
+   "latency": 21.714263916015625,
+   "error": null,
+   "text": "{\"location\": \"the loop update `a, b = b, a * b`\", \"cause\": \"Fibonacci recurrence requires addition of the previous two terms, but the update multiplies them (`a * b`). After a few steps `a` collapses to 0, so `fib(5)` returns 0 instead of 5.\", \"change\": \"Replace the product with a sum: use `a, b = b, a + b` so each iteration advances to the next Fibonacci number.\", \"verification\": \"Re-run `assert fib(5) == 5`. Also check nearby values such as `fib(0)==0`, `fib(1)==1`, `fib(6)==8`.\", \"applicable_if\": \"a, b = b, a * b\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T11:1002": {
+   "obj": {
+    "location": "The default argument `xs=[]` on `append_item`.",
+    "cause": "The default list is created once at function definition time and reused on later calls. `append_item(1)` mutates that shared list to `[1]`, so `append_item(2)` returns `[1, 2]` instead of `[2]`.",
+    "change": "Use an immutable default (e.g. `None`) and create a new list inside the function when no list is passed; do not use a mutable list as the default.",
+    "verification": "Call `append_item(1)` then `append_item(2)` and confirm the second call returns `[2]`; also confirm two independent calls without a list argument do not share state.",
+    "applicable_if": "xs=[]"
+   },
+   "usage": {
+    "output_chars": 640,
+    "est_output_tokens": 160,
+    "input_tokens": null
+   },
+   "latency": 16.128806114196777,
+   "error": null,
+   "text": "{\"location\": \"The default argument `xs=[]` on `append_item`.\", \"cause\": \"The default list is created once at function definition time and reused on later calls. `append_item(1)` mutates that shared list to `[1]`, so `append_item(2)` returns `[1, 2]` instead of `[2]`.\", \"change\": \"Use an immutable default (e.g. `None`) and create a new list inside the function when no list is passed; do not use a mutable list as the default.\", \"verification\": \"Call `append_item(1)` then `append_item(2)` and confirm the second call returns `[2]`; also confirm two independent calls without a list argument do not share state.\", \"applicable_if\": \"xs=[]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T11:1003": {
+   "obj": {
+    "location": "function default argument xs=[]",
+    "cause": "The default list is created once at definition time and reused on later calls, so append_item(1) leaves [1] in that shared list and append_item(2) then returns [1, 2] instead of [2].",
+    "change": "Use xs=None as the default and, when xs is None, assign a new empty list inside the function before appending.",
+    "verification": "Call append_item(1), then assert append_item(2) == [2]; also assert a fresh append_item(3) == [3] and that passing an explicit list is unchanged.",
+    "applicable_if": "def append_item(x, xs=[]):"
+   },
+   "usage": {
+    "output_chars": 574,
+    "est_output_tokens": 144,
+    "input_tokens": null
+   },
+   "latency": 17.45811653137207,
+   "error": null,
+   "text": "{\"location\": \"function default argument xs=[]\",\"cause\": \"The default list is created once at definition time and reused on later calls, so append_item(1) leaves [1] in that shared list and append_item(2) then returns [1, 2] instead of [2].\",\"change\": \"Use xs=None as the default and, when xs is None, assign a new empty list inside the function before appending.\",\"verification\": \"Call append_item(1), then assert append_item(2) == [2]; also assert a fresh append_item(3) == [3] and that passing an explicit list is unchanged.\",\"applicable_if\": \"def append_item(x, xs=[]):\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T11:1005": {
+   "obj": {
+    "location": "append_item default argument xs=[]",
+    "cause": "The default list is created once at function definition and reused across calls, so append_item(1) leaves [1] in that shared list and append_item(2) then returns [1, 2] instead of [2].",
+    "change": "Do not use a mutable list as the default. Use a sentinel such as None and create a new list inside the function when no list is passed.",
+    "verification": "Call append_item(1) then assert append_item(2) == [2]; also confirm a passed-in list is still extended in place.",
+    "applicable_if": "xs=[]"
+   },
+   "usage": {
+    "output_chars": 554,
+    "est_output_tokens": 139,
+    "input_tokens": null
+   },
+   "latency": 17.083775758743286,
+   "error": null,
+   "text": "{\"location\": \"append_item default argument xs=[]\", \"cause\": \"The default list is created once at function definition and reused across calls, so append_item(1) leaves [1] in that shared list and append_item(2) then returns [1, 2] instead of [2].\", \"change\": \"Do not use a mutable list as the default. Use a sentinel such as None and create a new list inside the function when no list is passed.\", \"verification\": \"Call append_item(1) then assert append_item(2) == [2]; also confirm a passed-in list is still extended in place.\", \"applicable_if\": \"xs=[]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T12:1000": {
+   "obj": {
+    "location": "is_palindrome comparison after alphanumeric filter",
+    "cause": "Case is not normalized, so 'Aba' stays mixed-case and does not equal its reverse 'abA'.",
+    "change": "Lowercase (or uppercase) the filtered string before comparing it to its reverse.",
+    "verification": "Re-run assert is_palindrome('Aba') and similar mixed-case palindromes; they should pass.",
+    "applicable_if": "return t == t[::-1]"
+   },
+   "usage": {
+    "output_chars": 408,
+    "est_output_tokens": 102,
+    "input_tokens": null
+   },
+   "latency": 19.048518657684326,
+   "error": null,
+   "text": "{\"location\": \"is_palindrome comparison after alphanumeric filter\", \"cause\": \"Case is not normalized, so 'Aba' stays mixed-case and does not equal its reverse 'abA'.\", \"change\": \"Lowercase (or uppercase) the filtered string before comparing it to its reverse.\", \"verification\": \"Re-run assert is_palindrome('Aba') and similar mixed-case palindromes; they should pass.\", \"applicable_if\": \"return t == t[::-1]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T12:1001": {
+   "obj": {
+    "location": "The equality check after alphanumeric filtering",
+    "cause": "Comparison is case-sensitive, so 'Aba' is not equal to its reverse 'abA'.",
+    "change": "Normalize case (e.g. lower/casefold) on the filtered string before comparing it to its reverse.",
+    "verification": "Re-run assert is_palindrome('Aba') and similar mixed-case palindromes.",
+    "applicable_if": "return t == t[::-1]"
+   },
+   "usage": {
+    "output_chars": 388,
+    "est_output_tokens": 97,
+    "input_tokens": null
+   },
+   "latency": 14.78491497039795,
+   "error": null,
+   "text": "{\"location\": \"The equality check after alphanumeric filtering\", \"cause\": \"Comparison is case-sensitive, so 'Aba' is not equal to its reverse 'abA'.\", \"change\": \"Normalize case (e.g. lower/casefold) on the filtered string before comparing it to its reverse.\", \"verification\": \"Re-run assert is_palindrome('Aba') and similar mixed-case palindromes.\", \"applicable_if\": \"return t == t[::-1]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T12:1002": {
+   "obj": {
+    "location": "return t == t[::-1] (and the construction of t)",
+    "cause": "The check is case-sensitive. After keeping alphanumerics, t is still 'Aba', whose reverse is 'abA', so equality fails even though 'Aba' is a palindrome ignoring case.",
+    "change": "Normalize case before comparing: lowercase (or uppercase) the filtered string, then compare it to its reverse.",
+    "verification": "Re-run assert is_palindrome('Aba'); also check mixed-case palindromes (e.g. 'RaceCar') and that non-palindromes still fail.",
+    "applicable_if": "return t == t[::-1]"
+   },
+   "usage": {
+    "output_chars": 549,
+    "est_output_tokens": 138,
+    "input_tokens": null
+   },
+   "latency": 20.360225439071655,
+   "error": null,
+   "text": "{\"location\": \"return t == t[::-1] (and the construction of t)\", \"cause\": \"The check is case-sensitive. After keeping alphanumerics, t is still 'Aba', whose reverse is 'abA', so equality fails even though 'Aba' is a palindrome ignoring case.\", \"change\": \"Normalize case before comparing: lowercase (or uppercase) the filtered string, then compare it to its reverse.\", \"verification\": \"Re-run assert is_palindrome('Aba'); also check mixed-case palindromes (e.g. 'RaceCar') and that non-palindromes still fail.\", \"applicable_if\": \"return t == t[::-1]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T14:1001": {
+   "obj": {
+    "location": "the not-found fallback at the end of first_index",
+    "cause": "when v is absent from xs the loop never returns, then the function returns 0 instead of the expected sentinel -1",
+    "change": "change the post-loop return from 0 to -1 so a missing value is reported as not found",
+    "verification": "re-run assert first_index([1, 2], 9) == -1 and also check a present-value case such as first_index([1, 2], 1) == 0",
+    "applicable_if": "return 0"
+   },
+   "usage": {
+    "output_chars": 450,
+    "est_output_tokens": 113,
+    "input_tokens": null
+   },
+   "latency": 12.91725206375122,
+   "error": null,
+   "text": "{\"location\": \"the not-found fallback at the end of first_index\", \"cause\": \"when v is absent from xs the loop never returns, then the function returns 0 instead of the expected sentinel -1\", \"change\": \"change the post-loop return from 0 to -1 so a missing value is reported as not found\", \"verification\": \"re-run assert first_index([1, 2], 9) == -1 and also check a present-value case such as first_index([1, 2], 1) == 0\", \"applicable_if\": \"return 0\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T14:1004": {
+   "obj": {
+    "location": "the fallback return at the end of first_index after the loop",
+    "cause": "when v is missing from xs the loop never returns, so the function returns 0 instead of the expected not-found sentinel -1",
+    "change": "change the post-loop return from 0 to -1 so a missing value reports not found rather than index 0",
+    "verification": "run the failing assert first_index([1, 2], 9) == -1; also confirm first_index([1, 2], 1) == 0 and first_index([1, 2], 2) == 1 still pass",
+    "applicable_if": "return 0"
+   },
+   "usage": {
+    "output_chars": 506,
+    "est_output_tokens": 127,
+    "input_tokens": null
+   },
+   "latency": 14.712516069412231,
+   "error": null,
+   "text": "{\"location\": \"the fallback return at the end of first_index after the loop\", \"cause\": \"when v is missing from xs the loop never returns, so the function returns 0 instead of the expected not-found sentinel -1\", \"change\": \"change the post-loop return from 0 to -1 so a missing value reports not found rather than index 0\", \"verification\": \"run the failing assert first_index([1, 2], 9) == -1; also confirm first_index([1, 2], 1) == 0 and first_index([1, 2], 2) == 1 still pass\", \"applicable_if\": \"return 0\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T14:1005": {
+   "obj": {
+    "location": "the fallback return after the for-loop in first_index",
+    "cause": "when v is not found the function returns 0 instead of -1, so first_index([1, 2], 9) yields 0 and the assertion fails",
+    "change": "replace the not-found return value 0 with -1",
+    "verification": "run the failing assert: first_index([1, 2], 9) should equal -1; also confirm a present value still returns its index, e.g. first_index([1, 2], 2) == 1",
+    "applicable_if": "return 0"
+   },
+   "usage": {
+    "output_chars": 455,
+    "est_output_tokens": 114,
+    "input_tokens": null
+   },
+   "latency": 13.071966171264648,
+   "error": null,
+   "text": "{\"location\": \"the fallback return after the for-loop in first_index\", \"cause\": \"when v is not found the function returns 0 instead of -1, so first_index([1, 2], 9) yields 0 and the assertion fails\", \"change\": \"replace the not-found return value 0 with -1\", \"verification\": \"run the failing assert: first_index([1, 2], 9) should equal -1; also confirm a present value still returns its index, e.g. first_index([1, 2], 2) == 1\", \"applicable_if\": \"return 0\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T17:1000": {
+   "obj": {
+    "location": "The test file calls power() but no power function (or import of one) exists anywhere in the snippet.",
+    "cause": "Python raises NameError because the name power is never bound before the assertion uses it.",
+    "change": "Define a function power(base, exp) that returns base raised to exp (for the given case, 2**3 == 8), or import that function from the module that should implement it, before the test runs.",
+    "verification": "Re-run the test so power(2, 3) evaluates to 8 with no NameError.",
+    "applicable_if": "self.assertEqual(power(2, 3), 8)"
+   },
+   "usage": {
+    "output_chars": 554,
+    "est_output_tokens": 139,
+    "input_tokens": null
+   },
+   "latency": 16.055219173431396,
+   "error": null,
+   "text": "{\"location\": \"The test file calls power() but no power function (or import of one) exists anywhere in the snippet.\",\"cause\": \"Python raises NameError because the name power is never bound before the assertion uses it.\",\"change\": \"Define a function power(base, exp) that returns base raised to exp (for the given case, 2**3 == 8), or import that function from the module that should implement it, before the test runs.\",\"verification\": \"Re-run the test so power(2, 3) evaluates to 8 with no NameError.\",\"applicable_if\": \"self.assertEqual(power(2, 3), 8)\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T17:1004": {
+   "obj": {
+    "location": "the multiplication inside the loop (`r *= e`)",
+    "cause": "the loop multiplies the accumulator by the exponent e instead of the base b, so power(2, 3) computes 1*3*3*3 = 27 rather than 2^3 = 8",
+    "change": "replace `r *= e` with `r *= b` so each of the e iterations multiplies by the base",
+    "verification": "re-run `assert power(2, 3) == 8` and optionally check other cases such as power(2, 0) == 1 and power(5, 1) == 5",
+    "applicable_if": "r *= e"
+   },
+   "usage": {
+    "output_chars": 460,
+    "est_output_tokens": 115,
+    "input_tokens": null
+   },
+   "latency": 19.524240732192993,
+   "error": null,
+   "text": "{\"location\": \"the multiplication inside the loop (`r *= e`)\", \"cause\": \"the loop multiplies the accumulator by the exponent e instead of the base b, so power(2, 3) computes 1*3*3*3 = 27 rather than 2^3 = 8\", \"change\": \"replace `r *= e` with `r *= b` so each of the e iterations multiplies by the base\", \"verification\": \"re-run `assert power(2, 3) == 8` and optionally check other cases such as power(2, 0) == 1 and power(5, 1) == 5\", \"applicable_if\": \"r *= e\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T17:1006": {
+   "obj": {
+    "location": "the loop body that updates the accumulator (`r *= e`)",
+    "cause": "the function multiplies by the exponent `e` on each iteration instead of the base `b`, so `power(2, 3)` computes 1*3*3*3 = 27 rather than 2^3 = 8",
+    "change": "in the loop, multiply the accumulator by the base: change `r *= e` to `r *= b`",
+    "verification": "re-run `assert power(2, 3) == 8`; also check `power(2, 0) == 1` and `power(5, 1) == 5`",
+    "applicable_if": "r *= e"
+   },
+   "usage": {
+    "output_chars": 448,
+    "est_output_tokens": 112,
+    "input_tokens": null
+   },
+   "latency": 15.436154842376709,
+   "error": null,
+   "text": "{\"location\": \"the loop body that updates the accumulator (`r *= e`)\",\"cause\": \"the function multiplies by the exponent `e` on each iteration instead of the base `b`, so `power(2, 3)` computes 1*3*3*3 = 27 rather than 2^3 = 8\",\"change\": \"in the loop, multiply the accumulator by the base: change `r *= e` to `r *= b`\",\"verification\": \"re-run `assert power(2, 3) == 8`; also check `power(2, 0) == 1` and `power(5, 1) == 5`\",\"applicable_if\": \"r *= e\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T20:1003": {
+   "obj": {
+    "location": "the return statement of capitalize_words",
+    "cause": "The function only collapses runs of spaces and rejoins split tokens; it never capitalizes, so 'hi there' is returned unchanged instead of 'Hi There'.",
+    "change": "After splitting, capitalize each word (for example with word.capitalize()) before joining them back with a single space.",
+    "verification": "Re-run assert capitalize_words('hi there') == 'Hi There' and confirm multi-space inputs still collapse to one space between capitalized words.",
+    "applicable_if": "return ' '.join(re.sub(r' {2,}', ' ', s).split())"
+   },
+   "usage": {
+    "output_chars": 584,
+    "est_output_tokens": 146,
+    "input_tokens": null
+   },
+   "latency": 22.842143535614014,
+   "error": null,
+   "text": "{\"location\": \"the return statement of capitalize_words\", \"cause\": \"The function only collapses runs of spaces and rejoins split tokens; it never capitalizes, so 'hi there' is returned unchanged instead of 'Hi There'.\", \"change\": \"After splitting, capitalize each word (for example with word.capitalize()) before joining them back with a single space.\", \"verification\": \"Re-run assert capitalize_words('hi there') == 'Hi There' and confirm multi-space inputs still collapse to one space between capitalized words.\", \"applicable_if\": \"return ' '.join(re.sub(r' {2,}', ' ', s).split())\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T20:1006": {
+   "obj": {
+    "location": "the slice that rebuilds each word after uppercasing its first character",
+    "cause": "w[2:] skips the second character, so 'hi' becomes 'H' and 'there' becomes 'Tere', producing 'H Tere' instead of 'Hi There'",
+    "change": "use the remainder starting at index 1 (w[1:]) instead of index 2 when concatenating after w[:1].upper()",
+    "verification": "re-run assert capitalize_words('hi there') == 'Hi There' and also check a longer word like 'hello' so the second letter is kept",
+    "applicable_if": "w[:1].upper() + w[2:]"
+   },
+   "usage": {
+    "output_chars": 528,
+    "est_output_tokens": 132,
+    "input_tokens": null
+   },
+   "latency": 14.756680488586426,
+   "error": null,
+   "text": "{\"location\": \"the slice that rebuilds each word after uppercasing its first character\", \"cause\": \"w[2:] skips the second character, so 'hi' becomes 'H' and 'there' becomes 'Tere', producing 'H Tere' instead of 'Hi There'\", \"change\": \"use the remainder starting at index 1 (w[1:]) instead of index 2 when concatenating after w[:1].upper()\", \"verification\": \"re-run assert capitalize_words('hi there') == 'Hi There' and also check a longer word like 'hello' so the second letter is kept\", \"applicable_if\": \"w[:1].upper() + w[2:]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T20:1007": {
+   "obj": {
+    "location": "The slice after uppercasing each word in the generator: w[:1].upper() + w[2:]",
+    "cause": "w[2:] drops the second character of every word, so 'hi there' becomes 'H Tere' instead of 'Hi There'.",
+    "change": "Use the rest of the word starting at index 1 (w[1:]), not index 2.",
+    "verification": "Re-run assert capitalize_words('hi there') == 'Hi There'; also check a one-letter word like 'a b' stays 'A B'.",
+    "applicable_if": "w[:1].upper() + w[2:]"
+   },
+   "usage": {
+    "output_chars": 455,
+    "est_output_tokens": 114,
+    "input_tokens": null
+   },
+   "latency": 20.648159742355347,
+   "error": null,
+   "text": "{\"location\": \"The slice after uppercasing each word in the generator: w[:1].upper() + w[2:]\",\"cause\": \"w[2:] drops the second character of every word, so 'hi there' becomes 'H Tere' instead of 'Hi There'.\",\"change\": \"Use the rest of the word starting at index 1 (w[1:]), not index 2.\",\"verification\": \"Re-run assert capitalize_words('hi there') == 'Hi There'; also check a one-letter word like 'a b' stays 'A B'.\",\"applicable_if\": \"w[:1].upper() + w[2:]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T26:1003": {
+   "obj": {
+    "location": "the return slice `s[len(p) + 1:]` inside the `startswith` branch",
+    "cause": "the extra `+ 1` starts one character after the prefix, so `'foobar'` with prefix `'foo'` yields `'ar'` instead of `'bar'`",
+    "change": "slice from the prefix length only: use `s[len(p):]` instead of `s[len(p) + 1:]`",
+    "verification": "re-run `assert strip_prefix('foobar', 'foo') == 'bar'` and confirm it passes",
+    "applicable_if": "s[len(p) + 1:]"
+   },
+   "usage": {
+    "output_chars": 438,
+    "est_output_tokens": 110,
+    "input_tokens": null
+   },
+   "latency": 15.087823390960693,
+   "error": null,
+   "text": "{\"location\": \"the return slice `s[len(p) + 1:]` inside the `startswith` branch\", \"cause\": \"the extra `+ 1` starts one character after the prefix, so `'foobar'` with prefix `'foo'` yields `'ar'` instead of `'bar'`\", \"change\": \"slice from the prefix length only: use `s[len(p):]` instead of `s[len(p) + 1:]`\", \"verification\": \"re-run `assert strip_prefix('foobar', 'foo') == 'bar'` and confirm it passes\", \"applicable_if\": \"s[len(p) + 1:]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T26:1004": {
+   "obj": {
+    "location": "return s[len(p) + 1:]",
+    "cause": "The slice starts one character after the prefix, so 'foobar' with prefix 'foo' yields 'ar' instead of 'bar'.",
+    "change": "Drop the extra + 1 so the slice starts at the first character after the prefix (index len(p)).",
+    "verification": "Re-run assert strip_prefix('foobar', 'foo') == 'bar' and also check a case with no extra char after the prefix, e.g. strip_prefix('foo', 'foo') == ''.",
+    "applicable_if": "s[len(p) + 1:]"
+   },
+   "usage": {
+    "output_chars": 471,
+    "est_output_tokens": 118,
+    "input_tokens": null
+   },
+   "latency": 22.3321692943573,
+   "error": null,
+   "text": "{\"location\": \"return s[len(p) + 1:]\", \"cause\": \"The slice starts one character after the prefix, so 'foobar' with prefix 'foo' yields 'ar' instead of 'bar'.\", \"change\": \"Drop the extra + 1 so the slice starts at the first character after the prefix (index len(p)).\", \"verification\": \"Re-run assert strip_prefix('foobar', 'foo') == 'bar' and also check a case with no extra char after the prefix, e.g. strip_prefix('foo', 'foo') == ''.\", \"applicable_if\": \"s[len(p) + 1:]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  },
+  "T26:1006": {
+   "obj": {
+    "location": "the return slice after startswith succeeds",
+    "cause": "off-by-one: len(p)+1 skips one extra character after the prefix, so 'foobar' with prefix 'foo' yields 'ar' instead of 'bar'",
+    "change": "slice from len(p) only; drop the +1 so the remainder starts immediately after the prefix",
+    "verification": "re-run assert strip_prefix('foobar', 'foo') == 'bar' and confirm a non-matching prefix still returns s unchanged",
+    "applicable_if": "return s[len(p) + 1:]"
+   },
+   "usage": {
+    "output_chars": 470,
+    "est_output_tokens": 118,
+    "input_tokens": null
+   },
+   "latency": 19.828141689300537,
+   "error": null,
+   "text": "{\"location\": \"the return slice after startswith succeeds\", \"cause\": \"off-by-one: len(p)+1 skips one extra character after the prefix, so 'foobar' with prefix 'foo' yields 'ar' instead of 'bar'\", \"change\": \"slice from len(p) only; drop the +1 so the remainder starts immediately after the prefix\", \"verification\": \"re-run assert strip_prefix('foobar', 'foo') == 'bar' and confirm a non-matching prefix still returns s unchanged\", \"applicable_if\": \"return s[len(p) + 1:]\"}",
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "seeded_from": null
+  }
+ },
+ "forks": [
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "control",
+   "mid": null,
+   "d": 0,
+   "success": false,
+   "exec_s": 9.45142126083374,
+   "wall": 9.45142126083374,
+   "status": "none",
+   "gen_tokens": 152,
+   "guide_out": 0,
+   "guide_in": 0,
+   "message_cost": 0.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m1",
+   "d": 0,
+   "success": false,
+   "exec_s": 5.700061321258545,
+   "wall": 26.682692527770996,
+   "status": "accepted",
+   "gen_tokens": 87,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 9.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m1",
+   "d": 1,
+   "success": true,
+   "exec_s": 3.2971410751342773,
+   "wall": 22.6062433719635,
+   "status": "accepted",
+   "gen_tokens": 56,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 9.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m1",
+   "d": 2,
+   "success": false,
+   "exec_s": 8.637861967086792,
+   "wall": 20.98263120651245,
+   "status": "not_needed",
+   "gen_tokens": 152,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 9.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m2",
+   "d": 0,
+   "success": false,
+   "exec_s": 5.1459801197052,
+   "wall": 26.12861132621765,
+   "status": "accepted",
+   "gen_tokens": 87,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 35.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m2",
+   "d": 1,
+   "success": false,
+   "exec_s": 5.3720479011535645,
+   "wall": 24.677831649780273,
+   "status": "accepted",
+   "gen_tokens": 85,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 35.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m2",
+   "d": 2,
+   "success": false,
+   "exec_s": 7.724776029586792,
+   "wall": 20.98263120651245,
+   "status": "not_needed",
+   "gen_tokens": 152,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 35.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m3",
+   "d": 0,
+   "success": true,
+   "exec_s": 1.669480800628662,
+   "wall": 22.652112007141113,
+   "status": "accepted",
+   "gen_tokens": 28,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 74.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m3",
+   "d": 1,
+   "success": true,
+   "exec_s": 3.229308843612671,
+   "wall": 22.57494282722473,
+   "status": "accepted",
+   "gen_tokens": 56,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 74.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m3",
+   "d": 2,
+   "success": false,
+   "exec_s": 8.066622734069824,
+   "wall": 20.98263120651245,
+   "status": "not_needed",
+   "gen_tokens": 152,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 74.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m4",
+   "d": 0,
+   "success": true,
+   "exec_s": 1.8423361778259277,
+   "wall": 22.82496738433838,
+   "status": "accepted",
+   "gen_tokens": 28,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 106.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m4",
+   "d": 1,
+   "success": true,
+   "exec_s": 3.4458835124969482,
+   "wall": 22.723732471466064,
+   "status": "accepted",
+   "gen_tokens": 56,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 106.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "msg",
+   "mid": "m4",
+   "d": 2,
+   "success": false,
+   "exec_s": 7.872764825820923,
+   "wall": 20.98263120651245,
+   "status": "not_needed",
+   "gen_tokens": 152,
+   "guide_out": 0,
+   "guide_in": null,
+   "guide_cached": 0,
+   "guide_reasoning": 0,
+   "message_cost": 106.0,
+   "diag_cost_shared": 0
+  },
+  {
+   "tid": "T09",
+   "seed": 1000,
+   "arm": "takeover",
+   "mid": null,
+   "d": null,
+   "success": false,
+   "exec_s": 1.7930092811584473,
+   "wall": 17.457983016967773,
+   "status": "takeover",
+   "gen_tokens": 0,
+   "guide_out": 25,
+   "guide_in": 0,
+   "message_cost": 0.0,
+   "diag_cost_shared": 0,
+   "cost": 25
+  }
+ ]
+}
