@@ -60,7 +60,7 @@ def main():
             idx.setdefault((e["tid"], e["seed"], e.get("d")), {})[e["arm"]] = e
     paired = []
     for k, m in idx.items():
-        if "G_fixL" in m and "VD" in m:
+        if "G_fixL" in m and "VD_enc" in m:
             paired.append(dict(
                 key=k,
                 g=1 if m["G_fixL"]["success"] else 0,
