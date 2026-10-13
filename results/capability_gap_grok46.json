@@ -1,0 +1,184 @@
+{
+ "model": "grok-4.6",
+ "backend": "cursor-cli-agent",
+ "agent_bin": "/home/box/.local/bin/agent",
+ "agent_version": "2026.10.01-e373342",
+ "n_tasks": 15,
+ "kept": [
+  "T09",
+  "T10",
+  "T11",
+  "T12",
+  "T14",
+  "T17",
+  "T20",
+  "T26",
+  "T28",
+  "T31",
+  "T32",
+  "T33",
+  "T37",
+  "T38",
+  "T40"
+ ],
+ "guide_alone": 1.0,
+ "small_alone": 0.56,
+ "small_alone_source": "results/pilot.json filter (frozen executor)",
+ "gap_pp": 43.99999999999999,
+ "pass_rule_pp": 15,
+ "passed": true,
+ "per_task": [
+  {
+   "tid": "T09",
+   "success": true,
+   "cost": 22,
+   "latency": 12.783388614654541,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T10",
+   "success": true,
+   "cost": 26,
+   "latency": 13.446495056152344,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T11",
+   "success": true,
+   "cost": 28,
+   "latency": 28.231359243392944,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T12",
+   "success": true,
+   "cost": 29,
+   "latency": 11.85715365409851,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T14",
+   "success": true,
+   "cost": 31,
+   "latency": 16.513644695281982,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T17",
+   "success": true,
+   "cost": 24,
+   "latency": 12.14879035949707,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T20",
+   "success": true,
+   "cost": 26,
+   "latency": 20.646171808242798,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T26",
+   "success": true,
+   "cost": 26,
+   "latency": 15.092468023300171,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T28",
+   "success": true,
+   "cost": 37,
+   "latency": 20.187979698181152,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T31",
+   "success": true,
+   "cost": 31,
+   "latency": 19.030434608459473,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T32",
+   "success": true,
+   "cost": 22,
+   "latency": 13.04570198059082,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T33",
+   "success": true,
+   "cost": 24,
+   "latency": 15.65646481513977,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T37",
+   "success": true,
+   "cost": 32,
+   "latency": 15.90089726448059,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T38",
+   "success": true,
+   "cost": 27,
+   "latency": 18.182202100753784,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  },
+  {
+   "tid": "T40",
+   "success": true,
+   "cost": 26,
+   "latency": 14.209039211273193,
+   "error": null,
+   "model": "grok-4.6",
+   "backend": "cursor-cli-agent",
+   "has_obj": true
+  }
+ ],
+ "wall_s": 107.50278234481812,
+ "note": "Codex guide-alone 100% not reused; path-A capability-gap recheck only."
+}

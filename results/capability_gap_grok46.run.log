@@ -1,0 +1,18 @@
+guide-alone precheck: n=15 model=grok-4.6
+  T10 ok=True err=None L=13.4s
+  T09 ok=True err=None L=12.8s
+  T12 ok=True err=None L=11.9s
+  T14 ok=True err=None L=16.5s
+  T11 ok=True err=None L=28.2s
+  T17 ok=True err=None L=12.1s
+  T26 ok=True err=None L=15.1s
+  T20 ok=True err=None L=20.6s
+  T28 ok=True err=None L=20.2s
+  T31 ok=True err=None L=19.0s
+  T32 ok=True err=None L=13.0s
+  T33 ok=True err=None L=15.7s
+  T37 ok=True err=None L=15.9s
+  T38 ok=True err=None L=18.2s
+  T40 ok=True err=None L=14.2s
+RESULT {"guide_alone": 1.0, "small_alone": 0.56, "gap_pp": 43.99999999999999, "passed": true}
+wrote /workspace/voi-delegate/voi/../results/capability_gap_grok46.json /workspace/voi-delegate/voi/../results/capability_gap_grok46.md
