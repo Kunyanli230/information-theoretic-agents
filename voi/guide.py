@@ -16,7 +16,7 @@ SPEC = {
 
 
 class GuideAuthError(RuntimeError):
-    """CURSOR_API_KEY missing / agent not logged in — do not attempt device login here."""
+    """Agent CLI reports auth required — do not attempt device login here."""
 
 
 def _usage_from_text(text, raw_usage=None):
@@ -35,9 +35,8 @@ def _ask(prompt):
     """One headless Cursor CLI ask-mode call. Returns (text, usage, latency, err)."""
     if not os.path.isfile(AGENT) and not os.path.islink(AGENT):
         return None, None, 0.0, f"agent_binary_missing:{AGENT}"
-    # Auth gate: require CURSOR_API_KEY or existing login — do not run agent login.
-    has_key = bool(os.environ.get("CURSOR_API_KEY") or os.environ.get("CURSOR_AUTH_TOKEN"))
-    # Cheap precheck: if neither key nor known auth, still try once and surface auth error.
+    # Auth: CURSOR_API_KEY / CURSOR_AUTH_TOKEN optional — `agent login` session is enough.
+    # Do not pre-raise; call CLI and surface auth only if stderr/stdout says so.
     with tempfile.TemporaryDirectory(prefix="voi-guide-") as d:
         t0 = time.time()
         cmd = [
@@ -70,7 +69,8 @@ def _ask(prompt):
 
 
 def cache_path(kind, key, code):
-    h = hashlib.sha256(f"{kind}|{key}|{code}".encode()).hexdigest()[:16]
+    # Include MODEL so Codex-era caches never collide with Cursor/grok-4.6.
+    h = hashlib.sha256(f"{MODEL}|{kind}|{key}|{code}".encode()).hexdigest()[:16]
     return os.path.join(CACHE, f"{kind}_{h}.json")
 
 
@@ -89,19 +89,16 @@ def guidance(kind, code, test, error, key):
     fp = cache_path(kind, key, code)
     if os.path.exists(fp):
         return json.load(open(fp))
-    # Refuse to proceed without auth rather than hanging on login prompts.
-    if not (os.environ.get("CURSOR_API_KEY") or os.environ.get("CURSOR_AUTH_TOKEN")):
-        # Still allow cache writes only after a successful call; surface clear error.
-        raise GuideAuthError(
-            "CURSOR_API_KEY / CURSOR_AUTH_TOKEN not set; "
-            "set the key or run `agent login` in 1:1 with Heath before live diagnosis"
-        )
+    # Env keys optional; session from `agent login` is enough. Raise only if CLI says auth required.
     prompt = build_prompt(kind, code, test, error)
     text, usage, L, err = None, None, 0.0, None
     for _ in range(2):
         text, usage, L, err = _ask(prompt)
         if err == "auth_required":
-            raise GuideAuthError("agent reports authentication required")
+            raise GuideAuthError(
+                "agent reports authentication required; "
+                "set CURSOR_API_KEY / CURSOR_AUTH_TOKEN or run `agent login`"
+            )
         if text:
             break
     obj = None
