@@ -1,0 +1,384 @@
+{
+ "filter": {
+  "T01": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T02": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T03": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T04": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T05": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T06": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T07": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T08": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T09": [
+   false,
+   false,
+   false,
+   true,
+   true
+  ],
+  "T10": [
+   false,
+   false,
+   true,
+   false,
+   false
+  ],
+  "T11": [
+   false,
+   true,
+   false,
+   false,
+   true
+  ],
+  "T12": [
+   true,
+   true,
+   true,
+   true,
+   false
+  ],
+  "T13": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T14": [
+   false,
+   false,
+   false,
+   false,
+   true
+  ],
+  "T15": [
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "T16": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T17": [
+   false,
+   false,
+   true,
+   true,
+   true
+  ],
+  "T18": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T19": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T20": [
+   true,
+   true,
+   false,
+   true,
+   true
+  ],
+  "T21": [
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "T22": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T23": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T24": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T25": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T26": [
+   true,
+   true,
+   false,
+   true,
+   true
+  ],
+  "T27": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T28": [
+   false,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T29": [
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "T30": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T31": [
+   true,
+   true,
+   true,
+   false,
+   true
+  ],
+  "T32": [
+   true,
+   false,
+   true,
+   false,
+   true
+  ],
+  "T33": [
+   false,
+   false,
+   true,
+   false,
+   false
+  ],
+  "T34": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "T35": [
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "T36": [
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "T37": [
+   false,
+   true,
+   true,
+   false,
+   true
+  ],
+  "T38": [
+   true,
+   false,
+   true,
+   true,
+   true
+  ],
+  "T39": [
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "T40": [
+   false,
+   true,
+   true,
+   false,
+   false
+  ]
+ },
+ "kept": [
+  "T09",
+  "T10",
+  "T11",
+  "T12",
+  "T14",
+  "T17",
+  "T20",
+  "T26",
+  "T28",
+  "T31",
+  "T32",
+  "T33",
+  "T37",
+  "T38",
+  "T40"
+ ],
+ "precheck": {
+  "guide_alone": 1.0,
+  "small_alone": 0.56,
+  "gap_pp": 43.99999999999999,
+  "per_task": [
+   [
+    "T09",
+    true,
+    15171
+   ],
+   [
+    "T10",
+    true,
+    15185
+   ],
+   [
+    "T11",
+    true,
+    15156
+   ],
+   [
+    "T12",
+    true,
+    15177
+   ],
+   [
+    "T14",
+    true,
+    14230
+   ],
+   [
+    "T17",
+    true,
+    14208
+   ],
+   [
+    "T20",
+    true,
+    14234
+   ],
+   [
+    "T26",
+    true,
+    14213
+   ],
+   [
+    "T28",
+    true,
+    14281
+   ],
+   [
+    "T31",
+    true,
+    14269
+   ],
+   [
+    "T32",
+    true,
+    14226
+   ],
+   [
+    "T33",
+    true,
+    14237
+   ],
+   [
+    "T37",
+    true,
+    14233
+   ],
+   [
+    "T38",
+    true,
+    14217
+   ],
+   [
+    "T40",
+    true,
+    14225
+   ]
+  ],
+  "passed": true
+ }
+}

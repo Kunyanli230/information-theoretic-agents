@@ -1,0 +1,84 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:   0%|          | 1/290 [00:00<02:21,  2.04it/s]Loading weights:  68%|██████▊   | 196/290 [00:00<00:00, 440.82it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 413.82it/s]
+filter T01 [True, True, True, True, True]
+filter T02 [True, True, True, True, True]
+filter T03 [True, True, True, True, True]
+filter T04 [True, True, True, True, True]
+filter T05 [True, True, True, True, True]
+filter T06 [True, True, True, True, True]
+filter T07 [True, True, True, True, True]
+filter T08 [True, True, True, True, True]
+filter T09 [False, False, False, True, True]
+filter T10 [False, False, True, False, False]
+filter T11 [False, True, False, False, True]
+filter T12 [True, True, True, True, False]
+filter T13 [True, True, True, True, True]
+filter T14 [False, False, False, False, True]
+filter T15 [False, False, False, False, False]
+filter T16 [True, True, True, True, True]
+filter T17 [False, False, True, True, True]
+filter T18 [True, True, True, True, True]
+filter T19 [True, True, True, True, True]
+filter T20 [True, True, False, True, True]
+filter T21 [False, False, False, False, False]
+filter T22 [True, True, True, True, True]
+filter T23 [True, True, True, True, True]
+filter T24 [True, True, True, True, True]
+filter T25 [True, True, True, True, True]
+filter T26 [True, True, False, True, True]
+filter T27 [True, True, True, True, True]
+filter T28 [False, True, True, True, True]
+filter T29 [False, False, False, False, False]
+filter T30 [True, True, True, True, True]
+filter T31 [True, True, True, False, True]
+filter T32 [True, False, True, False, True]
+filter T33 [False, False, True, False, False]
+filter T34 [True, True, True, True, True]
+filter T35 [False, False, False, False, False]
+filter T36 [False, False, False, False, False]
+filter T37 [False, True, True, False, True]
+filter T38 [True, False, True, True, True]
+filter T39 [False, False, False, False, False]
+filter T40 [False, True, True, False, False]
+kept 15
+precheck 43.99999999999999
+snapshots 45
+Traceback (most recent call last):
+  File "/workspace/voi-delegate/voi/run_pilot.py", line 46, in <module>
+    with ThreadPoolExecutor(4) as ex: G = list(ex.map(gcalls, snaps))
+                                          ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/usr/lib/python3.13/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/usr/lib/python3.13/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/workspace/voi-delegate/voi/run_pilot.py", line 45, in gcalls
+    return {k: guide.guidance(k, sn["code"], t["visible"], sn["err"], key) for k in ("short", "long", "takeover")}
+               ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/voi-delegate/voi/../voi/../voi/guide.py", line 31, in guidance
+    text, usage, L, err = _ask(prompt)
+                          ~~~~^^^^^^^^
+  File "/workspace/voi-delegate/voi/../voi/../voi/guide.py", line 12, in _ask
+    r = subprocess.run([CODEX, "exec", "--skip-git-repo-check", "-s", "read-only", "-m", MODEL, "-c", "model_reasoning_effort=low", "--json", prompt],
+                       cwd=d, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=300)
+  File "/usr/lib/python3.13/subprocess.py", line 556, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 1222, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 2129, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/subprocess.py", line 1269, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['/home/box/.local/bin/codex', 'exec', '--skip-git-repo-check', '-s', 'read-only', '-m', 'gpt-5.5', '-c', 'model_reasoning_effort=low', '--json', 'You are a senior engineer helping a junior fix a bug. Do not run tools or edit files.\nCode:\n```python\ndef capitalize_words(s):\n    return \' \'.join(w[:1].upper() + w[2:] for w in s.split(\' \'))\n```\nFailing test:\n```python\nassert capitalize_words(\'hi there\') == \'Hi There\'\n```\nError:\nTraceback (most recent call last):\n  File "/tmp/tmp7nvs9_eh.py", line 4, in <module>\n    assert capitalize_words(\'hi there\') == \'Hi There\'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\n\nReturn ONLY a JSON object {"code": <the complete corrected Python code>}.']' timed out after 300 seconds
