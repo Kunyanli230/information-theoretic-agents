@@ -1,0 +1,93 @@
+{
+ "n_snapshots": 8,
+ "n_forks": 40,
+ "arms": {
+  "control": {
+   "n": 8,
+   "success_rate": 0.375,
+   "n_success": 3,
+   "guide_out_mean": 0,
+   "message_cost_mean": 0,
+   "accepted": 0,
+   "stale": 0,
+   "render_fail": 0
+  },
+  "m1": {
+   "n": 8,
+   "success_rate": 0.5,
+   "n_success": 4,
+   "guide_out_mean": 121,
+   "message_cost_mean": 14.125,
+   "accepted": 8,
+   "stale": 0,
+   "render_fail": 0
+  },
+  "m2": {
+   "n": 8,
+   "success_rate": 0.625,
+   "n_success": 5,
+   "guide_out_mean": 121,
+   "message_cost_mean": 50.25,
+   "accepted": 8,
+   "stale": 0,
+   "render_fail": 0
+  },
+  "m3": {
+   "n": 8,
+   "success_rate": 0.75,
+   "n_success": 6,
+   "guide_out_mean": 121,
+   "message_cost_mean": 76.625,
+   "accepted": 8,
+   "stale": 0,
+   "render_fail": 0
+  },
+  "m4": {
+   "n": 8,
+   "success_rate": 0.75,
+   "n_success": 6,
+   "guide_out_mean": 121,
+   "message_cost_mean": 101.875,
+   "accepted": 8,
+   "stale": 0,
+   "render_fail": 0
+  }
+ },
+ "Q1": {
+  "m1": {
+   "mean_lift_pp": 12.5,
+   "n_better": 1,
+   "n_worse": 0,
+   "n_tie": 7,
+   "any_positive_lift": true
+  },
+  "m2": {
+   "mean_lift_pp": 25.0,
+   "n_better": 2,
+   "n_worse": 0,
+   "n_tie": 6,
+   "any_positive_lift": true
+  },
+  "m3": {
+   "mean_lift_pp": 37.5,
+   "n_better": 4,
+   "n_worse": 1,
+   "n_tie": 3,
+   "any_positive_lift": true
+  },
+  "m4": {
+   "mean_lift_pp": 37.5,
+   "n_better": 4,
+   "n_worse": 1,
+   "n_tie": 3,
+   "any_positive_lift": true
+  }
+ },
+ "signal": {
+  "control_success": 0.375,
+  "best_mid": "m3",
+  "best_success": 0.75,
+  "best_lift_pp": 37.5,
+  "q1_style_lift_exists": true
+ }
+}
