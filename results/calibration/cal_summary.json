@@ -1,0 +1,342 @@
+{
+  "meta": {
+    "prereg": "v3-path-A",
+    "N": 24,
+    "guide_model": "grok-4.6",
+    "guide_backend": "cursor-cli-agent",
+    "agent_version": "2026.10.01-e373342",
+    "capability_gap": {
+      "guide_alone": 1.0,
+      "small_alone": 0.56,
+      "gap_pp": 44.0,
+      "passed": true,
+      "source": "results/capability_gap_grok46.json"
+    },
+    "started": "2026-10-14T00:00:18+0800",
+    "finished": "2026-10-14T01:06:06+0800",
+    "n_forks": 336
+  },
+  "n_prefixes": 24,
+  "n_forks": 336,
+  "arms": {
+    "control": {
+      "n": 24,
+      "success_rate": 0.4166666666666667,
+      "n_success": 10
+    },
+    "m1": {
+      "n": 72,
+      "success_rate": 0.4305555555555556,
+      "n_success": 31
+    },
+    "m2": {
+      "n": 72,
+      "success_rate": 0.5277777777777778,
+      "n_success": 38
+    },
+    "m3": {
+      "n": 72,
+      "success_rate": 0.7777777777777778,
+      "n_success": 56
+    },
+    "m4": {
+      "n": 72,
+      "success_rate": 0.7777777777777778,
+      "n_success": 56
+    },
+    "takeover": {
+      "n": 24,
+      "success_rate": 0.9166666666666666,
+      "n_success": 22
+    }
+  },
+  "arm_delay": {
+    "control|d=0": {
+      "n": 24,
+      "success_rate": 0.4166666666666667,
+      "n_success": 10
+    },
+    "m1|d=0": {
+      "n": 24,
+      "success_rate": 0.4166666666666667,
+      "n_success": 10
+    },
+    "m1|d=1": {
+      "n": 24,
+      "success_rate": 0.4583333333333333,
+      "n_success": 11
+    },
+    "m1|d=2": {
+      "n": 24,
+      "success_rate": 0.4166666666666667,
+      "n_success": 10
+    },
+    "m2|d=0": {
+      "n": 24,
+      "success_rate": 0.5833333333333334,
+      "n_success": 14
+    },
+    "m2|d=1": {
+      "n": 24,
+      "success_rate": 0.5416666666666666,
+      "n_success": 13
+    },
+    "m2|d=2": {
+      "n": 24,
+      "success_rate": 0.4583333333333333,
+      "n_success": 11
+    },
+    "m3|d=0": {
+      "n": 24,
+      "success_rate": 0.8333333333333334,
+      "n_success": 20
+    },
+    "m3|d=1": {
+      "n": 24,
+      "success_rate": 0.7916666666666666,
+      "n_success": 19
+    },
+    "m3|d=2": {
+      "n": 24,
+      "success_rate": 0.7083333333333334,
+      "n_success": 17
+    },
+    "m4|d=0": {
+      "n": 24,
+      "success_rate": 0.8333333333333334,
+      "n_success": 20
+    },
+    "m4|d=1": {
+      "n": 24,
+      "success_rate": 0.7916666666666666,
+      "n_success": 19
+    },
+    "m4|d=2": {
+      "n": 24,
+      "success_rate": 0.7083333333333334,
+      "n_success": 17
+    },
+    "takeover|d=None": {
+      "n": 24,
+      "success_rate": 0.9166666666666666,
+      "n_success": 22
+    }
+  },
+  "by_task": {
+    "T09": {
+      "control": {
+        "n": 3,
+        "success_rate": 0.0
+      },
+      "m1": {
+        "n": 9,
+        "success_rate": 0.1111111111111111
+      },
+      "m2": {
+        "n": 9,
+        "success_rate": 0.0
+      },
+      "m3": {
+        "n": 9,
+        "success_rate": 0.8888888888888888
+      },
+      "m4": {
+        "n": 9,
+        "success_rate": 0.8888888888888888
+      },
+      "takeover": {
+        "n": 3,
+        "success_rate": 0.6666666666666666
+      }
+    },
+    "T10": {
+      "control": {
+        "n": 3,
+        "success_rate": 0.3333333333333333
+      },
+      "m1": {
+        "n": 9,
+        "success_rate": 0.0
+      },
+      "m2": {
+        "n": 9,
+        "success_rate": 0.4444444444444444
+      },
+      "m3": {
+        "n": 9,
+        "success_rate": 0.5555555555555556
+      },
+      "m4": {
+        "n": 9,
+        "success_rate": 0.5555555555555556
+      },
+      "takeover": {
+        "n": 3,
+        "success_rate": 0.6666666666666666
+      }
+    },
+    "T11": {
+      "control": {
+        "n": 3,
+        "success_rate": 0.6666666666666666
+      },
+      "m1": {
+        "n": 9,
+        "success_rate": 0.5555555555555556
+      },
+      "m2": {
+        "n": 9,
+        "success_rate": 0.6666666666666666
+      },
+      "m3": {
+        "n": 9,
+        "success_rate": 0.8888888888888888
+      },
+      "m4": {
+        "n": 9,
+        "success_rate": 1.0
+      },
+      "takeover": {
+        "n": 3,
+        "success_rate": 1.0
+      }
+    },
+    "T12": {
+      "control": {
+        "n": 3,
+        "success_rate": 0.3333333333333333
+      },
+      "m1": {
+        "n": 9,
+        "success_rate": 0.3333333333333333
+      },
+      "m2": {
+        "n": 9,
+        "success_rate": 0.5555555555555556
+      },
+      "m3": {
+        "n": 9,
+        "success_rate": 0.5555555555555556
+      },
+      "m4": {
+        "n": 9,
+        "success_rate": 0.4444444444444444
+      },
+      "takeover": {
+        "n": 3,
+        "success_rate": 1.0
+      }
+    },
+    "T14": {
+      "control": {
+        "n": 3,
+        "success_rate": 0.0
+      },
+      "m1": {
+        "n": 9,
+        "success_rate": 0.4444444444444444
+      },
+      "m2": {
+        "n": 9,
+        "success_rate": 0.6666666666666666
+      },
+      "m3": {
+        "n": 9,
+        "success_rate": 0.7777777777777778
+      },
+      "m4": {
+        "n": 9,
+        "success_rate": 0.7777777777777778
+      },
+      "takeover": {
+        "n": 3,
+        "success_rate": 1.0
+      }
+    },
+    "T17": {
+      "control": {
+        "n": 3,
+        "success_rate": 0.6666666666666666
+      },
+      "m1": {
+        "n": 9,
+        "success_rate": 0.6666666666666666
+      },
+      "m2": {
+        "n": 9,
+        "success_rate": 0.6666666666666666
+      },
+      "m3": {
+        "n": 9,
+        "success_rate": 1.0
+      },
+      "m4": {
+        "n": 9,
+        "success_rate": 1.0
+      },
+      "takeover": {
+        "n": 3,
+        "success_rate": 1.0
+      }
+    },
+    "T20": {
+      "control": {
+        "n": 3,
+        "success_rate": 0.6666666666666666
+      },
+      "m1": {
+        "n": 9,
+        "success_rate": 0.5555555555555556
+      },
+      "m2": {
+        "n": 9,
+        "success_rate": 0.5555555555555556
+      },
+      "m3": {
+        "n": 9,
+        "success_rate": 0.8888888888888888
+      },
+      "m4": {
+        "n": 9,
+        "success_rate": 0.7777777777777778
+      },
+      "takeover": {
+        "n": 3,
+        "success_rate": 1.0
+      }
+    },
+    "T26": {
+      "control": {
+        "n": 3,
+        "success_rate": 0.6666666666666666
+      },
+      "m1": {
+        "n": 9,
+        "success_rate": 0.7777777777777778
+      },
+      "m2": {
+        "n": 9,
+        "success_rate": 0.6666666666666666
+      },
+      "m3": {
+        "n": 9,
+        "success_rate": 0.6666666666666666
+      },
+      "m4": {
+        "n": 9,
+        "success_rate": 0.7777777777777778
+      },
+      "takeover": {
+        "n": 3,
+        "success_rate": 1.0
+      }
+    }
+  },
+  "status_counts": {
+    "none": 24,
+    "accepted": 192,
+    "not_needed": 80,
+    "takeover": 24,
+    "stale": 16
+  }
+}

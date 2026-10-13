@@ -315,3 +315,99 @@ forking ('T17', 1006) (18/24)...
     m4 d=2: success=True status=not_needed
     takeover d=None: success=True status=takeover
 forking ('T20', 1003) (19/24)...
+  forks=14 success=7
+    control d=0: success=False status=none
+    m1 d=0: success=False status=accepted
+    m1 d=1: success=False status=accepted
+    m1 d=2: success=False status=accepted
+    m2 d=0: success=False status=accepted
+    m2 d=1: success=False status=accepted
+    m2 d=2: success=False status=accepted
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=True status=accepted
+    m3 d=2: success=True status=accepted
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=True status=accepted
+    m4 d=2: success=True status=accepted
+    takeover d=None: success=True status=takeover
+forking ('T20', 1006) (20/24)...
+  forks=14 success=13
+    control d=0: success=True status=none
+    m1 d=0: success=True status=accepted
+    m1 d=1: success=True status=not_needed
+    m1 d=2: success=True status=not_needed
+    m2 d=0: success=True status=accepted
+    m2 d=1: success=True status=not_needed
+    m2 d=2: success=True status=not_needed
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=True status=not_needed
+    m3 d=2: success=True status=not_needed
+    m4 d=0: success=False status=accepted
+    m4 d=1: success=True status=not_needed
+    m4 d=2: success=True status=not_needed
+    takeover d=None: success=True status=takeover
+forking ('T20', 1007) (21/24)...
+  forks=14 success=10
+    control d=0: success=True status=none
+    m1 d=0: success=False status=accepted
+    m1 d=1: success=True status=not_needed
+    m1 d=2: success=True status=not_needed
+    m2 d=0: success=False status=accepted
+    m2 d=1: success=True status=not_needed
+    m2 d=2: success=True status=not_needed
+    m3 d=0: success=False status=accepted
+    m3 d=1: success=True status=not_needed
+    m3 d=2: success=True status=not_needed
+    m4 d=0: success=False status=accepted
+    m4 d=1: success=True status=not_needed
+    m4 d=2: success=True status=not_needed
+    takeover d=None: success=True status=takeover
+forking ('T26', 1003) (22/24)...
+  forks=14 success=14
+    control d=0: success=True status=none
+    m1 d=0: success=True status=accepted
+    m1 d=1: success=True status=accepted
+    m1 d=2: success=True status=not_needed
+    m2 d=0: success=True status=accepted
+    m2 d=1: success=True status=accepted
+    m2 d=2: success=True status=not_needed
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=True status=accepted
+    m3 d=2: success=True status=not_needed
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=True status=accepted
+    m4 d=2: success=True status=not_needed
+    takeover d=None: success=True status=takeover
+forking ('T26', 1004) (23/24)...
+  forks=14 success=4
+    control d=0: success=False status=none
+    m1 d=0: success=True status=accepted
+    m1 d=1: success=False status=not_needed
+    m1 d=2: success=False status=not_needed
+    m2 d=0: success=True status=accepted
+    m2 d=1: success=False status=not_needed
+    m2 d=2: success=False status=not_needed
+    m3 d=0: success=False status=accepted
+    m3 d=1: success=False status=not_needed
+    m3 d=2: success=False status=not_needed
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=False status=not_needed
+    m4 d=2: success=False status=not_needed
+    takeover d=None: success=True status=takeover
+forking ('T26', 1006) (24/24)...
+  forks=14 success=13
+    control d=0: success=True status=none
+    m1 d=0: success=True status=accepted
+    m1 d=1: success=True status=not_needed
+    m1 d=2: success=True status=not_needed
+    m2 d=0: success=False status=accepted
+    m2 d=1: success=True status=not_needed
+    m2 d=2: success=True status=not_needed
+    m3 d=0: success=True status=accepted
+    m3 d=1: success=True status=not_needed
+    m3 d=2: success=True status=not_needed
+    m4 d=0: success=True status=accepted
+    m4 d=1: success=True status=not_needed
+    m4 d=2: success=True status=not_needed
+    takeover d=None: success=True status=takeover
+CALIBRATION DONE 336 forks
