@@ -1,6 +1,5 @@
 """Signal probe (prereg §4): N0=8, d=0, control + m1–m4. Resumable."""
 import json, os, sys, time
-from concurrent.futures import ThreadPoolExecutor
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from voi.calibration import CAL_TASKS, make_snapshots, probe_forks_for_snapshot, diagnose
 from voi.encoder import FactorialEncoder
@@ -42,20 +41,25 @@ def main():
     diags = state.get("diagnoses") or {}
     need = [sn for sn in snaps if f"{sn['tid']}:{sn['seed']}" not in diags]
     if need:
-        print(f"diagnosing {len(need)} prefixes...", flush=True)
-        def _d(sn):
+        print(f"diagnosing {len(need)} prefixes (serial)...", flush=True)
+        for sn in need:
             rec = diagnose(sn)
-            return f"{sn['tid']}:{sn['seed']}", {
+            k = f"{sn['tid']}:{sn['seed']}"
+            v = {
                 "obj": rec.get("obj"), "usage": rec.get("usage"),
                 "latency": rec.get("latency"), "error": rec.get("error"),
                 "text": rec.get("text"), "model": rec.get("model"),
+                "seeded_from": rec.get("seeded_from"),
             }
-        with ThreadPoolExecutor(4) as ex:
-            for k, v in ex.map(_d, need):
-                diags[k] = v
-                state["diagnoses"] = diags
+            diags[k] = v
+            state["diagnoses"] = diags
+            save(state)
+            print("diag", k, "obj" if v.get("obj") else "FAIL", v.get("usage"),
+                  ("seeded="+v["seeded_from"]) if v.get("seeded_from") else "", flush=True)
+            if not v.get("obj"):
+                print("BLOCKER: diagnosis failed; stop before wasting forks", flush=True)
                 save(state)
-                print("diag", k, "obj" if v.get("obj") else "FAIL", v.get("usage"), flush=True)
+                raise SystemExit(2)
 
     # Forks resumable by (tid, seed)
     done = {(f["tid"], f["seed"]) for f in state.get("forks", []) if f.get("arm") == "control"}
