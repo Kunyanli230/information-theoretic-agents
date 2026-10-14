@@ -1,0 +1,25 @@
+{
+  "tasks": [
+    {
+      "task_id": "example-max-nonempty",
+      "description": "Return the maximum of a nonempty sequence, including all-negative inputs.",
+      "files": {
+        "calc.py": "def maximum(xs):\n    best = 0\n    for x in xs:\n        best = max(best, x)\n    return best\n",
+        "tests.py": "from calc import maximum\nassert maximum([-3, -1]) == -1\nassert maximum([2, 5]) == 5\n"
+      },
+      "visible_test": [
+        "python",
+        "tests.py"
+      ],
+      "hidden_test": [
+        "python",
+        "heldout.py"
+      ],
+      "hidden_files": {
+        "heldout.py": "from calc import maximum\nassert maximum([-100]) == -100\nassert maximum([-9, -7, -11]) == -7\nassert maximum([0, 1, -5]) == 1\n"
+      },
+      "test_timeout": 5.0,
+      "tool_delay": 0.0
+    }
+  ]
+}

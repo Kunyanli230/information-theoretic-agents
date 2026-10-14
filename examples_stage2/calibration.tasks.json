@@ -1,0 +1,48 @@
+{
+  "tasks": [
+    {
+      "task_id": "inclusive",
+      "description": "Return the sum of all integers from 0 through n, inclusive.",
+      "files": {
+        "calc.py": "def total(n):\n    return sum(range(n))\n",
+        "requirements.txt": "Return the sum of all integers from 0 through n, inclusive.",
+        "tests.py": "from calc import total\nassert total(3) == 6\n"
+      },
+      "visible_test": [
+        "python",
+        "tests.py"
+      ],
+      "hidden_test": [
+        "python",
+        "heldout.py"
+      ],
+      "hidden_files": {
+        "heldout.py": "from calc import total\nassert total(0) == 0\nassert total(5) == 15\n"
+      },
+      "test_timeout": 5.0,
+      "tool_delay": 0
+    },
+    {
+      "task_id": "average",
+      "description": "Return the arithmetic mean as a real number.",
+      "files": {
+        "calc.py": "def average(xs):\n    return sum(xs) // len(xs)\n",
+        "requirements.txt": "Return the arithmetic mean as a real number.",
+        "tests.py": "from calc import average\nassert average([1, 2]) == 1.5\n"
+      },
+      "visible_test": [
+        "python",
+        "tests.py"
+      ],
+      "hidden_test": [
+        "python",
+        "heldout.py"
+      ],
+      "hidden_files": {
+        "heldout.py": "from calc import average\nassert average([2, 3]) == 2.5\n"
+      },
+      "test_timeout": 5.0,
+      "tool_delay": 0
+    }
+  ]
+}
