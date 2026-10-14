@@ -1,0 +1,2 @@
+WROTE /workspace/voi-delegate/voi/../results/confirmatory
+Q3 None VD_enc 0.8412698412698413 G_fixL 0.8095238095238095 VD 0.9523809523809523

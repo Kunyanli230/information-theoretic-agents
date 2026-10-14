@@ -1,0 +1,50 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 63/290 [00:00<00:00, 577.44it/s]Loading weights:  42%|████▏     | 121/290 [00:00<00:01, 151.34it/s]Loading weights:  52%|█████▏    | 151/290 [00:00<00:00, 140.18it/s]Loading weights:  60%|█████▉    | 173/290 [00:01<00:00, 147.91it/s]Loading weights:  67%|██████▋   | 194/290 [00:01<00:00, 144.11it/s]Loading weights:  73%|███████▎  | 212/290 [00:01<00:00, 126.89it/s]Loading weights:  78%|███████▊  | 227/290 [00:01<00:00, 115.23it/s]Loading weights:  83%|████████▎ | 240/290 [00:01<00:00, 99.99it/s] Loading weights:  87%|████████▋ | 251/290 [00:02<00:00, 84.60it/s]Loading weights:  90%|█████████ | 261/290 [00:02<00:00, 76.81it/s]Loading weights:  93%|█████████▎| 270/290 [00:02<00:00, 76.37it/s]Loading weights:  97%|█████████▋| 280/290 [00:02<00:00, 79.97it/s]Loading weights: 100%|██████████| 290/290 [00:02<00:00, 119.68it/s]
+kept 15
+precheck 43.99999999999999
+snapshots 45
+fork T09 1000
+fork T09 1002
+fork T09 1003
+fork T10 1000
+fork T10 1001
+fork T10 1002
+fork T11 1002
+fork T11 1003
+fork T11 1005
+fork T12 1000
+fork T12 1001
+fork T12 1002
+fork T14 1001
+fork T14 1004
+fork T14 1005
+fork T17 1000
+fork T17 1004
+fork T17 1006
+fork T20 1000
+fork T20 1006
+fork T20 1007
+fork T26 1003
+fork T26 1004
+fork T26 1005
+fork T28 1002
+fork T28 1003
+fork T28 1004
+fork T31 1000
+fork T31 1018
+fork T31 1023
+fork T32 1000
+fork T32 1001
+fork T32 1003
+fork T33 1000
+fork T33 1001
+fork T33 1002
+fork T37 1000
+fork T37 1002
+fork T37 1003
+fork T38 1001
+fork T38 1002
+fork T38 1003
+fork T40 1001
+fork T40 1002
+fork T40 1004
+DONE

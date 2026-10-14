@@ -1,0 +1,60 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:  18%|█▊        | 51/290 [00:00<00:00, 502.31it/s]Loading weights:  35%|███▌      | 102/290 [00:00<00:00, 494.31it/s]Loading weights:  59%|█████▉    | 171/290 [00:00<00:00, 580.66it/s]Loading weights:  80%|███████▉  | 231/290 [00:00<00:00, 570.25it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 618.99it/s]
+resume snapshots 8
+diagnosing 8 prefixes (serial)...
+diag T09:1000 obj {'input_tokens': 14198, 'cached_input_tokens': 13696, 'cache_write_input_tokens': 0, 'output_tokens': 136, 'reasoning_output_tokens': 10} seeded=long_7d96166787169aac
+diag T10:1000 obj {'input_tokens': 14199, 'cached_input_tokens': 13696, 'cache_write_input_tokens': 0, 'output_tokens': 123, 'reasoning_output_tokens': 10} seeded=long_34dd92ba8a198b97
+diag T11:1002 obj {'input_tokens': 14183, 'cached_input_tokens': 13696, 'cache_write_input_tokens': 0, 'output_tokens': 118, 'reasoning_output_tokens': 10} seeded=long_451b5679ff93306b
+diag T12:1000 obj {'input_tokens': 14188, 'cached_input_tokens': 13696, 'cache_write_input_tokens': 0, 'output_tokens': 109, 'reasoning_output_tokens': 0} seeded=long_105c4b49024a9eb2
+diag T14:1001 obj {'input_tokens': 14205, 'cached_input_tokens': 13696, 'cache_write_input_tokens': 0, 'output_tokens': 96, 'reasoning_output_tokens': 0} seeded=long_62969fe1d3804e85
+diag T17:1000 obj {'input_tokens': 14206, 'cached_input_tokens': 13696, 'cache_write_input_tokens': 0, 'output_tokens': 150, 'reasoning_output_tokens': 10} seeded=long_65df742d6dc58a6e
+diag T20:1006 obj {'input_tokens': 14197, 'cached_input_tokens': 13696, 'cache_write_input_tokens': 0, 'output_tokens': 128, 'reasoning_output_tokens': 10} seeded=long_c67b423183ef08ae
+diag T26:1003 obj {'input_tokens': 14194, 'cached_input_tokens': 13696, 'cache_write_input_tokens': 0, 'output_tokens': 108, 'reasoning_output_tokens': 0} seeded=long_04f297803b8b7f04
+forking ('T09', 1000)
+  control: success=False status=none msg_cost=0.0
+  m1: success=False status=accepted msg_cost=17.0
+  m2: success=False status=accepted msg_cost=49.0
+  m3: success=True status=accepted msg_cost=69.0
+  m4: success=True status=accepted msg_cost=97.0
+forking ('T10', 1000)
+  control: success=False status=none msg_cost=0.0
+  m1: success=False status=accepted msg_cost=10.0
+  m2: success=True status=accepted msg_cost=44.0
+  m3: success=False status=accepted msg_cost=81.0
+  m4: success=True status=accepted msg_cost=103.0
+forking ('T11', 1002)
+  control: success=True status=none msg_cost=0.0
+  m1: success=True status=accepted msg_cost=11.0
+  m2: success=True status=accepted msg_cost=47.0
+  m3: success=True status=accepted msg_cost=73.0
+  m4: success=True status=accepted msg_cost=108.0
+forking ('T12', 1000)
+  control: success=False status=none msg_cost=0.0
+  m1: success=True status=accepted msg_cost=11.0
+  m2: success=True status=accepted msg_cost=47.0
+  m3: success=True status=accepted msg_cost=78.0
+  m4: success=False status=accepted msg_cost=107.0
+forking ('T14', 1001)
+  control: success=False status=none msg_cost=0.0
+  m1: success=False status=accepted msg_cost=11.0
+  m2: success=False status=accepted msg_cost=50.0
+  m3: success=True status=accepted msg_cost=64.0
+  m4: success=True status=accepted msg_cost=86.0
+forking ('T17', 1000)
+  control: success=False status=none msg_cost=0.0
+  m1: success=False status=accepted msg_cost=19.0
+  m2: success=False status=accepted msg_cost=62.0
+  m3: success=True status=accepted msg_cost=103.0
+  m4: success=True status=accepted msg_cost=127.0
+forking ('T20', 1006)
+  control: success=True status=none msg_cost=0.0
+  m1: success=True status=accepted msg_cost=16.0
+  m2: success=True status=accepted msg_cost=52.0
+  m3: success=False status=accepted msg_cost=82.0
+  m4: success=False status=accepted msg_cost=102.0
+forking ('T26', 1003)
+  control: success=True status=none msg_cost=0.0
+  m1: success=True status=accepted msg_cost=18.0
+  m2: success=True status=accepted msg_cost=51.0
+  m3: success=True status=accepted msg_cost=63.0
+  m4: success=True status=accepted msg_cost=85.0
+PROBE DONE 40 forks
