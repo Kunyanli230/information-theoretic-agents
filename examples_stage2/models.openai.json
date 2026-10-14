@@ -1,0 +1,13 @@
+{
+  "executor": {
+    "kind": "openai",
+    "base_url": "http://localhost:8000/v1",
+    "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "key_env": "SMALL_MODEL_API_KEY",
+    "timeout": 120,
+    "temperature": 0.2,
+    "max_tokens": 2048,
+    "json_mode": false
+  },
+  "guide": {"kind": "cursor", "model": "grok-4.6", "timeout": 300}
+}

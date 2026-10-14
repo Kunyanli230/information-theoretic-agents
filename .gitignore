@@ -1,2 +1,6 @@
 __pycache__/
 runs/
+results_stage2/
+*.egg-info/
+build/
+dist/
