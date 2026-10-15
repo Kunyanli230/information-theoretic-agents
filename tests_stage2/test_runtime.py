@@ -1,14 +1,17 @@
 import asyncio
 from dataclasses import replace
 import json
+import os
+from pathlib import Path
 import sys
 import unittest
+from unittest.mock import patch
 
-from voi_async.environment import CodeEnvironment, safe_relative
+from voi_async.environment import CodeEnvironment, safe_relative, stop_process
 from voi_async.fixtures import fixture_tasks, FixtureGuideSet
 from voi_async.learning import DIM, RidgePredictor, ValueBundle
 from voi_async.models import FixtureAgent, FixtureGuide, JSONCommandModel
-from voi_async.planning import fusion_decision
+from voi_async.planning import WorkPlanner, fusion_decision
 from voi_async.runtime import AsyncDelegate, Config
 from voi_async.types import Action, Message, Snapshot
 
@@ -128,6 +131,174 @@ class RuntimeTests(unittest.IsolatedAsyncioTestCase):
                    deterministic_encoder=True)).run(self.task)
         self.assertTrue(r.success)
         self.assertLess(r.elapsed, 0.5)
+
+    async def test_patch_on_guide_snapshot_beats_wait(self):
+        snapshot = CodeEnvironment(self.task).snapshot()
+        action = Action("edit", "calc.py", "range(n)", "range(n + 1)")
+        ranked = WorkPlanner().rank([Action("wait"), action], snapshot, snapshot)
+        self.assertEqual(ranked[0][1], action)
+
+    async def test_speculative_repair_finishes_without_guide(self):
+        cancelled = asyncio.Event()
+        class SlowGuide:
+            async def diagnose(self, snapshot, seed):
+                try:
+                    await asyncio.Future()
+                finally:
+                    cancelled.set()
+        class Repair:
+            async def propose(self, snapshot, message, seed):
+                return [Action("edit", "calc.py", "range(n)", "range(n + 1)")]
+        r = await AsyncDelegate(Repair(), SlowGuide(), test_values(),
+            Config(force_request=True, expected_delay=0, deadline=0.5)).run(self.task)
+        self.assertTrue(r.success)
+        self.assertTrue(cancelled.is_set())
+        self.assertFalse(any(e["event"] == "guide_returned" for e in r.events))
+        self.assertEqual(sum(e["event"] == "executor_start" for e in r.events), 1)
+
+    async def test_failed_speculation_rolls_back_and_waits_for_advice(self):
+        attempts = []
+        class Repair:
+            async def propose(self, snapshot, message, seed):
+                attempts.append(message is not None)
+                self_source = snapshot.files["calc.py"]
+                assert "range(n)" in self_source  # failed candidate never commits
+                return [Action("edit", "calc.py", "range(n)",
+                               "range(n + 1)" if message else "range(n - 1)")]
+        r = await AsyncDelegate(Repair(), FixtureGuideSet(self.diags, 0.1), test_values(),
+            Config(force_request=True, expected_delay=0, deadline=0.8)).run(self.task)
+        self.assertTrue(r.success)
+        self.assertEqual(attempts, [False, True])
+        rejected = next(e for e in r.events if e["event"] == "tool_end")
+        self.assertFalse(rejected["observation"]["ok"])
+        self.assertTrue(rejected["while_in_flight"])
+
+    async def test_completed_proposal_survives_simultaneous_guide_return(self):
+        diagnosis = self.diags[self.task.task_id]
+        class ImmediateGuide:
+            async def diagnose(self, snapshot, seed):
+                return diagnosis
+        class ImmediateRepair:
+            async def propose(self, snapshot, message, seed):
+                assert message is None  # must not need a second generation
+                return [Action("edit", "calc.py", "range(n)", "range(n + 1)")]
+        r = await AsyncDelegate(ImmediateRepair(), ImmediateGuide(), test_values(),
+            Config(force_request=True, expected_delay=0, deadline=0.5)).run(self.task)
+        self.assertTrue(r.success)
+        self.assertEqual(sum(e["event"] == "executor_start" for e in r.events), 1)
+
+    async def test_guide_arrival_during_validation_keeps_single_writer(self):
+        checking = asyncio.Event()
+        diagnosis = self.diags[self.task.task_id]
+        original_check = CodeEnvironment.check
+        async def slow_check(env, files=None, hidden=False):
+            if files is not None:
+                checking.set()
+                await asyncio.sleep(0.03)
+            return await original_check(env, files, hidden)
+        class GuideDuringCheck:
+            async def diagnose(self, snapshot, seed):
+                await checking.wait()
+                return diagnosis
+        class Repair:
+            async def propose(self, snapshot, message, seed):
+                return [Action("edit", "calc.py", "range(n)", "range(n + 1)")]
+        with patch.object(CodeEnvironment, "check", slow_check):
+            r = await AsyncDelegate(Repair(), GuideDuringCheck(), test_values(),
+                Config(force_request=True, expected_delay=0, deadline=0.5)).run(self.task)
+        self.assertTrue(r.success)
+        events = [e["event"] for e in r.events]
+        self.assertLess(events.index("guide_returned"), events.index("tool_end"))
+        self.assertNotIn("fusion", events)  # solved before stale advice is used
+
+    async def test_speculative_decode_error_does_not_drop_guide(self):
+        calls = []
+        class Repair:
+            async def propose(self, snapshot, message, seed):
+                calls.append(message is not None)
+                if message is None:
+                    raise ValueError("invalid model JSON")
+                return [Action("edit", "calc.py", "range(n)", "range(n + 1)")]
+        r = await AsyncDelegate(Repair(), FixtureGuideSet(self.diags, 0.04), test_values(),
+            Config(force_request=True, expected_delay=0, deadline=0.5)).run(self.task)
+        self.assertTrue(r.success)
+        self.assertEqual(calls, [False, True])
+
+    async def test_zero_speculation_budget_waits_for_guide(self):
+        r = await AsyncDelegate(FixtureAgent(), FixtureGuideSet(self.diags, 0.03),
+            test_values(), Config(force_request=True, expected_delay=0, deadline=0.5,
+                                  max_speculative_steps=0)).run(self.task)
+        self.assertTrue(r.success)
+        self.assertFalse(any(e["event"] == "tool_start" and e["while_in_flight"]
+                             for e in r.events))
+
+    async def test_deadline_during_speculative_validation_cannot_commit(self):
+        cancelled = asyncio.Event()
+        original = dict(self.task.files)
+        async def unfinished_check(env, files=None, hidden=False):
+            self.assertIsNotNone(files)
+            try:
+                await asyncio.Future()
+            finally:
+                cancelled.set()
+        class Repair:
+            async def propose(self, snapshot, message, seed):
+                return [Action("edit", "calc.py", "range(n)", "range(n + 1)")]
+        with patch.object(CodeEnvironment, "check", unfinished_check):
+            r = await AsyncDelegate(Repair(), FixtureGuideSet(self.diags, 2), test_values(),
+                Config(force_request=True, expected_delay=0, deadline=0.08)).run(self.task)
+        self.assertEqual(r.reason, "deadline")
+        self.assertFalse(r.success)
+        self.assertEqual(r.files, original)
+        self.assertTrue(cancelled.is_set())
+        self.assertFalse([t for t in asyncio.all_tasks() if t.get_name().startswith("vda-")])
+
+    async def test_failed_guide_keeps_inflight_candidate_without_retry_loop(self):
+        for valid in (False, True):
+            calls = []
+            class FailedGuide:
+                async def diagnose(self, snapshot, seed):
+                    raise RuntimeError("provider unavailable")
+            class Repair:
+                async def propose(self, snapshot, message, seed):
+                    calls.append(message)
+                    await asyncio.sleep(0.02)
+                    return [Action("edit", "calc.py", "range(n)",
+                                   "range(n + 1)" if valid else "range(n - 1)")]
+            r = await AsyncDelegate(Repair(), FailedGuide(), test_values(),
+                Config(force_request=True, expected_delay=0, deadline=0.5)).run(self.task)
+            self.assertEqual(r.success, valid)
+            self.assertEqual(r.reason, "visible_verified" if valid else "guide_error")
+            self.assertEqual(calls, [None])
+
+    @unittest.skipUnless(os.path.isdir("/proc"), "Linux process-state regression")
+    async def test_cancel_reaps_group_when_descendant_ignores_term(self):
+        script = (
+            "import os,signal,time\n"
+            "child=os.fork()\n"
+            "if child == 0:\n"
+            " signal.signal(signal.SIGTERM,signal.SIG_IGN)\n"
+            " print(os.getpid(),flush=True)\n"
+            " time.sleep(30)\n"
+            "else:\n"
+            " time.sleep(30)\n")
+        proc = await asyncio.create_subprocess_exec(
+            sys.executable, "-c", script, stdout=asyncio.subprocess.PIPE,
+            start_new_session=True)
+        try:
+            child = int(await asyncio.wait_for(proc.stdout.readline(), 1))
+            await stop_process(proc)
+            # An adopted zombie can await init's reap, but must not run work.
+            for _ in range(100):
+                status = Path(f"/proc/{child}/stat")
+                if not status.exists() or status.read_text().split()[2] == "Z":
+                    break
+                await asyncio.sleep(0.01)
+            else:
+                self.fail("cancelled CLI left a running descendant")
+            self.assertIsNotNone(proc.returncode)
+        finally:
+            await stop_process(proc)
 
     async def test_gate_rechecked_after_waiting_at_first_boundary(self):
         class LaterValues:

@@ -1,0 +1,104 @@
+{
+  "runs": {
+    "initial_cross_task": {
+      "label": "跨题初版（失败后才请求指导）",
+      "tasks": 10,
+      "seed": 0,
+      "budget": 240.0,
+      "batch_seconds": 240.0306986659998,
+      "qualified": 8,
+      "public_pass": 8,
+      "guide_errors": 0,
+      "executor_calls": 14,
+      "guide_calls": 6,
+      "guide_concurrency": 1,
+      "executor_concurrency": 1,
+      "executor_action_busy_seconds": 230.61999567400017,
+      "executor_action_utilization": 0.9609166486416674,
+      "guide_busy_seconds": 84.76533032599946,
+      "cross_task_dispatches": 7,
+      "guided_resumptions": 5,
+      "qualified_by_seconds": {
+        "30": 0,
+        "60": 1,
+        "90": 4,
+        "120": 4,
+        "180": 6,
+        "240": 8
+      },
+      "source": "results_stage2/cross-task10-seed0.to_z1bge"
+    },
+    "cross_task_prefetch": {
+      "label": "跨题最终版（指导预取）",
+      "tasks": 10,
+      "seed": 0,
+      "budget": 240.0,
+      "batch_seconds": 112.87300942300135,
+      "qualified": 10,
+      "public_pass": 10,
+      "guide_errors": 0,
+      "executor_calls": 12,
+      "guide_calls": 6,
+      "guide_concurrency": 1,
+      "executor_concurrency": 1,
+      "executor_action_busy_seconds": 112.60969008100437,
+      "executor_action_utilization": 0.9976671186199159,
+      "guide_busy_seconds": 93.34828497200215,
+      "cross_task_dispatches": 10,
+      "guided_resumptions": 6,
+      "qualified_by_seconds": {
+        "30": 2,
+        "60": 5,
+        "90": 7,
+        "120": 10,
+        "180": 10,
+        "240": 10
+      },
+      "source": "results_stage2/cross-task10-prefetch-seed0.6hyhjicw"
+    },
+    "sequential": {
+      "label": "同配置串行对照",
+      "tasks": 10,
+      "seed": 0,
+      "budget": 240.0,
+      "batch_seconds": 196.56965666399992,
+      "qualified": 8,
+      "public_pass": 9,
+      "guide_errors": 1,
+      "executor_calls": 9,
+      "guide_calls": 10,
+      "guide_concurrency": 1,
+      "executor_concurrency": 1,
+      "executor_action_busy_seconds": 34.46428208799989,
+      "executor_action_utilization": 0.175328596859231,
+      "guide_busy_seconds": 161.82499825900413,
+      "cross_task_dispatches": 0,
+      "guided_resumptions": 9,
+      "qualified_by_seconds": {
+        "30": 1,
+        "60": 3,
+        "90": 3,
+        "120": 5,
+        "180": 7,
+        "240": 8
+      },
+      "source": "results_stage2/cross-task10-sequential-seed0.4d8_btoi"
+    }
+  },
+  "comparison": {
+    "quality": "All hidden assertions pass; hidden outcomes evaluated only after the batch.",
+    "objective": "Number of qualified tasks completed within the same wall-clock budget.",
+    "qualified_difference_by_seconds": {
+      "30": 1,
+      "60": 2,
+      "90": 4,
+      "120": 5,
+      "180": 3,
+      "240": 2
+    },
+    "all_ten_speed_ratio": null,
+    "interpretation": "Fresh actual Grok calls in every arm. Guidance content and latency are not frozen; single-seed small-sample measurements.",
+    "timing": "One batch clock includes initial public checks and local cleanup. Model load and post-batch hidden evaluation are excluded.",
+    "utilization": "Executor action wall time (generation plus public validation), not CPU or GPU utilization."
+  }
+}

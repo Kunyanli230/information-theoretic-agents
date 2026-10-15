@@ -1,0 +1,1699 @@
+{
+  "schema": "stage2_shape_comparison_v1",
+  "profile": "observed_control_v1",
+  "round_definition": "one selected semantic decision event; per task, recorded order",
+  "left": "/workspace/information-theoretic-agents/results_stage2/cross-task10-sequential-seed0.4d8_btoi/batch.json",
+  "right": "/workspace/information-theoretic-agents/results_stage2/cross-task10-prefetch-seed0.6hyhjicw/batch.json",
+  "config_left": {
+    "mode": "sequential",
+    "deadline": 240.0,
+    "seed": 0,
+    "max_unassisted_steps": 1,
+    "max_guided_steps": 1,
+    "prefetch_guides": true
+  },
+  "config_right": {
+    "mode": "cross_task",
+    "deadline": 240.0,
+    "seed": 0,
+    "max_unassisted_steps": 1,
+    "max_guided_steps": 1,
+    "prefetch_guides": true
+  },
+  "config_differences": {
+    "mode": [
+      "sequential",
+      "cross_task"
+    ]
+  },
+  "pair_count": 10,
+  "changed_pair_count": 6,
+  "changed_pair_rate": 0.6,
+  "empty_prefix_pairs": [],
+  "caveats": [
+    "A declared observed-event projection, not the paper's original controller graph.",
+    "Implicit public-test and unlogged gate/commit nodes are not reconstructed.",
+    "D_iter and D_struct cover observed node IDs only; D_struct is auxiliary.",
+    "Same task IDs alone do not establish a controlled causal comparison.",
+    "Zero shape distance does not imply equal outputs or quality; empty prefixes are vacuous."
+  ],
+  "pairs": [
+    {
+      "task_id": "T01",
+      "D_shape": 0,
+      "shape_changed": false,
+      "k_left": 5,
+      "k_right": 5,
+      "common_rounds": 5,
+      "empty_common_prefix": false,
+      "mismatch_fraction": 0.0,
+      "unmatched_tail_rounds": 0,
+      "D_iter_observed": 0,
+      "node_counts_left": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_counts_right": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_count_differences": {
+        "executor": 0,
+        "fusion": 0,
+        "guide": 0,
+        "stop": 0,
+        "tool:patch": 0
+      },
+      "auxiliary_D_struct_observed": false,
+      "mismatches": [],
+      "rounds_left": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "rounds_right": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "quality_left": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      },
+      "quality_right": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      }
+    },
+    {
+      "task_id": "T02",
+      "D_shape": 5,
+      "shape_changed": true,
+      "k_left": 5,
+      "k_right": 8,
+      "common_rounds": 5,
+      "empty_common_prefix": false,
+      "mismatch_fraction": 1.0,
+      "unmatched_tail_rounds": 3,
+      "D_iter_observed": 3,
+      "node_counts_left": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_counts_right": {
+        "executor": 2,
+        "tool:patch": 2,
+        "park": 1,
+        "guide": 1,
+        "fusion": 1,
+        "stop": 1
+      },
+      "node_count_differences": {
+        "executor": 1,
+        "fusion": 0,
+        "guide": 0,
+        "park": 1,
+        "stop": 0,
+        "tool:patch": 1
+      },
+      "auxiliary_D_struct_observed": true,
+      "mismatches": [
+        {
+          "t": 1,
+          "left": {
+            "a": "REQUEST_GUIDANCE",
+            "Q": {},
+            "node": "guide",
+            "source_event_index": 0
+          },
+          "right": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": false
+            },
+            "node": "executor",
+            "source_event_index": 1
+          }
+        },
+        {
+          "t": 2,
+          "left": {
+            "a": "FUSE_GUIDANCE",
+            "Q": {
+              "decision": "apply"
+            },
+            "node": "fusion",
+            "source_event_index": 2
+          },
+          "right": {
+            "a": "TOOL_PATCH",
+            "Q": {
+              "paths": [
+                "calc.py"
+              ]
+            },
+            "node": "tool:patch",
+            "source_event_index": 2
+          }
+        },
+        {
+          "t": 3,
+          "left": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": true
+            },
+            "node": "executor",
+            "source_event_index": 4
+          },
+          "right": {
+            "a": "PARK",
+            "Q": {
+              "reason": "needs_guidance"
+            },
+            "node": "park",
+            "source_event_index": 4
+          }
+        },
+        {
+          "t": 4,
+          "left": {
+            "a": "TOOL_PATCH",
+            "Q": {
+              "paths": [
+                "calc.py"
+              ]
+            },
+            "node": "tool:patch",
+            "source_event_index": 5
+          },
+          "right": {
+            "a": "REQUEST_GUIDANCE",
+            "Q": {},
+            "node": "guide",
+            "source_event_index": 5
+          }
+        },
+        {
+          "t": 5,
+          "left": {
+            "a": "STOP",
+            "Q": {
+              "reason": "visible_verified"
+            },
+            "node": "stop",
+            "source_event_index": 7
+          },
+          "right": {
+            "a": "FUSE_GUIDANCE",
+            "Q": {
+              "decision": "apply"
+            },
+            "node": "fusion",
+            "source_event_index": 7
+          }
+        }
+      ],
+      "rounds_left": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "rounds_right": [
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": false
+          },
+          "node": "executor",
+          "source_event_index": 1
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 2
+        },
+        {
+          "a": "PARK",
+          "Q": {
+            "reason": "needs_guidance"
+          },
+          "node": "park",
+          "source_event_index": 4
+        },
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 5
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 7
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 9
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 10
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 12
+        }
+      ],
+      "quality_left": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      },
+      "quality_right": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      }
+    },
+    {
+      "task_id": "T03",
+      "D_shape": 3,
+      "shape_changed": true,
+      "k_left": 5,
+      "k_right": 3,
+      "common_rounds": 3,
+      "empty_common_prefix": false,
+      "mismatch_fraction": 1.0,
+      "unmatched_tail_rounds": 2,
+      "D_iter_observed": 2,
+      "node_counts_left": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_counts_right": {
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_count_differences": {
+        "executor": 0,
+        "fusion": 1,
+        "guide": 1,
+        "stop": 0,
+        "tool:patch": 0
+      },
+      "auxiliary_D_struct_observed": true,
+      "mismatches": [
+        {
+          "t": 1,
+          "left": {
+            "a": "REQUEST_GUIDANCE",
+            "Q": {},
+            "node": "guide",
+            "source_event_index": 0
+          },
+          "right": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": false
+            },
+            "node": "executor",
+            "source_event_index": 1
+          }
+        },
+        {
+          "t": 2,
+          "left": {
+            "a": "FUSE_GUIDANCE",
+            "Q": {
+              "decision": "apply"
+            },
+            "node": "fusion",
+            "source_event_index": 2
+          },
+          "right": {
+            "a": "TOOL_PATCH",
+            "Q": {
+              "paths": [
+                "calc.py"
+              ]
+            },
+            "node": "tool:patch",
+            "source_event_index": 2
+          }
+        },
+        {
+          "t": 3,
+          "left": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": true
+            },
+            "node": "executor",
+            "source_event_index": 4
+          },
+          "right": {
+            "a": "STOP",
+            "Q": {
+              "reason": "visible_verified"
+            },
+            "node": "stop",
+            "source_event_index": 4
+          }
+        }
+      ],
+      "rounds_left": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "rounds_right": [
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": false
+          },
+          "node": "executor",
+          "source_event_index": 1
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 2
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 4
+        }
+      ],
+      "quality_left": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      },
+      "quality_right": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      }
+    },
+    {
+      "task_id": "T04",
+      "D_shape": 2,
+      "shape_changed": true,
+      "k_left": 2,
+      "k_right": 3,
+      "common_rounds": 2,
+      "empty_common_prefix": false,
+      "mismatch_fraction": 1.0,
+      "unmatched_tail_rounds": 1,
+      "D_iter_observed": 3,
+      "node_counts_left": {
+        "guide": 1,
+        "stop": 1
+      },
+      "node_counts_right": {
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_count_differences": {
+        "executor": 1,
+        "guide": 1,
+        "stop": 0,
+        "tool:patch": 1
+      },
+      "auxiliary_D_struct_observed": true,
+      "mismatches": [
+        {
+          "t": 1,
+          "left": {
+            "a": "REQUEST_GUIDANCE",
+            "Q": {},
+            "node": "guide",
+            "source_event_index": 0
+          },
+          "right": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": false
+            },
+            "node": "executor",
+            "source_event_index": 1
+          }
+        },
+        {
+          "t": 2,
+          "left": {
+            "a": "STOP",
+            "Q": {
+              "reason": "guide_error"
+            },
+            "node": "stop",
+            "source_event_index": 2
+          },
+          "right": {
+            "a": "TOOL_PATCH",
+            "Q": {
+              "paths": [
+                "calc.py"
+              ]
+            },
+            "node": "tool:patch",
+            "source_event_index": 2
+          }
+        }
+      ],
+      "rounds_left": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "guide_error"
+          },
+          "node": "stop",
+          "source_event_index": 2
+        }
+      ],
+      "rounds_right": [
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": false
+          },
+          "node": "executor",
+          "source_event_index": 1
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 2
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 4
+        }
+      ],
+      "quality_left": {
+        "visible_pass": false,
+        "success": false,
+        "reason": "guide_error"
+      },
+      "quality_right": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      }
+    },
+    {
+      "task_id": "T05",
+      "D_shape": 5,
+      "shape_changed": true,
+      "k_left": 5,
+      "k_right": 8,
+      "common_rounds": 5,
+      "empty_common_prefix": false,
+      "mismatch_fraction": 1.0,
+      "unmatched_tail_rounds": 3,
+      "D_iter_observed": 3,
+      "node_counts_left": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_counts_right": {
+        "executor": 2,
+        "tool:patch": 2,
+        "park": 1,
+        "guide": 1,
+        "fusion": 1,
+        "stop": 1
+      },
+      "node_count_differences": {
+        "executor": 1,
+        "fusion": 0,
+        "guide": 0,
+        "park": 1,
+        "stop": 0,
+        "tool:patch": 1
+      },
+      "auxiliary_D_struct_observed": true,
+      "mismatches": [
+        {
+          "t": 1,
+          "left": {
+            "a": "REQUEST_GUIDANCE",
+            "Q": {},
+            "node": "guide",
+            "source_event_index": 0
+          },
+          "right": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": false
+            },
+            "node": "executor",
+            "source_event_index": 1
+          }
+        },
+        {
+          "t": 2,
+          "left": {
+            "a": "FUSE_GUIDANCE",
+            "Q": {
+              "decision": "apply"
+            },
+            "node": "fusion",
+            "source_event_index": 2
+          },
+          "right": {
+            "a": "TOOL_PATCH",
+            "Q": {
+              "paths": [
+                "calc.py"
+              ]
+            },
+            "node": "tool:patch",
+            "source_event_index": 2
+          }
+        },
+        {
+          "t": 3,
+          "left": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": true
+            },
+            "node": "executor",
+            "source_event_index": 4
+          },
+          "right": {
+            "a": "PARK",
+            "Q": {
+              "reason": "needs_guidance"
+            },
+            "node": "park",
+            "source_event_index": 4
+          }
+        },
+        {
+          "t": 4,
+          "left": {
+            "a": "TOOL_PATCH",
+            "Q": {
+              "paths": [
+                "calc.py"
+              ]
+            },
+            "node": "tool:patch",
+            "source_event_index": 5
+          },
+          "right": {
+            "a": "REQUEST_GUIDANCE",
+            "Q": {},
+            "node": "guide",
+            "source_event_index": 5
+          }
+        },
+        {
+          "t": 5,
+          "left": {
+            "a": "STOP",
+            "Q": {
+              "reason": "visible_verified"
+            },
+            "node": "stop",
+            "source_event_index": 7
+          },
+          "right": {
+            "a": "FUSE_GUIDANCE",
+            "Q": {
+              "decision": "apply"
+            },
+            "node": "fusion",
+            "source_event_index": 7
+          }
+        }
+      ],
+      "rounds_left": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "rounds_right": [
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": false
+          },
+          "node": "executor",
+          "source_event_index": 1
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 2
+        },
+        {
+          "a": "PARK",
+          "Q": {
+            "reason": "needs_guidance"
+          },
+          "node": "park",
+          "source_event_index": 4
+        },
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 5
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 7
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 9
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 10
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 12
+        }
+      ],
+      "quality_left": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      },
+      "quality_right": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      }
+    },
+    {
+      "task_id": "T06",
+      "D_shape": 0,
+      "shape_changed": false,
+      "k_left": 5,
+      "k_right": 5,
+      "common_rounds": 5,
+      "empty_common_prefix": false,
+      "mismatch_fraction": 0.0,
+      "unmatched_tail_rounds": 0,
+      "D_iter_observed": 0,
+      "node_counts_left": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_counts_right": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_count_differences": {
+        "executor": 0,
+        "fusion": 0,
+        "guide": 0,
+        "stop": 0,
+        "tool:patch": 0
+      },
+      "auxiliary_D_struct_observed": false,
+      "mismatches": [],
+      "rounds_left": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "rounds_right": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "quality_left": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      },
+      "quality_right": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      }
+    },
+    {
+      "task_id": "T07",
+      "D_shape": 3,
+      "shape_changed": true,
+      "k_left": 5,
+      "k_right": 3,
+      "common_rounds": 3,
+      "empty_common_prefix": false,
+      "mismatch_fraction": 1.0,
+      "unmatched_tail_rounds": 2,
+      "D_iter_observed": 2,
+      "node_counts_left": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_counts_right": {
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_count_differences": {
+        "executor": 0,
+        "fusion": 1,
+        "guide": 1,
+        "stop": 0,
+        "tool:patch": 0
+      },
+      "auxiliary_D_struct_observed": true,
+      "mismatches": [
+        {
+          "t": 1,
+          "left": {
+            "a": "REQUEST_GUIDANCE",
+            "Q": {},
+            "node": "guide",
+            "source_event_index": 0
+          },
+          "right": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": false
+            },
+            "node": "executor",
+            "source_event_index": 1
+          }
+        },
+        {
+          "t": 2,
+          "left": {
+            "a": "FUSE_GUIDANCE",
+            "Q": {
+              "decision": "apply"
+            },
+            "node": "fusion",
+            "source_event_index": 2
+          },
+          "right": {
+            "a": "TOOL_PATCH",
+            "Q": {
+              "paths": [
+                "calc.py"
+              ]
+            },
+            "node": "tool:patch",
+            "source_event_index": 2
+          }
+        },
+        {
+          "t": 3,
+          "left": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": true
+            },
+            "node": "executor",
+            "source_event_index": 4
+          },
+          "right": {
+            "a": "STOP",
+            "Q": {
+              "reason": "visible_verified"
+            },
+            "node": "stop",
+            "source_event_index": 4
+          }
+        }
+      ],
+      "rounds_left": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "rounds_right": [
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": false
+          },
+          "node": "executor",
+          "source_event_index": 1
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 2
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 4
+        }
+      ],
+      "quality_left": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      },
+      "quality_right": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      }
+    },
+    {
+      "task_id": "T08",
+      "D_shape": 3,
+      "shape_changed": true,
+      "k_left": 5,
+      "k_right": 3,
+      "common_rounds": 3,
+      "empty_common_prefix": false,
+      "mismatch_fraction": 1.0,
+      "unmatched_tail_rounds": 2,
+      "D_iter_observed": 2,
+      "node_counts_left": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_counts_right": {
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_count_differences": {
+        "executor": 0,
+        "fusion": 1,
+        "guide": 1,
+        "stop": 0,
+        "tool:patch": 0
+      },
+      "auxiliary_D_struct_observed": true,
+      "mismatches": [
+        {
+          "t": 1,
+          "left": {
+            "a": "REQUEST_GUIDANCE",
+            "Q": {},
+            "node": "guide",
+            "source_event_index": 0
+          },
+          "right": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": false
+            },
+            "node": "executor",
+            "source_event_index": 1
+          }
+        },
+        {
+          "t": 2,
+          "left": {
+            "a": "FUSE_GUIDANCE",
+            "Q": {
+              "decision": "apply"
+            },
+            "node": "fusion",
+            "source_event_index": 2
+          },
+          "right": {
+            "a": "TOOL_PATCH",
+            "Q": {
+              "paths": [
+                "calc.py"
+              ]
+            },
+            "node": "tool:patch",
+            "source_event_index": 2
+          }
+        },
+        {
+          "t": 3,
+          "left": {
+            "a": "GENERATE",
+            "Q": {
+              "guided": true
+            },
+            "node": "executor",
+            "source_event_index": 4
+          },
+          "right": {
+            "a": "STOP",
+            "Q": {
+              "reason": "visible_verified"
+            },
+            "node": "stop",
+            "source_event_index": 4
+          }
+        }
+      ],
+      "rounds_left": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "rounds_right": [
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": false
+          },
+          "node": "executor",
+          "source_event_index": 1
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 2
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 4
+        }
+      ],
+      "quality_left": {
+        "visible_pass": true,
+        "success": false,
+        "reason": "visible_verified"
+      },
+      "quality_right": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      }
+    },
+    {
+      "task_id": "T09",
+      "D_shape": 0,
+      "shape_changed": false,
+      "k_left": 5,
+      "k_right": 5,
+      "common_rounds": 5,
+      "empty_common_prefix": false,
+      "mismatch_fraction": 0.0,
+      "unmatched_tail_rounds": 0,
+      "D_iter_observed": 0,
+      "node_counts_left": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_counts_right": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_count_differences": {
+        "executor": 0,
+        "fusion": 0,
+        "guide": 0,
+        "stop": 0,
+        "tool:patch": 0
+      },
+      "auxiliary_D_struct_observed": false,
+      "mismatches": [],
+      "rounds_left": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "rounds_right": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "quality_left": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      },
+      "quality_right": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      }
+    },
+    {
+      "task_id": "T10",
+      "D_shape": 0,
+      "shape_changed": false,
+      "k_left": 5,
+      "k_right": 5,
+      "common_rounds": 5,
+      "empty_common_prefix": false,
+      "mismatch_fraction": 0.0,
+      "unmatched_tail_rounds": 0,
+      "D_iter_observed": 0,
+      "node_counts_left": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_counts_right": {
+        "guide": 1,
+        "fusion": 1,
+        "executor": 1,
+        "tool:patch": 1,
+        "stop": 1
+      },
+      "node_count_differences": {
+        "executor": 0,
+        "fusion": 0,
+        "guide": 0,
+        "stop": 0,
+        "tool:patch": 0
+      },
+      "auxiliary_D_struct_observed": false,
+      "mismatches": [],
+      "rounds_left": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "rounds_right": [
+        {
+          "a": "REQUEST_GUIDANCE",
+          "Q": {},
+          "node": "guide",
+          "source_event_index": 0
+        },
+        {
+          "a": "FUSE_GUIDANCE",
+          "Q": {
+            "decision": "apply"
+          },
+          "node": "fusion",
+          "source_event_index": 2
+        },
+        {
+          "a": "GENERATE",
+          "Q": {
+            "guided": true
+          },
+          "node": "executor",
+          "source_event_index": 4
+        },
+        {
+          "a": "TOOL_PATCH",
+          "Q": {
+            "paths": [
+              "calc.py"
+            ]
+          },
+          "node": "tool:patch",
+          "source_event_index": 5
+        },
+        {
+          "a": "STOP",
+          "Q": {
+            "reason": "visible_verified"
+          },
+          "node": "stop",
+          "source_event_index": 7
+        }
+      ],
+      "quality_left": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      },
+      "quality_right": {
+        "visible_pass": true,
+        "success": true,
+        "reason": "visible_verified"
+      }
+    }
+  ]
+}

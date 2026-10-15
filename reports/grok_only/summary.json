@@ -1,0 +1,141 @@
+{
+  "grok_only": {
+    "solver": "grok_only",
+    "tasks": 10,
+    "seed": 0,
+    "batch_seconds": 154.37414289700064,
+    "evaluation_seconds": 0.33370702499996696,
+    "model_wait_seconds": 153.5382585899988,
+    "qualified": 10,
+    "public_pass": 10,
+    "model_errors": 0,
+    "qualified_by_seconds": {
+      "30": 1,
+      "60": 3,
+      "90": 5,
+      "120": 7,
+      "180": 10,
+      "240": 10
+    },
+    "per_task": [
+      {
+        "task_id": "T01",
+        "name": "sum_to_n",
+        "public_pass": true,
+        "hidden_pass": true,
+        "reason": "visible_verified",
+        "call_seconds": 21.50684943200031,
+        "error": null,
+        "task_seconds": 21.563764574999368,
+        "finished_at": 21.933393211000293
+      },
+      {
+        "task_id": "T02",
+        "name": "max_of",
+        "public_pass": true,
+        "hidden_pass": true,
+        "reason": "visible_verified",
+        "call_seconds": 14.97585829899981,
+        "error": null,
+        "task_seconds": 15.09461422899949,
+        "finished_at": 37.02851004800141
+      },
+      {
+        "task_id": "T03",
+        "name": "is_even",
+        "public_pass": true,
+        "hidden_pass": true,
+        "reason": "visible_verified",
+        "call_seconds": 13.453765115998976,
+        "error": null,
+        "task_seconds": 13.480643259999852,
+        "finished_at": 50.509606481000446
+      },
+      {
+        "task_id": "T04",
+        "name": "average",
+        "public_pass": true,
+        "hidden_pass": true,
+        "reason": "visible_verified",
+        "call_seconds": 15.003301349999674,
+        "error": null,
+        "task_seconds": 15.038020695999876,
+        "finished_at": 65.54817999900115
+      },
+      {
+        "task_id": "T05",
+        "name": "count_vowels",
+        "public_pass": true,
+        "hidden_pass": true,
+        "reason": "visible_verified",
+        "call_seconds": 14.327840787998866,
+        "error": null,
+        "task_seconds": 14.353365031000067,
+        "finished_at": 79.90210558000035
+      },
+      {
+        "task_id": "T06",
+        "name": "reverse_words",
+        "public_pass": true,
+        "hidden_pass": true,
+        "reason": "visible_verified",
+        "call_seconds": 14.88429617499969,
+        "error": null,
+        "task_seconds": 14.92161963700164,
+        "finished_at": 94.82437228600065
+      },
+      {
+        "task_id": "T07",
+        "name": "factorial",
+        "public_pass": true,
+        "hidden_pass": true,
+        "reason": "visible_verified",
+        "call_seconds": 11.168296324000039,
+        "error": null,
+        "task_seconds": 11.233101197998622,
+        "finished_at": 106.05813873000079
+      },
+      {
+        "task_id": "T08",
+        "name": "clamp",
+        "public_pass": true,
+        "hidden_pass": true,
+        "reason": "visible_verified",
+        "call_seconds": 15.718400141999155,
+        "error": null,
+        "task_seconds": 15.74511485199946,
+        "finished_at": 121.8037551640009
+      },
+      {
+        "task_id": "T09",
+        "name": "last_n",
+        "public_pass": true,
+        "hidden_pass": true,
+        "reason": "visible_verified",
+        "call_seconds": 16.94489694600088,
+        "error": null,
+        "task_seconds": 16.98188691299947,
+        "finished_at": 138.78641125600006
+      },
+      {
+        "task_id": "T10",
+        "name": "fib",
+        "public_pass": true,
+        "hidden_pass": true,
+        "reason": "visible_verified",
+        "call_seconds": 15.554754018001404,
+        "error": null,
+        "task_seconds": 15.586283728000126,
+        "finished_at": 154.3731657340013
+      }
+    ]
+  },
+  "comparison": {
+    "cross_task_seconds": 112.87300942300135,
+    "cross_task_qualified": 10,
+    "grok_qualified_at_cross_task_time": 7,
+    "grok_to_cross_time_ratio": 1.3676798703795539,
+    "interpretation": "One fresh real trial per strategy at different times; provider latency and sampling vary.",
+    "source": "results_stage2/grok-only10-seed0.ap6u8ss0"
+  }
+}

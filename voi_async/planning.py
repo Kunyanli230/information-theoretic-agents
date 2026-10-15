@@ -92,10 +92,10 @@ class WorkPlanner:
             elif a.kind == "test":
                 keep, progress, conflict = 1.0, (0.01 if seen else 0.2), 0.0
             elif a.kind in {"edit", "patch"}:
-                paths = [e["path"] for e in a.edits] if a.kind == "patch" else [a.path]
-                conflict = float(pending_snapshot is not None and any(
-                    p in pending_snapshot.files for p in paths))
-                keep, progress = 1 - 0.8 * conflict, 0.7
+                # The guide reads a frozen snapshot; it is not a competing
+                # writer. Sharing its files is not an edit conflict. Exact
+                # anchors and public tests are checked by the environment.
+                keep, progress, conflict = 1.0, 0.7, 0.0
             elif a.kind == "submit":
                 keep, progress, conflict = 1.0, -0.2, 0.0
             else:

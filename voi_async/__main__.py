@@ -7,6 +7,8 @@ from pathlib import Path
 import sys
 
 from .calibration import collect_forks
+from .batch import BatchConfig, BatchDelegate
+from .complete_code import CompleteCodeAgent
 from .evaluation import factorial
 from .fixtures import fixture_tasks, FixtureGuideSet
 from .hf_backend import HFProcessModel
@@ -53,7 +55,12 @@ def real_models(path):
         if config:
             raise ValueError(f"unknown model settings: {list(config)}")
         return JSONCommandModel(argv, timeout=timeout)
-    return CommandAgent(adapter(data["executor"])), CommandGuide(adapter(data["guide"]))
+    executor = dict(data["executor"])
+    protocol = executor.pop("protocol", "actions")
+    if protocol not in {"actions", "complete_code"}:
+        raise ValueError("executor protocol must be actions or complete_code")
+    agent = CompleteCodeAgent if protocol == "complete_code" else CommandAgent
+    return agent(adapter(executor)), CommandGuide(adapter(data["guide"]))
 
 
 async def demo(args):
@@ -131,6 +138,7 @@ async def run(args):
             agent, guide, values,
             Config(mode=args.mode, message_mode=args.message_mode, deadline=args.deadline,
                    expected_delay=args.expected_delay, max_steps=args.max_steps,
+                   max_speculative_steps=args.max_speculative_steps,
                    seed=args.seed, force_request=args.force_request,
                    deterministic_encoder=args.argmax),
             planner=planner).run(task)
@@ -150,10 +158,26 @@ async def evaluate(args):
     print(json.dumps(report, indent=2))
 
 
+async def batch(args):
+    out = Path(args.out)
+    if out.exists() and any(out.iterdir()):
+        raise ValueError("choose an empty batch output directory")
+    agent, guide = args.live_models
+    result = await BatchDelegate(agent, guide, BatchConfig(
+        mode=args.mode, deadline=args.deadline, seed=args.seed,
+        max_unassisted_steps=args.max_unassisted_steps,
+        max_guided_steps=args.max_guided_steps,
+        prefetch_guides=not args.no_guide_prefetch)).run(task_specs(args.tasks))
+    write_json(out / "batch.json", asdict(result))
+    print(json.dumps(dict(elapsed=result.elapsed, reason=result.reason,
+                         qualified=result.qualified_by(args.deadline),
+                         tasks=len(result.results))))
+
+
 async def dispatch(args):
     models = ()
     try:
-        if args.command in {"collect", "run", "evaluate"}:
+        if args.command in {"collect", "run", "evaluate", "batch"}:
             args.live_models = real_models(args.models)
             models = tuple(actor.model for actor in args.live_models)
             for model in models:
@@ -161,7 +185,7 @@ async def dispatch(args):
                 if prepare:
                     await prepare()
         await {"demo": demo, "collect": collect, "run": run,
-               "evaluate": evaluate}[args.command](args)
+               "evaluate": evaluate, "batch": batch}[args.command](args)
     finally:
         for model in models:
             close = getattr(model, "aclose", None)
@@ -197,11 +221,23 @@ def main():
     r.add_argument("--deadline", type=float, default=60)
     r.add_argument("--expected-delay", type=float, default=2)
     r.add_argument("--max-steps", type=int, default=100)
+    r.add_argument("--max-speculative-steps", type=int, default=1,
+                   help="maximum executor proposals per in-flight guide request (0 disables speculation)")
     r.add_argument("--seed", type=int, default=0)
     r.add_argument("--force-request", action="store_true")
     r.add_argument("--argmax", action="store_true")
     r.add_argument("--allow-training-tasks", action="store_true")
     r.add_argument("--work-records")
+    b = sub.add_parser("batch", help="one executor switches tasks while one guide request runs")
+    for arg in ("tasks", "models", "out"):
+        b.add_argument("--" + arg, required=True)
+    b.add_argument("--mode", choices=["cross_task", "sequential"], default="cross_task")
+    b.add_argument("--deadline", type=float, default=300)
+    b.add_argument("--seed", type=int, default=0)
+    b.add_argument("--max-unassisted-steps", type=int, default=1)
+    b.add_argument("--max-guided-steps", type=int, default=1)
+    b.add_argument("--no-guide-prefetch", action="store_true",
+                   help="only request guidance after an independent attempt fails (except bootstrap A)")
     e = sub.add_parser("evaluate", help="paired 2x2 message/schedule factorial with task-bootstrap CI")
     for arg in ("tasks", "models", "values", "out"):
         e.add_argument("--" + arg, required=True)

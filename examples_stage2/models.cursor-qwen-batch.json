@@ -1,0 +1,22 @@
+{
+  "executor": {
+    "kind": "hf",
+    "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "device": "cpu",
+    "threads": 4,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_new_tokens": 256,
+    "timeout": 120,
+    "load_timeout": 300,
+    "cancel_grace": 2,
+    "local_files_only": true,
+    "protocol": "complete_code"
+  },
+  "guide": {
+    "kind": "cursor",
+    "model": "grok-4.6",
+    "timeout": 300
+  }
+}

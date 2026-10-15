@@ -1,0 +1,7 @@
+run_id,guide_mode,tasks,visible_pass,hidden_pass,e2e_seconds,qwen_calls,qwen_cancelled,qwen_tokens,qwen_generation_seconds,guide_calls,guide_errors,guide_cancelled
+historical_sync,live,10,10,10,228.91881950799996,10,0,324,76.44285228599983,10,0,0
+historical_async,live,10,10,9,228.12185743500004,33,10,1066,226.23867903200016,10,0,0
+initial_fix_live,live,10,9,9,198.00388238099958,32,3,1683,180.173886218,10,1,5
+final_fix_live,live,10,10,10,247.78964085899952,16,4,830,228.32668648600065,10,0,4
+paired_sync,replayed,10,10,9,201.76798755199934,10,0,308,45.72881458300071,0,0,0
+paired_async,replayed,10,10,10,138.05129654199982,15,0,911,114.13839318300006,0,0,0

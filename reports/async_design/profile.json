@@ -1,0 +1,195 @@
+{
+  "source": "results_stage2/cross-task10-prefetch-seed0.6hyhjicw/batch.json",
+  "source_kind": "preserved live calls; no replay",
+  "elapsed_seconds": 112.87300942300135,
+  "executor_calls": 12,
+  "guide_calls": 6,
+  "generation_stage_seconds": 112.25140316200122,
+  "validation_stage_seconds": 0.3582869190031488,
+  "outside_executor_action_seconds": 0.2633193419969757,
+  "executor_action_occupancy": 0.9976671186199159,
+  "generation_stage_fraction": 0.9944928706678617,
+  "guide_service_seconds": 93.34828497200215,
+  "failed_unguided_generation_seconds": 35.80432173100235,
+  "guidance_ready_wait_mean": 14.554305790667058,
+  "guidance_ready_wait_max": 25.701904569999897,
+  "same_work_generation_resource_lower_bound_seconds": 112.25140316200122,
+  "same_work_max_speedup_if_all_non_generation_time_removed": 1.005537625753355,
+  "same_work_phase_demand_sensitivity": [
+    {
+      "generation_service_reduction": 0.0,
+      "generation_demand": 112.25140316200122,
+      "resource_only_lower_bound": 112.25140316200122
+    },
+    {
+      "generation_service_reduction": 0.1,
+      "generation_demand": 101.0262628458011,
+      "resource_only_lower_bound": 101.0262628458011
+    },
+    {
+      "generation_service_reduction": 0.2,
+      "generation_demand": 89.80112252960099,
+      "resource_only_lower_bound": 93.34828497200215
+    }
+  ],
+  "caveats": [
+    "No historical CPU, scheduler lag, lock-wait or context-switch counters.",
+    "Resource lower bounds omit precedence, startup and final drain.",
+    "Failing attempts cannot be declared avoidable using hindsight.",
+    "Guidance waits overlap existing work and cannot be summed as savings."
+  ],
+  "actions": [
+    {
+      "task_id": "T02",
+      "guided": false,
+      "start": 0.2591871730001003,
+      "end": 16.0205118820013,
+      "generation_stage_seconds": 15.732866771000772,
+      "validation_stage_seconds": 0.02845793800042884,
+      "public_pass": false
+    },
+    {
+      "task_id": "T03",
+      "guided": false,
+      "start": 16.020864116000666,
+      "end": 18.56606667900087,
+      "generation_stage_seconds": 2.5179385039991757,
+      "validation_stage_seconds": 0.027264059001026908,
+      "public_pass": true
+    },
+    {
+      "task_id": "T04",
+      "guided": false,
+      "start": 18.566385334999723,
+      "end": 22.374576506001176,
+      "generation_stage_seconds": 3.781271601001208,
+      "validation_stage_seconds": 0.026919570000245585,
+      "public_pass": true
+    },
+    {
+      "task_id": "T05",
+      "guided": false,
+      "start": 22.374944004999634,
+      "end": 42.47765118700045,
+      "generation_stage_seconds": 20.071454960001574,
+      "validation_stage_seconds": 0.03125222199923883,
+      "public_pass": false
+    },
+    {
+      "task_id": "T01",
+      "guided": true,
+      "start": 42.477996696001355,
+      "end": 47.65756952400079,
+      "generation_stage_seconds": 5.145396920999701,
+      "validation_stage_seconds": 0.03417590699973516,
+      "public_pass": true
+    },
+    {
+      "task_id": "T02",
+      "guided": true,
+      "start": 47.65801147900129,
+      "end": 53.343535756001074,
+      "generation_stage_seconds": 5.658202851998794,
+      "validation_stage_seconds": 0.02732142500099144,
+      "public_pass": true
+    },
+    {
+      "task_id": "T06",
+      "guided": true,
+      "start": 53.34386830400035,
+      "end": 56.66426994200083,
+      "generation_stage_seconds": 3.2936252580002474,
+      "validation_stage_seconds": 0.026776380000228528,
+      "public_pass": true
+    },
+    {
+      "task_id": "T07",
+      "guided": false,
+      "start": 56.66455551500076,
+      "end": 61.069578393000484,
+      "generation_stage_seconds": 4.375323997999658,
+      "validation_stage_seconds": 0.02969888000006904,
+      "public_pass": true
+    },
+    {
+      "task_id": "T08",
+      "guided": false,
+      "start": 61.069963011001164,
+      "end": 76.80540722300066,
+      "generation_stage_seconds": 15.707705578999594,
+      "validation_stage_seconds": 0.027738632999898982,
+      "public_pass": true
+    },
+    {
+      "task_id": "T05",
+      "guided": true,
+      "start": 76.80576886600102,
+      "end": 103.82578599500084,
+      "generation_stage_seconds": 26.973438876999353,
+      "validation_stage_seconds": 0.046578252000472276,
+      "public_pass": true
+    },
+    {
+      "task_id": "T09",
+      "guided": true,
+      "start": 103.82611845999963,
+      "end": 107.50997189200098,
+      "generation_stage_seconds": 3.6571424280009523,
+      "validation_stage_seconds": 0.02671100400038995,
+      "public_pass": true
+    },
+    {
+      "task_id": "T10",
+      "guided": true,
+      "start": 107.51031893300024,
+      "end": 112.87274699500085,
+      "generation_stage_seconds": 5.337035413000194,
+      "validation_stage_seconds": 0.025392649000423262,
+      "public_pass": true
+    }
+  ],
+  "guides": [
+    {
+      "task_id": "T01",
+      "start": 0.25801417200091237,
+      "end": 23.80709793099959,
+      "service_seconds": 23.549083758998677,
+      "wait_for_executor_seconds": 18.670898765001766
+    },
+    {
+      "task_id": "T02",
+      "start": 23.80737470799977,
+      "end": 39.03214510399994,
+      "service_seconds": 15.224770396000167,
+      "wait_for_executor_seconds": 8.625866375001351
+    },
+    {
+      "task_id": "T06",
+      "start": 39.032543790999625,
+      "end": 47.58009886800028,
+      "service_seconds": 8.547555077000652,
+      "wait_for_executor_seconds": 5.763769436000075
+    },
+    {
+      "task_id": "T05",
+      "start": 47.58052474299984,
+      "end": 62.14457176600081,
+      "service_seconds": 14.564047023000967,
+      "wait_for_executor_seconds": 14.661197100000209
+    },
+    {
+      "task_id": "T09",
+      "start": 62.14505734799968,
+      "end": 78.12421388999974,
+      "service_seconds": 15.979156542000055,
+      "wait_for_executor_seconds": 25.701904569999897
+    },
+    {
+      "task_id": "T10",
+      "start": 78.12444825999955,
+      "end": 93.60812043500118,
+      "service_seconds": 15.48367217500163,
+      "wait_for_executor_seconds": 13.902198497999052
+    }
+  ]
+}

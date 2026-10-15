@@ -32,6 +32,7 @@ class Config:
     force_request: bool = False          # explicitly a fixed-timing ablation
     deterministic_encoder: bool = False # explicit argmax ablation
     compatibility_planning: bool = True
+    max_speculative_steps: int = 1      # bounded work per in-flight request
 
     def __post_init__(self):
         if self.mode not in {"async", "sync", "none"}:
@@ -39,7 +40,8 @@ class Config:
         if self.message_mode not in {"info", "fixed"}:
             raise ValueError("invalid message mode")
         if (self.deadline <= 0 or self.expected_delay < 0
-                or self.max_steps < 1 or self.max_requests < 0):
+                or self.max_steps < 1 or self.max_requests < 0
+                or self.max_speculative_steps < 0):
             raise ValueError("invalid deadline/limits")
 
 
@@ -130,10 +132,12 @@ class AsyncDelegate:
         pending_snapshot = None
         ready_message = None
         delivery_ready = False
+        guide_failed = False
         active = None
         requests = 0
         checked_state = None
         proposal_state = None
+        speculative_steps = 0
         current_action = None
         reason = "step_limit"
         submitted = False
@@ -142,15 +146,20 @@ class AsyncDelegate:
             async with asyncio.timeout(self.config.deadline):
                 while True:
                     if guide_task is not None and guide_task.done():
+                        guide_failed = False
                         try:
                             ready_message = guide_task.result()
                         except Exception as exc:
                             ready_message = None
+                            guide_failed = True
                             self.log("guide_error", error=type(exc).__name__)
                         guide_task = None
                         delivery_ready = True
-                        # Fresh guidance invalidates proposals based on old advice.
-                        if proposal_task is not None:
+                        # Interrupt unfinished inference, but retain a completed
+                        # candidate for public validation before fusing advice.
+                        if (not guide_failed and proposal_task is not None
+                                and not proposal_task.done()):
+                            self.log("proposal_cancelled", reason="guide_arrived")
                             proposal_task.cancel()
                             await asyncio.gather(proposal_task, return_exceptions=True)
                             proposal_task = None
@@ -169,11 +178,51 @@ class AsyncDelegate:
                         reason, submitted = "visible_verified", True
                         break
 
-                    if delivery_ready and tool_task is None:
+                    if proposal_task is not None and proposal_task.done():
+                        try:
+                            actions = proposal_task.result()
+                            if not actions:
+                                raise ValueError("empty executor action set")
+                        except Exception as exc:
+                            self.log("executor_error", error=type(exc).__name__,
+                                     speculative=pending_snapshot is not None)
+                            if pending_snapshot is None:
+                                reason = "executor_error"
+                                break
+                            # A failed speculative decode must not lose the
+                            # already-requested guidance or cause a retry loop.
+                            actions = []
+                            speculative_steps = self.config.max_speculative_steps
+                        proposal_task = None
+                        if proposal_state != env.snapshot().state_id:
+                            self.log("proposal_discarded", reason="state_changed")
+                            continue
+                        if actions:
+                            if pending_snapshot is not None and self.config.compatibility_planning:
+                                ranked = self.planner.rank(
+                                    actions + [Action("wait", seconds=0.01)],
+                                    env.snapshot(), pending_snapshot)
+                            else:
+                                ranked = self.planner.rank(actions, env.snapshot(), None)
+                            _, current_action, parts = ranked[0]
+                            self.log("tool_start", action=asdict(current_action), scores=parts,
+                                     while_in_flight=pending_snapshot is not None)
+                            # Validate immediately in an isolated copy. Only a
+                            # passing patch commits, at the single tool boundary;
+                            # guide delivery never mutates the environment.
+                            tool_task = asyncio.create_task(
+                                env.execute(current_action), name="vda-tool")
+
+                    if delivery_ready and tool_task is None and proposal_task is None:
                         active = await self._fuse(env, ready_message)
                         delivery_ready, ready_message, pending_snapshot = False, None, None
                         if env.visible_pass:
                             reason, submitted = "visible_verified", True
+                            break
+                        if guide_failed and requests >= self.config.max_requests:
+                            # No new advice can arrive. Do not restart the same
+                            # unguided inference after exhausting this request.
+                            reason = "guide_error"
                             break
 
                     if env.step >= self.config.max_steps:
@@ -195,43 +244,22 @@ class AsyncDelegate:
                                      remaining=self.remaining())
                             if request:
                                 pending_snapshot = snapshot
+                                speculative_steps = 0
                                 self.log("request", request_no=requests, snapshot_hash=snapshot.state_id)
                                 guide_task = asyncio.create_task(
                                     self._guide_job(snapshot, requests, self.remaining(), message_override),
                                     name="vda-guide")
                                 requests += 1
 
-                    if proposal_task is not None and proposal_task.done():
-                        try:
-                            actions = proposal_task.result()
-                            if not actions:
-                                raise ValueError("empty executor action set")
-                        except Exception as exc:
-                            self.log("executor_error", error=type(exc).__name__)
-                            reason = "executor_error"
-                            break
-                        proposal_task = None
-                        if proposal_state != env.snapshot().state_id:
-                            self.log("proposal_discarded", reason="state_changed")
-                            continue
-                        if pending_snapshot is not None and self.config.compatibility_planning:
-                            ranked = self.planner.rank(
-                                actions + [Action("wait", seconds=0.01)],
-                                env.snapshot(), pending_snapshot)
-                        else:
-                            ranked = self.planner.rank(actions, env.snapshot(), None)
-                        _, current_action, parts = ranked[0]
-                        self.log("tool_start", action=asdict(current_action), scores=parts,
-                                 while_in_flight=pending_snapshot is not None)
-                        tool_task = asyncio.create_task(
-                            env.execute(current_action, speculative=pending_snapshot is not None),
-                            name="vda-tool")
-
-                    blocked = self.config.mode == "sync" and pending_snapshot is not None
+                    blocked = pending_snapshot is not None and (
+                        self.config.mode == "sync"
+                        or speculative_steps >= self.config.max_speculative_steps)
                     if (proposal_task is None and tool_task is None and not delivery_ready
                             and not blocked):
                         snapshot = env.snapshot()
                         proposal_state = snapshot.state_id
+                        if pending_snapshot is not None:
+                            speculative_steps += 1
                         model_seed = subseed(self.config.seed, task.task_id, "executor", snapshot.step)
                         self.log("executor_start", state_hash=proposal_state,
                                  message_hash=active.id if active else None, seed=model_seed,

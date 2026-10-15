@@ -1,0 +1,42 @@
+{
+  "groups": {
+    "live_cross_task": {
+      "observed_control_v1": {
+        "pair_count": 10,
+        "changed_pair_count": 6,
+        "changed_pair_rate": 0.6,
+        "empty_prefix_pairs": []
+      },
+      "observed_tools_v1": {
+        "pair_count": 10,
+        "changed_pair_count": 0,
+        "changed_pair_rate": 0.0,
+        "empty_prefix_pairs": [
+          "T04"
+        ]
+      }
+    },
+    "frozen_guide_same_task": {
+      "observed_control_v1": {
+        "pair_count": 10,
+        "changed_pair_count": 10,
+        "changed_pair_rate": 1.0,
+        "empty_prefix_pairs": []
+      },
+      "observed_tools_v1": {
+        "pair_count": 10,
+        "changed_pair_count": 0,
+        "changed_pair_rate": 0.0,
+        "empty_prefix_pairs": []
+      }
+    }
+  },
+  "notes": [
+    "Each task is one pair; left=sync/sequential, right=async/cross_task.",
+    "live_cross_task: fresh historical Grok calls; not frozen guidance or latency.",
+    "frozen_guide_same_task: historical real Grok guidance/delay replay; actual historical Qwen generations.",
+    "This analysis only reads saved traces; it does not rerun tasks or invoke models.",
+    "Decisions are observed-event projections; common-prefix differences are not correctness scores.",
+    "Empty-prefix pairs remain in the all-pair denominator and are explicitly flagged."
+  ]
+}
