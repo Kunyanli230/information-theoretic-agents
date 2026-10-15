@@ -3,8 +3,10 @@ from __future__ import annotations
 import argparse
 import contextlib
 import json
+import re
 import signal
 import sys
+import time
 
 interrupted = False
 
@@ -52,21 +54,34 @@ def main():
         try:
             payload = json.loads(line)
             torch.manual_seed(int(payload.get("seed", 0)) % (2 ** 63))
-            messages = [
+            full_code = payload.get("response_format") == "python_code"
+            messages = payload["messages"] if full_code else [
                 {"role": "system", "content": "You fix Python code. Follow the supplied instruction and return only one valid JSON object."},
                 {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}]
-            text = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
-            inputs = tokenizer(text, return_tensors="pt").to(config["device"])
+            if full_code:
+                inputs = tokenizer.apply_chat_template(
+                    messages, add_generation_prompt=True, return_tensors="pt",
+                    return_dict=True).to(config["device"])
+            else:
+                text = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
+                inputs = tokenizer(text, return_tensors="pt").to(config["device"])
             options = dict(max_new_tokens=config["max_new_tokens"],
                            do_sample=config["temperature"] > 0,
                            pad_token_id=tokenizer.eos_token_id,
                            stopping_criteria=StoppingCriteriaList([CancelGeneration()]))
             if options["do_sample"]:
                 options.update(temperature=config["temperature"], top_p=config["top_p"])
+            started = time.monotonic()
             with torch.inference_mode():
                 output = model.generate(**inputs, **options)
             generated = output[0, inputs["input_ids"].shape[1]:]
-            emit({"text": tokenizer.decode(generated, skip_special_tokens=True),
+            raw = tokenizer.decode(generated, skip_special_tokens=True)
+            if full_code:
+                match = re.search(r"```(?:python)?\n(.*?)```", raw, re.S)
+                raw = json.dumps({"code": (match.group(1) if match else raw).rstrip() + "\n",
+                                  "raw": raw, "generation_seconds": time.monotonic() - started,
+                                  "cancelled": interrupted})
+            emit({"text": raw,
                   "cancelled": interrupted, "generated_tokens": len(generated)})
         except Exception as exc:
             emit({"error": type(exc).__name__})

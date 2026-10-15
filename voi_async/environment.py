@@ -20,8 +20,6 @@ def safe_relative(path: str) -> str:
 
 
 async def stop_process(proc: asyncio.subprocess.Process) -> None:
-    if proc.returncode is not None:
-        return
     try:
         os.killpg(proc.pid, signal.SIGTERM)
     except ProcessLookupError:
@@ -29,11 +27,14 @@ async def stop_process(proc: asyncio.subprocess.Process) -> None:
     try:
         await asyncio.wait_for(proc.wait(), 0.3)
     except asyncio.TimeoutError:
-        try:
-            os.killpg(proc.pid, signal.SIGKILL)
-        except ProcessLookupError:
-            pass
-        await proc.wait()
+        pass
+    # A CLI launcher may exit on TERM while a descendant ignores it. Reaping
+    # the leader alone does not clean up the process group we created.
+    try:
+        os.killpg(proc.pid, signal.SIGKILL)
+    except ProcessLookupError:
+        pass
+    await proc.wait()
 
 
 async def run_command(argv: list[str], files: dict[str, str],
